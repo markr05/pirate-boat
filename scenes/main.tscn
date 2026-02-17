@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://dgei3sdvi5j3i"]
+
+[ext_resource type="Script" uid="uid://dnrvraq4w0fgq" path="res://scripts/main.gd" id="1_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://c013d2f1iwmfv" path="res://glbs/fish2.glb" id="3_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://r87e80am0ugc" path="res://scenes/barrel_closed.tscn" id="4_0ld40"]
+[ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/dinghy1.tscn" id="5_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://chthbdjf183ux" path="res://scenes/PickupItem.tscn" id="6_yc10j"]
+[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="7_jscy8"]
+[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_pm3ni"]
+[ext_resource type="ArrayMesh" uid="uid://uq5raon5donk" path="res://models/meshes/tuna_mesh.tres" id="9_y6deb"]
+[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="10_og1vs"]
+[ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/meshes/flying_fish_mesh.tres" id="11_2wyq8"]
+[ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/fishing_rod.tres" id="12_vxglm"]
+[ext_resource type="ArrayMesh" uid="uid://d2cdtpyek71qs" path="res://models/meshes/fishing_rod.tres" id="13_2f3dj"]
+[ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://addons/proto_controller/proto_controller.tscn" id="14_yq6so"]
+[ext_resource type="PackedScene" path="res://scenes/ui_template.tscn" id="16_muem4"]
+[ext_resource type="PackedScene" uid="uid://btu1lmd48hnol" path="res://glbs/terrain1.glb" id="16_tel4y"]
+[ext_resource type="PackedScene" uid="uid://ds6qkkeu1tyfu" path="res://scenes/chest.tscn" id="17_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://bbp31jak13786" path="res://scenes/ocean.tscn" id="17_muem4"]
+[ext_resource type="PackedScene" uid="uid://bsapgq5t58ji1" path="res://scenes/hud.tscn" id="18_dp3eg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4c57u"]
+size = Vector3(0.33496094, 0.29003906, 0.67645264)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+size = Vector3(0.16308594, 0.29492188, 1.2431641)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cegan"]
+size = Vector3(0.1, 0.6, 0.1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_density = 0.0
+
+[node name="Main" type="Node3D" unique_id=1774244753]
+script = ExtResource("1_jbj1t")
+
+[node name="Objects" type="Node3D" parent="." unique_id=2080418021]
+
+[node name="fish2" parent="Objects" unique_id=475846853 instance=ExtResource("3_dp3eg")]
+transform = Transform3D(0.15875, 0.28730956, -0.9445909, -0.34522855, 0.9124838, 0.21952389, 0.92499495, 0.29125026, 0.24404426, -5.186196, 0.13775158, 13.259562)
+
+[node name="closed_barrel" parent="Objects" unique_id=621081290 instance=ExtResource("4_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4094634, 1.7162151, -6.0407934)
+mass = 70.0
+
+[node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0, 0, 1.2)
+
+[node name="Items" type="Node3D" parent="." unique_id=258792208]
+
+[node name="fish" parent="Items" unique_id=662022366 instance=ExtResource("6_yc10j")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, -2.308403, 1.1837265, -4.0494328)
+item_data = ExtResource("7_jscy8")
+
+[node name="tuna" parent="Items" unique_id=2028507825 instance=ExtResource("6_yc10j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -0.34943247)
+item_data = ExtResource("8_pm3ni")
+
+[node name="CollisionShape3D" parent="Items/tuna" index="0" unique_id=489335696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70000005, -0.07735598, -2.483856)
+shape = SubResource("BoxShape3D_4c57u")
+
+[node name="MeshInstance3D" parent="Items/tuna" index="1" unique_id=948636537]
+transform = Transform3D(0.40128416, 0, 0, 0, 0.40128416, 0, 0, 0, 0.40128416, 0.60000014, -0.20000005, -2.3999999)
+mesh = ExtResource("9_y6deb")
+
+[node name="flyingfish" parent="Items" unique_id=1981609393 instance=ExtResource("6_yc10j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -4.5494328)
+item_data = ExtResource("10_og1vs")
+
+[node name="CollisionShape3D" parent="Items/flyingfish" index="0" unique_id=489335696]
+transform = Transform3D(0.19675449, 0, -0.22646783, 0, 0.3, 0, 0.22646783, 0, 0.19675449, -0.085834265, -0.14263117, 0.8810139)
+shape = SubResource("BoxShape3D_dg77c")
+
+[node name="MeshInstance3D" parent="Items/flyingfish" index="1" unique_id=948636537]
+transform = Transform3D(0.07895446, 0, -0.09087796, 0, 0.12038525, 0, 0.09087796, 0, 0.07895446, -0.09361005, -0.14942443, 0.8877697)
+mesh = ExtResource("11_2wyq8")
+
+[node name="fishagain" parent="Items" unique_id=134107582 instance=ExtResource("6_yc10j")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.7084029, 1.1837265, -3.7494326)
+item_data = ExtResource("7_jscy8")
+
+[node name="rod" parent="Items" unique_id=853805980 instance=ExtResource("6_yc10j")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
+item_data = ExtResource("12_vxglm")
+
+[node name="CollisionShape3D" parent="Items/rod" index="0" unique_id=489335696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
+shape = SubResource("BoxShape3D_cegan")
+
+[node name="MeshInstance3D" parent="Items/rod" index="1" unique_id=948636537]
+mesh = ExtResource("13_2f3dj")
+
+[node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4952376, 1.1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1523047921]
+transform = Transform3D(-0.8137978, -0.23588882, 0.5311214, 0.5, -0.75000006, 0.4330126, 0.29619807, 0.6179453, 0.72829276, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Terrain" type="Node" parent="." unique_id=743599336]
+
+[node name="pier" type="Node3D" parent="Terrain" unique_id=1190533252]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/pier" unique_id=1131695752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.736563, 0.829761, -3.9674315)
+use_collision = true
+size = Vector3(35.8, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/pier" unique_id=1102750442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 0.8576672, -7.155118)
+use_collision = true
+size = Vector3(8.114258, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/pier" unique_id=1046130139]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.563326, 0.8576672, -8.74799)
+use_collision = true
+size = Vector3(6.3, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/pier" unique_id=606313333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 0.8576672, -10.324859)
+use_collision = true
+size = Vector3(8.114258, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/pier" unique_id=326351967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 4.9576674, -7.155118)
+use_collision = true
+size = Vector3(8.114258, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/pier" unique_id=2039178574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 4.9576674, -10.324859)
+use_collision = true
+size = Vector3(8.114258, 0.29296875, 3.0839844)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/pier" unique_id=104259917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2066274, 3.063133, -8.713966)
+use_collision = true
+size = Vector3(0.2, 4.105713, 6.3)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/pier/CSGBox3D4" unique_id=1318042598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3528564, -2)
+operation = 2
+use_collision = true
+size = Vector3(0.4, 3.4, 1.5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/pier" unique_id=1448856983]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 3.063133, -11.813967)
+use_collision = true
+size = Vector3(0.2, 4.105713, 7.8)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/pier" unique_id=112776031]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 1.5602765, -5.6139665)
+use_collision = true
+size = Vector3(0.2, 1.1, 7.8)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/pier" unique_id=703822127]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 4.4602766, -5.6139665)
+use_collision = true
+size = Vector3(0.2, 1.3000001, 7.8)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/pier" unique_id=740734619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.106627, 3.063133, -8.713966)
+use_collision = true
+size = Vector3(0.2, 4.105713, 6.3)
+
+[node name="sea_floor" type="CSGBox3D" parent="Terrain" unique_id=535339752]
+transform = Transform3D(12.8, 0, 0, 0, 1, 0, 0, 0, 6.9, 0, -1.5, 0)
+use_collision = true
+size = Vector3(39.7, 0.001, 55)
+
+[node name="terrain1" parent="Terrain" unique_id=637846351 instance=ExtResource("16_tel4y")]
+transform = Transform3D(91.79869, 0, 53, 0, 31.6, 0, -53, 0, 91.79869, 155.4, 13, -22.6)
+
+[node name="Node2D" parent="." unique_id=128967801 instance=ExtResource("16_muem4")]
+
+[node name="Chest" parent="." unique_id=714947045 instance=ExtResource("17_dp3eg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.4000001, -4.9)
+
+[node name="Ocean" parent="." unique_id=1402291055 instance=ExtResource("17_muem4")]
+transform = Transform3D(4.4, 0, 0, 0, 1, 0, 0, 0, 3.9, 0, 0, 0)
+
+[node name="HUD" parent="." unique_id=1160997618 instance=ExtResource("18_dp3eg")]
+
+[connection signal="body_entered" from="Items/fish" to="Items/fish" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/tuna" to="Items/tuna" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/flyingfish" to="Items/flyingfish" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/fishagain" to="Items/fishagain" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/rod" to="Items/rod" method="_on_body_entered"]
+
+[editable path="Items/tuna"]
+[editable path="Items/flyingfish"]
+[editable path="Items/rod"]

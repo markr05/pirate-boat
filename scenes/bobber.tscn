@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dctd8ojxxt6lu"]
+
+[ext_resource type="Script" uid="uid://dbxcpt1o1qy8y" path="res://scripts/bobber.gd" id="1_i5s1t"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_x0c03"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tjrd"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2wku4"]
+radius = 0.06
+
+[node name="Bobber" type="CharacterBody3D" unique_id=1361057172]
+script = ExtResource("1_i5s1t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1753508796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4901161e-08, 3.7252903e-08, 0)
+mesh = SubResource("SphereMesh_x0c03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1788808041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4901161e-08, 0.010000028, 0)
+shape = SubResource("BoxShape3D_1tjrd")
+
+[node name="WaterDetector" type="Area3D" parent="." unique_id=128903648]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterDetector" unique_id=1957220228]
+shape = SubResource("SphereShape3D_2wku4")

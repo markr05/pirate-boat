@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://caqvxsjihogmm"]
+
+[ext_resource type="Script" uid="uid://nwqsvnbt0b6h" path="res://scripts/item_grid.gd" id="1_2nrou"]
+[ext_resource type="PackedScene" uid="uid://8k1rawkxwfq1" path="res://scenes/slot.tscn" id="2_tyapc"]
+
+[node name="Node2D" type="CanvasLayer" unique_id=128967801]
+layer = 10
+
+[node name="PanelContainer" type="CenterContainer" parent="." unique_id=21143119]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer" unique_id=275253650 groups=["inventory_menu"]]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ItemGrid" type="GridContainer" parent="PanelContainer/ScrollContainer" unique_id=290497988 groups=["inventory_grid"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+script = ExtResource("1_2nrou")
+slot_scene = ExtResource("2_tyapc")

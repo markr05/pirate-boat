@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ds6qkkeu1tyfu"]
+
+[ext_resource type="Script" uid="uid://cnd26own65wi8" path="res://scripts/chest.gd" id="1_oii8l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sy5e1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oii8l"]
+size = Vector3(0.8, 2, 0.8)
+
+[node name="Chest" type="StaticBody3D" unique_id=714947045]
+collision_layer = 128
+script = ExtResource("1_oii8l")
+chest_inventory = null
+chest_name = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1400686863]
+mesh = SubResource("BoxMesh_sy5e1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1442829014]
+shape = SubResource("BoxShape3D_oii8l")

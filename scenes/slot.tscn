@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://keayugj7s60d"]
+
+[node name="Panel7" type="Panel" unique_id=1256281119]
+custom_minimum_size = Vector2(128, 128)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1834895630]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=1872948942]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=1063689515]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -31.0
+offset_right = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="KeyLabel" type="Label" parent="." unique_id=295609461]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1"

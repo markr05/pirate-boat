@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://dgei3sdvi5j3i"]
+
+[ext_resource type="PackedScene" uid="uid://cxawtsmykbj44" path="res://ui/inventory_ui.tscn" id="1_5vw27"]
+[ext_resource type="Shader" uid="uid://b0ymqouu624ed" path="res://shaders/boat.gdshader" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c013d2f1iwmfv" path="res://models/fish2.glb" id="1_lquwl"]
+[ext_resource type="Shader" uid="uid://01jao1a61gju" path="res://shaders/water.gdshader" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://r87e80am0ugc" path="res://models/barrel/barrel_closed.tscn" id="2_1bvp3"]
+[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="2_kek77"]
+[ext_resource type="ArrayMesh" uid="uid://uq5raon5donk" path="res://models/tuna_mesh.tres" id="3_4c57u"]
+[ext_resource type="PackedScene" uid="uid://chthbdjf183ux" path="res://PickupItem.tscn" id="6_272bh"]
+[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="7_5vw27"]
+[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="9_dg77c"]
+[ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/flying_fish_mesh.tres" id="9_efxa6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+render_priority = 0
+shader = ExtResource("1_h2yge")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(0.5, 5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(3, 5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+size = Vector3(2.8, 5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(1.3, 5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(4, 5, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+render_priority = 0
+shader = ExtResource("2_0xm2m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+size = Vector2(100, 100)
+subdivide_width = 40
+subdivide_depth = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4c57u"]
+size = Vector3(0.33496094, 0.29003906, 0.67645264)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+size = Vector3(0.16308594, 0.29492188, 1.2431641)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=1774244753]
+
+[node name="Objects" type="Node3D" parent="." unique_id=2080418021]
+
+[node name="full_boat" type="Node" parent="Objects" unique_id=1750396536]
+
+[node name="boat" type="CSGCylinder3D" parent="Objects/full_boat" unique_id=969036698]
+transform = Transform3D(10.69396, 0, 0, 0, 0.1025227, 0, 0, 0, 3.300975, 0, 0.3659663, 0)
+material_override = SubResource("ShaderMaterial_0xm2m")
+use_collision = true
+sides = 14
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/full_boat/boat" unique_id=1096118837]
+transform = Transform3D(0.22100008, 0, 0, 0, 21.092402, 0, 0, 0, 1, 0.41342968, 6.634469, 0)
+operation = 2
+
+[node name="boat_wall" type="CSGCylinder3D" parent="Objects/full_boat/boat" unique_id=230694443]
+transform = Transform3D(1, 0, 0, 0, 3.03025, 0, 0, 0, 1, 0, 3.9806824, 0)
+use_collision = true
+sides = 14
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/full_boat/boat/boat_wall" unique_id=256023048]
+transform = Transform3D(0.22100008, 0, 0, 0, 21.092402, 0, 0, 0, 1, 0.41342968, 6.634469, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="boat_floor3" type="CSGCylinder3D" parent="Objects/full_boat/boat/boat_wall" unique_id=1534838786]
+transform = Transform3D(0.945003, 0, 0, 0, 2.5704007, 0, 0, 0, 0.9449999, 0, 7.1525574e-07, 0)
+operation = 2
+use_collision = true
+sides = 14
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/full_boat/boat/boat_wall/boat_floor3" unique_id=942699176]
+transform = Transform3D(0.22100008, 0, 0, 0, 21.092402, 0, 0, 0, 1, 0.41342968, 6.634469, 0)
+operation = 2
+
+[node name="invis_barrier" type="StaticBody3D" parent="Objects/full_boat" unique_id=1137192700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1000001, 2.4)
+collision_layer = 2
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=155348062]
+transform = Transform3D(0.9396928, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.9396928, 4.6000013, 2.3841858e-07, -0.50000024)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1616895055]
+transform = Transform3D(0.98480785, 0, 0.17364816, 0, 1, 0, -0.17364816, 0, 0.98480785, 2.900001, 2.3841858e-07, -0.20000029)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=745919565]
+transform = Transform3D(1, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, 2.3841858e-07, 0, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1794413476]
+transform = Transform3D(0.9848077, 0, -0.17364818, 0, 1, 0, 0.17364818, 0, 0.9848077, -3, 2.3841858e-07, -0.20000005)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1859667993]
+transform = Transform3D(0.9396929, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, 0.9396929, -5.8000016, 2.3841858e-07, -0.9000006)
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=149821362]
+transform = Transform3D(0.6427885, 0, -0.7660452, 0, 1, 0, 0.7660452, 0, 0.6427885, -7.600009, 2.3841858e-07, -1.9000038)
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1342107272]
+transform = Transform3D(0.9396936, -5.3290705e-15, 0.3420202, 2.9900345e-08, -1, -8.2150564e-08, 0.34202018, 8.742283e-08, -0.93969315, 4.600005, 2.3841858e-07, -4.333337)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1713255670]
+transform = Transform3D(0.9848083, -5.3290705e-15, 0.17364831, 1.5180808e-08, -1, -8.609464e-08, 0.17364831, 8.7422805e-08, -0.9848082, 2.9000025, 2.3841858e-07, -4.633337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=507678011]
+transform = Transform3D(1.0000007, -5.3290705e-15, 2.9802322e-08, -1.7763568e-15, -1, -8.742279e-08, 4.4703484e-08, 8.7422805e-08, -1.0000006, 1.9073486e-06, 4.7683716e-07, -4.833338)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1376352165]
+transform = Transform3D(0.98480815, -5.3290705e-15, -0.17364824, -1.5180808e-08, -1, -8.609463e-08, -0.1736482, 8.742281e-08, -0.984808, -3, 2.3841858e-07, -4.633337)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=234979124]
+transform = Transform3D(0.93969333, -7.1054274e-15, -0.34202015, -2.990035e-08, -1, -8.215057e-08, -0.34202018, 8.742282e-08, -0.9396932, -5.8000016, 2.3841858e-07, -3.933336)
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=1686983665]
+transform = Transform3D(0.64278895, -5.3290705e-15, -0.7660456, -6.69698e-08, -1, -5.6194363e-08, -0.7660455, 8.742281e-08, -0.642789, -7.600012, 2.3841858e-07, -2.9333332)
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="Objects/full_boat/invis_barrier" unique_id=721029230]
+transform = Transform3D(7.4505806e-08, 0, 1, 0, 1, 0, -1, 0, 7.4505806e-08, 4.9, -0.099999905, -2.5000007)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="ocean" type="MeshInstance3D" parent="Objects" unique_id=1447653983]
+material_override = SubResource("ShaderMaterial_h2yge")
+mesh = SubResource("PlaneMesh_1bvp3")
+
+[node name="fish2" parent="Objects" unique_id=475846853 instance=ExtResource("1_lquwl")]
+transform = Transform3D(0.15875, 0.28730956, -0.9445909, -0.34522855, 0.9124838, 0.21952389, 0.92499495, 0.29125026, 0.24404426, 5.2922983, 0.81867623, -1.9286509)
+
+[node name="closed_barrel" parent="Objects" unique_id=621081290 instance=ExtResource("2_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5094633, 1.1162153, -0.64079356)
+mass = 70.0
+
+[node name="Items" type="Node3D" parent="." unique_id=258792208]
+
+[node name="fish" parent="Items" unique_id=662022366 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0084028, 1.1837265, -0.34943247)
+item_data = ExtResource("7_5vw27")
+
+[node name="tuna" parent="Items" unique_id=2028507825 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -0.34943247)
+item_data = ExtResource("2_kek77")
+
+[node name="CollisionShape3D" parent="Items/tuna" index="0" unique_id=489335696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022644043, 0.016143799)
+shape = SubResource("BoxShape3D_4c57u")
+
+[node name="MeshInstance3D" parent="Items/tuna" index="1" unique_id=948636537]
+mesh = ExtResource("3_4c57u")
+
+[node name="flyingfish" parent="Items" unique_id=1981609393 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -0.34943247)
+item_data = ExtResource("9_dg77c")
+
+[node name="CollisionShape3D" parent="Items/flyingfish" index="0" unique_id=489335696]
+transform = Transform3D(0.65584826, 0, -0.75489277, 0, 1, 0, 0.75489277, 0, 0.65584826, -0.07676196, -0.13470578, 0.873132)
+shape = SubResource("BoxShape3D_dg77c")
+
+[node name="MeshInstance3D" parent="Items/flyingfish" index="1" unique_id=948636537]
+transform = Transform3D(0.2631815, 0, -0.3029265, 0, 0.40128416, 0, 0.3029265, 0, 0.2631815, -0.10268235, -0.15734982, 0.89565134)
+mesh = ExtResource("9_efxa6")
+
+[node name="fishagain" parent="Items" unique_id=134107582 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0084028, 1.1837265, -0.34943247)
+item_data = ExtResource("7_5vw27")
+
+[node name="Player" parent="." unique_id=1947708472 groups=["player"] instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4952376, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1523047921]
+transform = Transform3D(-0.8137978, -0.23588882, 0.5311214, 0.5, -0.75000006, 0.4330126, 0.29619807, 0.6179453, 0.72829276, 0, 0, 0)
+shadow_enabled = true
+
+[node name="UI" type="Control" parent="." unique_id=101345589]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InventoryUI" parent="UI" unique_id=1353961346 instance=ExtResource("1_5vw27")]
+
+[connection signal="body_entered" from="Items/fish" to="Items/fish" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/tuna" to="Items/tuna" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/flyingfish" to="Items/flyingfish" method="_on_body_entered"]
+[connection signal="body_entered" from="Items/fishagain" to="Items/fishagain" method="_on_body_entered"]
+[connection signal="inventory_changed" from="Player" to="UI/InventoryUI" method="update_view"]
+[connection signal="slot_selected" from="UI/InventoryUI" to="Player" method="_on_inventory_ui_slot_selected"]
+
+[editable path="Items/tuna"]
+[editable path="Items/flyingfish"]

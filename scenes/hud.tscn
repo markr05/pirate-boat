@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bsapgq5t58ji1"]
+
+[ext_resource type="Script" uid="uid://p1xpxaxuuj2r" path="res://scenes/hotbar.gd" id="1_ahhtf"]
+[ext_resource type="PackedScene" uid="uid://keayugj7s60d" path="res://scenes/slot.tscn" id="2_oo0fn"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1160997618]
+
+[node name="Hotbar" type="Control" parent="." unique_id=131103557]
+custom_minimum_size = Vector2(0, 108)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SlotContainer" type="GridContainer" parent="Hotbar" unique_id=1853442199 groups=["hotbar"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 9
+script = ExtResource("1_ahhtf")
+slot_scene = ExtResource("2_oo0fn")

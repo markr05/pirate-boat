@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dn0i7jb7fyrje"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="1_jn6rs"]
+[ext_resource type="Texture2D" uid="uid://bhth1d6kh35hb" path="res://items/fish_icon.PNG" id="1_rpj72"]
+
+[resource]
+script = ExtResource("1_jn6rs")
+icon = ExtResource("1_rpj72")
+stackable = true
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

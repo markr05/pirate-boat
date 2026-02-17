@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://chthbdjf183ux"]
+
+[ext_resource type="Script" uid="uid://dkrfypp6igs05" path="res://scripts/PickupItem.gd" id="1_ltixv"]
+[ext_resource type="ArrayMesh" uid="uid://bl52mf8haeh10" path="res://models/meshes/fish_mesh.tres" id="2_lrnnq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hfng"]
+size = Vector3(0.14038086, 0.1673584, 0.30664063)
+
+[node name="Area3D" type="Area3D" unique_id=2028507825]
+script = ExtResource("1_ltixv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=489335696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.002746582, -0.06347656)
+shape = SubResource("BoxShape3D_0hfng")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=948636537]
+transform = Transform3D(0.40128416, 0, 0, 0, 0.40128416, 0, 0, 0, 0.40128416, 0, 0, 0)
+mesh = ExtResource("2_lrnnq")

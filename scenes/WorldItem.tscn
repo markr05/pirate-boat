@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d38i0pyiwty6h"]
+
+[ext_resource type="Script" uid="uid://digbkays6xxhs" path="res://scripts/world_item.gd" id="1_dpfrn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1e4b"]
+size = Vector3(0.41, 1.3199999, 0.24)
+
+[node name="WorldItem" type="Area3D" unique_id=2129893044]
+script = ExtResource("1_dpfrn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=168091223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06999999, 0.6131836, -0.01)
+shape = SubResource("BoxShape3D_f1e4b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=694148133]

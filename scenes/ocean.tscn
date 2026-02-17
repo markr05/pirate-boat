@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bbp31jak13786"]
+
+[ext_resource type="Script" uid="uid://dsb7oblrrnekt" path="res://scripts/ocean.gd" id="1_j38dg"]
+[ext_resource type="Shader" uid="uid://01jao1a61gju" path="res://shaders/water.gdshader" id="1_tiovm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j38dg"]
+render_priority = 0
+shader = ExtResource("1_tiovm")
+shader_parameter/sync_time = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nb2vx"]
+size = Vector2(100, 100)
+subdivide_width = 40
+subdivide_depth = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j38dg"]
+size = Vector3(100, 10, 100)
+
+[node name="Ocean" type="Node3D" unique_id=1402291055]
+script = ExtResource("1_j38dg")
+
+[node name="ocean_mesh" type="MeshInstance3D" parent="." unique_id=2105834076]
+material_override = SubResource("ShaderMaterial_j38dg")
+mesh = SubResource("PlaneMesh_nb2vx")
+
+[node name="WaterArea" type="Area3D" parent="." unique_id=1205368910 groups=["water"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea" unique_id=52798978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5299997, 0)
+shape = SubResource("BoxShape3D_j38dg")

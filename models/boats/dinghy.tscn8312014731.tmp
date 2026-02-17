@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bo0nfxgn8gn2y"]
+
+[ext_resource type="PackedScene" uid="uid://dnee5ubs7gxqt" path="res://models/boats/dinghy.glb" id="1_o6kft"]
+[ext_resource type="Material" uid="uid://c0spcbdakvf1c" path="res://shaders/mask.tres" id="2_nh1ne"]
+[ext_resource type="Script" uid="uid://d3bciyaok16cu" path="res://models/boats/boat_physics.gd" id="3_q2xxr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q2xxr"]
+
+[node name="dinghy" unique_id=107296507 instance=ExtResource("1_o6kft")]
+
+[node name="Node3D" type="Node3D" parent="dinghy" parent_id_path=PackedInt32Array(1866902345) index="0" unique_id=1734627112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.9129064, 0, 0.5428883, 0.16440094)
+
+[node name="water_mask" type="MeshInstance3D" parent="dinghy/Node3D" index="0" unique_id=1717476264]
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask2" type="MeshInstance3D" parent="dinghy/Node3D" index="1" unique_id=928149898]
+transform = Transform3D(0.91860145, 0, 0, 0, 1, 0, 0, 0, 0.31256384, 0, 0, 1.0285132)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask9" type="MeshInstance3D" parent="dinghy/Node3D" index="2" unique_id=2021441933]
+transform = Transform3D(0.80942976, 0, 0, 0, 1, 0, 0, 0, 0.1825164, 0, 0, 1.4176155)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask10" type="MeshInstance3D" parent="dinghy/Node3D" index="3" unique_id=41471662]
+transform = Transform3D(0.747294, 0, 0, 0, 1, 0, 0, 0, 0.15015708, 0, 0, 1.6198065)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask11" type="MeshInstance3D" parent="dinghy/Node3D" index="4" unique_id=2048297041]
+transform = Transform3D(0.7022108, 0, 0, 0, 1, 0, 0, 0, 0.15015711, 0, 0, 1.7908429)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask12" type="MeshInstance3D" parent="dinghy/Node3D" index="5" unique_id=287923567]
+transform = Transform3D(0.59091485, 0, 0, 0, 1, 0, 0, 0, 0.052085657, 0, 0, 1.9889054)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask13" type="MeshInstance3D" parent="dinghy/Node3D" index="6" unique_id=610070881]
+transform = Transform3D(0.52279747, 0, 0, 0, 1, 0, 0, 0, 0.05208566, 0, 0, 2.0746555)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask14" type="MeshInstance3D" parent="dinghy/Node3D" index="7" unique_id=2040332569]
+transform = Transform3D(0.4334868, 0, 0, 0, 1, 0, 0, 0, 0.05208566, 0, 0, 2.1665952)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask15" type="MeshInstance3D" parent="dinghy/Node3D" index="8" unique_id=1077672102]
+transform = Transform3D(0.32842585, 0, 0, 0, 1, 0, 0, 0, 0.05208566, 0, 0, 2.2514312)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask16" type="MeshInstance3D" parent="dinghy/Node3D" index="9" unique_id=4299399]
+transform = Transform3D(0.23137017, 0, 0, 0, 1, 0, 0, 0, 0.05208566, 0, 0, 2.3433402)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask17" type="MeshInstance3D" parent="dinghy/Node3D" index="10" unique_id=134196733]
+transform = Transform3D(0.14257377, 0, 0, 0, 1, 0, 0, 0, 0.05208566, 0, 0, 2.425168)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask18" type="MeshInstance3D" parent="dinghy/Node3D" index="11" unique_id=1451366459]
+transform = Transform3D(0.088574916, 0, 0, 0, 1, 0, 0, 0, 0.037912052, 0, 0, 2.4859948)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask3" type="MeshInstance3D" parent="dinghy/Node3D" index="12" unique_id=442726441]
+transform = Transform3D(0.96585166, 0, 0, 0, 1, 0, 0, 0, 0.31256384, 0, 0, -1.0444485)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask4" type="MeshInstance3D" parent="dinghy/Node3D" index="13" unique_id=1773406688]
+transform = Transform3D(0.8566188, 0, 0, 0, 1, 0, 0, 0, 0.1749631, 0, 0, -1.4773332)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask5" type="MeshInstance3D" parent="dinghy/Node3D" index="14" unique_id=1679876948]
+transform = Transform3D(0.7662099, 0, 0, 0, 1, 0, 0, 0, 0.10092645, 0, 0, -1.741722)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask6" type="MeshInstance3D" parent="dinghy/Node3D" index="15" unique_id=835644339]
+transform = Transform3D(0.68846786, 0, 0, 0, 1, 0, 0, 0, 0.10092645, 0, 0, -1.932536)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask7" type="MeshInstance3D" parent="dinghy/Node3D" index="16" unique_id=361417213]
+transform = Transform3D(0.7165233, 0, 0, 0, 1, 0, 0, 0, 0.10092645, 0, 0, -1.9040353)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="water_mask8" type="MeshInstance3D" parent="dinghy/Node3D" index="17" unique_id=1399461010]
+transform = Transform3D(0.6633724, 0, 0, 0, 1, 0, 0, 0, 0.10092645, 0, 0, -2.0010424)
+material_override = ExtResource("2_nh1ne")
+mesh = SubResource("PlaneMesh_q2xxr")
+
+[node name="StaticBody3D" parent="dinghy" parent_id_path=PackedInt32Array(1866902345) index="1" unique_id=1406766124]
+script = ExtResource("3_q2xxr")
