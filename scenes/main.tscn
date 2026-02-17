@@ -11,9 +11,9 @@
 [ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="10_og1vs"]
 [ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/meshes/flying_fish_mesh.tres" id="11_2wyq8"]
 [ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/fishing_rod.tres" id="12_vxglm"]
-[ext_resource type="ArrayMesh" uid="uid://d2cdtpyek71qs" path="res://models/meshes/fishing_rod.tres" id="13_2f3dj"]
+[ext_resource type="ArrayMesh" uid="uid://bpnm3uo5wgep6" path="res://models/meshes/fishing_rod.tres" id="13_2f3dj"]
 [ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://addons/proto_controller/proto_controller.tscn" id="14_yq6so"]
-[ext_resource type="PackedScene" path="res://scenes/ui_template.tscn" id="16_muem4"]
+[ext_resource type="PackedScene" uid="uid://caqvxsjihogmm" path="res://scenes/ui_template.tscn" id="16_muem4"]
 [ext_resource type="PackedScene" uid="uid://btu1lmd48hnol" path="res://glbs/terrain1.glb" id="16_tel4y"]
 [ext_resource type="PackedScene" uid="uid://ds6qkkeu1tyfu" path="res://scenes/chest.tscn" id="17_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://bbp31jak13786" path="res://scenes/ocean.tscn" id="17_muem4"]
@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4094634, 1.7162151, -6.0407
 mass = 70.0
 
 [node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0, 0, 1.2)
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0, 0, 2.2)
 
 [node name="Items" type="Node3D" parent="." unique_id=258792208]
 
@@ -103,7 +103,7 @@ shape = SubResource("BoxShape3D_cegan")
 mesh = ExtResource("13_2f3dj")
 
 [node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4952376, 1.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4952376, 2.1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
 environment = SubResource("Environment_0xm2m")

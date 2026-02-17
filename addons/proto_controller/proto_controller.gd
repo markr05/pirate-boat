@@ -116,18 +116,18 @@ func _unhandled_input(event: InputEvent) -> void:
 # --- PHYSICS ---
 func _physics_process(delta: float) -> void:
 	
+	# Boat State
+	if seat_target:
+		global_position = seat_target.global_position
+		global_rotation.y = seat_target.global_rotation.y
+		return
+	
 	# Menu or Locked State (Fishing/Cutscenes)
 	if is_menu_open or is_locked: 
 		velocity.x = 0
 		velocity.z = 0
 		if not is_on_floor(): velocity += get_gravity() * delta
 		move_and_slide()
-		return
-		
-	# Boat State
-	if seat_target:
-		global_position = seat_target.global_position
-		global_rotation.y = seat_target.global_rotation.y
 		return
 	
 	# Standard Movement

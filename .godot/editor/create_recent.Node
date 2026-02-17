@@ -1,11 +1,11 @@
+StaticBody3D
+CollisionShape3D
 Label
 GridContainer
-CollisionShape3D
 Area3D
 Marker3D
 RigidBody3D
 FogVolume
-StaticBody3D
 Node3D
 MeshInstance3D
 CSGPolygon3D

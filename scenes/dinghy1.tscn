@@ -40,14 +40,14 @@ points = PackedVector3Array(1.123797, 0.5997925, 1.7409973, 1.0135733, 0.6249062
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3s166"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p4fp6"]
-size = Vector3(1.6, 2.6, 1.6)
+[sub_resource type="BoxShape3D" id="BoxShape3D_u12p8"]
+size = Vector3(1.9932556, 0.9466553, 1)
 
 [node name="dinghy1" type="Node3D" unique_id=1282315474]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=888065904]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-mass = 50.0
+mass = 80.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
 continuous_cd = true
@@ -56,6 +56,8 @@ max_contacts_reported = 4
 linear_damp = 0.5
 angular_damp = 4.0
 script = ExtResource("1_ny2ge")
+float_force = 120.0
+interaction_area_path = NodePath("")
 
 [node name="dinghy" type="MeshInstance3D" parent="RigidBody3D" unique_id=96882418]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -172,9 +174,10 @@ mesh = SubResource("PlaneMesh_3s166")
 [node name="SeatMarker" type="Marker3D" parent="RigidBody3D" unique_id=426798928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8257764, 0)
 
-[node name="InteractionArea" type="Area3D" parent="RigidBody3D" unique_id=1769603122]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="RigidBody3D" unique_id=1108989776]
+collision_layer = 128
+collision_mask = 128
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/InteractionArea" unique_id=698824750]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.0419376, 0)
-shape = SubResource("BoxShape3D_p4fp6")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/StaticBody3D" unique_id=698824750]
+transform = Transform3D(1, 0, 1.7484554e-07, 0, 1, 0, -1.7484554e-07, 0, 1, 0.12025452, 0.29311627, -2.1025961e-08)
+shape = SubResource("BoxShape3D_u12p8")
