@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ddwtx8xr6rnod" path="res://scripts/fishing_rod.gd" id="1_1xn5j"]
 [ext_resource type="PackedScene" uid="uid://dbywck4neo35u" path="res://glbs/fishing_rod.glb" id="2_binnr"]
-[ext_resource type="PackedScene" path="res://scenes/bobber.tscn" id="3_7l55x"]
+[ext_resource type="PackedScene" uid="uid://dctd8ojxxt6lu" path="res://scenes/bobber.tscn" id="3_7l55x"]
 [ext_resource type="Script" uid="uid://cv283ja2d0w1i" path="res://scripts/fishing_manager.gd" id="4_binnr"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="5_nswio"]
+[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="6_apkvc"]
+[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="7_eax16"]
+[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_imhye"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uokpy"]
 top_radius = 0.003
@@ -35,3 +39,4 @@ mesh = SubResource("CylinderMesh_uokpy")
 
 [node name="FishingManager" type="Node" parent="." unique_id=839389139]
 script = ExtResource("4_binnr")
+fish_types = Array[ExtResource("5_nswio")]([ExtResource("6_apkvc"), ExtResource("7_eax16"), ExtResource("8_imhye")])

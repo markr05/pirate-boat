@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bsvnlfedyl7mf"]
+
+[ext_resource type="Script" uid="uid://b4x3exg25g5kp" path="res://scripts/external_inventory.gd" id="1_o24sl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srcgb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ExternalInventoryUI" type="Control" unique_id=79095522 groups=["external_inventory_ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_o24sl")
+
+[node name="Panel" type="Panel" parent="." unique_id=774502533]
+custom_minimum_size = Vector2(972, 324)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_srcgb")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=631049548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer" unique_id=733595016]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 9

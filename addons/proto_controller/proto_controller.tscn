@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb8jjc6xsmrcq"]
 
 [ext_resource type="Script" uid="uid://dappoyx5kwie2" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/inventory_controller.tscn" id="2_wr06p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -15,6 +16,7 @@ height = 1.8
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
 script = ExtResource("1_ucva2")
+coins = 10
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1540594731]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -37,3 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, -0.6, -0.7999999)
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=375180249]
 target_position = Vector3(0, 0, -3)
 collision_mask = 128
+
+[node name="InventoryController" parent="." unique_id=1775436220 instance=ExtResource("2_wr06p")]
+unique_name_in_owner = true

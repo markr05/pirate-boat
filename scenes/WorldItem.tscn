@@ -1,12 +1,38 @@
 [gd_scene format=3 uid="uid://d38i0pyiwty6h"]
 
-[ext_resource type="Script" uid="uid://digbkays6xxhs" path="res://scripts/world_item.gd" id="1_dpfrn"]
+[sub_resource type="GDScript" id="GDScript_f1e4b"]
+script/source = "extends Area3D
+
+# The specific item data (e.g., Fishing Rod, Apple, Ammo)
+@export var item_data: ItemData
+
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+
+func _ready() -> void:
+	# 1. Connect the signal via code (cleaner than using the Node tab)
+	body_entered.connect(_on_body_entered)
+	
+	# 2. Update the visual mesh if data exists
+	if item_data and item_data.ground_mesh:
+		mesh_instance.mesh = item_data.ground_mesh
+
+func _process(delta: float) -> void:
+	# Optional: Rotate slowly to look like a \"pickup\"
+	rotate_y(1.0 * delta)
+
+func _on_body_entered(body: Node3D) -> void:
+	# Check if the body is the player and has an inventory
+	if body.has_method(\"add_to_inventory\"):
+		if item_data:
+			body.add_to_inventory(item_data)
+			queue_free() # Delete this object from the world
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1e4b"]
 size = Vector3(0.41, 1.3199999, 0.24)
 
 [node name="WorldItem" type="Area3D" unique_id=2129893044]
-script = ExtResource("1_dpfrn")
+script = SubResource("GDScript_f1e4b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=168091223]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06999999, 0.6131836, -0.01)

@@ -9,4 +9,5 @@ name = "Tuna"
 icon = ExtResource("1_hpcv6")
 description = "This is a tuna."
 stackable = true
+price = 20
 metadata/_custom_type_script = "uid://buhi2og5nuwaj"

@@ -7,4 +7,5 @@
 script = ExtResource("1_jn6rs")
 icon = ExtResource("1_rpj72")
 stackable = true
+price = 10
 metadata/_custom_type_script = "uid://buhi2og5nuwaj"

@@ -23,6 +23,8 @@ var is_fishing: bool = false
 var in_water: bool = false
 var current_rope_length: float = 1.0
 var cast_timer: float = 0.0
+var fish_hooked: bool = false
+var fish_caught: ItemData = null
 
 func setup(player):
 	super.setup(player)
@@ -143,12 +145,16 @@ func start_fishing():
 	bobber.velocity = throw_dir * THROW_FORCE
 	bobber.velocity.y += THROW_ARC
 
-func _on_fish_bite_received():
+func _on_fish_bite_received(fish_data: ItemData):
+	fish_hooked = true
+	fish_caught = fish_data
 	if is_fishing and bobber:
-		print("Rod: I felt a tug!")
 		bobber.velocity.y -= 4.0 
+	
 
 func stop_fishing():
+	if fish_hooked:
+		player_ref.add_to_inventory(fish_caught)
 	is_fishing = false
 	in_water = false
 	if fishing_manager: fishing_manager.reset()
