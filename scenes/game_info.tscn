@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ck0hnjbok1n0n"]
+
+[ext_resource type="Script" uid="uid://biy62o0qfgs5o" path="res://scripts/game_info.gd" id="1_djvxw"]
+
+[node name="Control" type="Control" unique_id=1154610763 groups=["game_info"]]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_djvxw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1714486553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CoinLabel" type="Label" parent="MarginContainer" unique_id=549313466]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 40

@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="1_jn6rs"]
 [ext_resource type="Texture2D" uid="uid://bhth1d6kh35hb" path="res://items/fish_icon.PNG" id="1_rpj72"]
+[ext_resource type="PackedScene" uid="uid://dy6wr2f4ho38y" path="res://items/item_scenes/fish1.tscn" id="1_u24ud"]
+[ext_resource type="ArrayMesh" uid="uid://bl52mf8haeh10" path="res://models/meshes/fish_mesh.tres" id="2_6c12g"]
 
 [resource]
 script = ExtResource("1_jn6rs")
 icon = ExtResource("1_rpj72")
+equippable_scene = ExtResource("1_u24ud")
+ground_mesh = ExtResource("2_6c12g")
 stackable = true
 price = 10
 metadata/_custom_type_script = "uid://buhi2og5nuwaj"

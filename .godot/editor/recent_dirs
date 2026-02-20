@@ -1,7 +1,8 @@
-res://scenes/
 res://models/meshes/
-res://models/boats/
 res://shaders/
-res://items/
+res://items/item_scenes/
 res://
+res://scenes/
+res://models/boats/
+res://items/
 res://models/

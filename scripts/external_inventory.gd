@@ -4,13 +4,13 @@ class_name ExternalInventoryUI
 var slot_prefab = preload("res://scenes/slot.tscn")
 @onready var grid = $Panel/MarginContainer/GridContainer
 
-var current_chest = null
+var current_inventory = null
 
-func open_container(chest_object):
-	if chest_object == null:
+func open_container(external_inventory_object):
+	if external_inventory_object == null:
 		return
 		
-	current_chest = chest_object
+	current_inventory = external_inventory_object
 	
 	# 1. Clear old slots IMMEDIATELY
 	for child in grid.get_children():
@@ -18,7 +18,7 @@ func open_container(chest_object):
 		child.queue_free() # Then tell it to delete
 	
 	# 2. Instantiate and Fill in one go
-	for i in range(chest_object.inventory_size):
+	for i in range(external_inventory_object.inventory_size):
 		var slot = slot_prefab.instantiate()
 		grid.add_child(slot)
 		
@@ -27,7 +27,7 @@ func open_container(chest_object):
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)
 		
 		# FILL THE SLOT IMMEDIATELY
-		var data_entry = chest_object.inventory_slots[i]
+		var data_entry = external_inventory_object.inventory_slots[i]
 		if data_entry != null:
 			slot.display_item(data_entry["data"], data_entry["quantity"])
 		else:

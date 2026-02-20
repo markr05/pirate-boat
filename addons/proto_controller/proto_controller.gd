@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 signal inventory_changed(new_inventory)
 signal coins_changed(coins_amount)
+signal inventory_closed
 
 # --- REFERENCES ---
 @onready var head: Node3D = $Head
@@ -27,7 +28,7 @@ var look_rotation: Vector2 = Vector2.ZERO
 var seat_target: Node3D = null 
 var is_menu_open: bool = false
 var is_locked: bool = false 
-@export var external_inventory_node: Control
+@onready var external_inventory_node = $CanvasLayer/ExternalInventoryUI
 
 # Fishing / Limits
 var look_limit_center: Vector2 = Vector2.ZERO
@@ -140,11 +141,18 @@ func toggle_inventory(open: bool):
 	if inventory_controller:
 		inventory_controller.visible = open
 	
-	# 2. Handle External Inventory (Chest)
-	# This is the part that was missing!
+	# 2. Handle External Inventory
 	if external_inventory_node:
 		if not open:
 			external_inventory_node.visible = false
+			var external_ui = get_tree().get_first_node_in_group("external_inventory_ui")
+			if external_ui and external_ui.current_inventory:
+				# Tell the chest it's closing
+				if external_ui.current_inventory.has_method("on_player_closed_npc"):
+					external_ui.current_inventory.on_player_closed_npc(self)
+		
+				# Clear the reference so we don't accidentally edit it later
+				external_ui.current_inventory = null
 	
 	# 3. Handle Hotbar (Always visible)
 	if hotbar_controller:
@@ -210,7 +218,7 @@ func try_interact():
 # --- INVENTORY ---
 func add_to_inventory(item: ItemData):
 	var external_ui = get_tree().get_first_node_in_group("external_inventory_ui")
-	var chest = external_ui.current_chest if (external_ui and external_ui.visible) else null
+	var external_inventory = external_ui.current_inventory if (external_ui and external_ui.visible) else null
 
 	# 1. Check for existing stacks (Player + Chest)
 	if item.stackable:
@@ -222,11 +230,11 @@ func add_to_inventory(item: ItemData):
 				return 
 		
 		# Check Chest (if open)
-		if chest:
-			for slot in chest.inventory_slots:
+		if external_inventory:
+			for slot in external_inventory.inventory_slots:
 				if slot and slot["data"] == item and slot["quantity"] < item.max_stack_size:
 					slot["quantity"] += 1
-					external_ui.update_ui(chest.inventory_slots)
+					external_ui.update_ui(external_inventory.inventory_slots)
 					return
 
 	# 2. Find empty slot in Player first
@@ -237,11 +245,11 @@ func add_to_inventory(item: ItemData):
 			return
 
 	# 3. If Player is full, find empty slot in Chest
-	if chest:
-		for i in range(chest.inventory_slots.size()):
-			if chest.inventory_slots[i] == null:
-				chest.inventory_slots[i] = { "data": item, "quantity": 1 }
-				external_ui.update_ui(chest.inventory_slots)
+	if external_inventory:
+		for i in range(external_inventory.inventory_slots.size()):
+			if external_inventory.inventory_slots[i] == null:
+				external_inventory.inventory_slots[i] = { "data": item, "quantity": 1 }
+				external_ui.update_ui(external_inventory.inventory_slots)
 				return
 				
 	print("Everything (including the chest) is full!")
@@ -261,7 +269,7 @@ func _refresh_inventory():
 func handle_global_swap(from_id: int, to_id: int):
 	# Find the chest UI to see if a chest is currently open
 	var external_ui = get_tree().get_first_node_in_group("external_inventory_ui")
-	var chest = external_ui.current_chest if external_ui else null
+	var chest = external_ui.current_inventory if external_ui else null
 
 	# GET DATA
 	var get_data = func(id: int):
@@ -323,6 +331,7 @@ func unequip_hand():
 
 # --- BOAT MODES ---
 func enter_boat_mode(target_seat: Node3D):
+	select_slot(-1)
 	seat_target = target_seat
 	is_locked = true
 	collider.disabled = true

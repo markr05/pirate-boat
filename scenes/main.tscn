@@ -4,32 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://c013d2f1iwmfv" path="res://glbs/fish2.glb" id="3_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://r87e80am0ugc" path="res://scenes/barrel_closed.tscn" id="4_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/dinghy1.tscn" id="5_gqmmt"]
-[ext_resource type="PackedScene" uid="uid://chthbdjf183ux" path="res://scenes/PickupItem.tscn" id="6_yc10j"]
 [ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="7_jscy8"]
-[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_pm3ni"]
-[ext_resource type="ArrayMesh" uid="uid://uq5raon5donk" path="res://models/meshes/tuna_mesh.tres" id="9_y6deb"]
-[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="10_og1vs"]
-[ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/meshes/flying_fish_mesh.tres" id="11_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="8_a8y0u"]
 [ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/fishing_rod.tres" id="12_vxglm"]
-[ext_resource type="ArrayMesh" uid="uid://bpnm3uo5wgep6" path="res://models/meshes/fishing_rod.tres" id="13_2f3dj"]
 [ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://addons/proto_controller/proto_controller.tscn" id="14_yq6so"]
 [ext_resource type="PackedScene" uid="uid://btu1lmd48hnol" path="res://glbs/terrain1.glb" id="16_tel4y"]
 [ext_resource type="PackedScene" uid="uid://ds6qkkeu1tyfu" path="res://scenes/chest.tscn" id="17_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://bbp31jak13786" path="res://scenes/ocean.tscn" id="17_muem4"]
-[ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ExternalInventoryUI.tscn" id="18_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://2lhvn6qyr455" path="res://scenes/npc.tscn" id="19_0ld40"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4c57u"]
-size = Vector3(0.33496094, 0.29003906, 0.67645264)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
-size = Vector3(0.16308594, 0.29492188, 1.2431641)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cegan"]
-size = Vector3(0.1, 0.6, 0.1)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.11329044, 0.3852801, 0.96997505, 1)
+sky_horizon_color = Color(0.39272186, 0.6885152, 1, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
 [sub_resource type="Sky" id="Sky_ig7tw"]
@@ -38,6 +24,8 @@ sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
 sky = SubResource("Sky_ig7tw")
+ambient_light_color = Color(0.7397564, 0.6898029, 0.3385251, 1)
+ambient_light_sky_contribution = 0.1
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_density = 0.0
@@ -55,155 +43,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4094634, 1.7162151, -6.0407
 mass = 70.0
 
 [node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0, 0, 0)
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.0033240318, 0.0041520596, 0.0038022995)
 
 [node name="Items" type="Node3D" parent="." unique_id=258792208]
 
-[node name="fish" parent="Items" unique_id=662022366 instance=ExtResource("6_yc10j")]
-transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, -2.308403, 1.1837265, -4.0494328)
+[node name="Fish1" parent="Items" unique_id=2129893044 instance=ExtResource("8_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8669429, -4.086938)
 item_data = ExtResource("7_jscy8")
 
-[node name="tuna" parent="Items" unique_id=2028507825 instance=ExtResource("6_yc10j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -0.34943247)
-item_data = ExtResource("8_pm3ni")
-
-[node name="CollisionShape3D" parent="Items/tuna" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70000005, -0.07735598, -2.483856)
-shape = SubResource("BoxShape3D_4c57u")
-
-[node name="MeshInstance3D" parent="Items/tuna" index="1" unique_id=948636537]
-transform = Transform3D(0.40128416, 0, 0, 0, 0.40128416, 0, 0, 0, 0.40128416, 0.60000014, -0.20000005, -2.3999999)
-mesh = ExtResource("9_y6deb")
-
-[node name="flyingfish" parent="Items" unique_id=1981609393 instance=ExtResource("6_yc10j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1292913, 1.342868, -4.5494328)
-item_data = ExtResource("10_og1vs")
-
-[node name="CollisionShape3D" parent="Items/flyingfish" index="0" unique_id=489335696]
-transform = Transform3D(0.19675449, 0, -0.22646783, 0, 0.3, 0, 0.22646783, 0, 0.19675449, -0.085834265, -0.14263117, 0.8810139)
-shape = SubResource("BoxShape3D_dg77c")
-
-[node name="MeshInstance3D" parent="Items/flyingfish" index="1" unique_id=948636537]
-transform = Transform3D(0.07895446, 0, -0.09087796, 0, 0.12038525, 0, 0.09087796, 0, 0.07895446, -0.09361005, -0.14942443, 0.8877697)
-mesh = ExtResource("11_2wyq8")
-
-[node name="fishagain" parent="Items" unique_id=134107582 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.7084029, 1.1837265, -3.7494326)
-item_data = ExtResource("7_jscy8")
-
-[node name="rod" parent="Items" unique_id=853805980 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
+[node name="rod1" parent="Items" unique_id=986483330 instance=ExtResource("8_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5558686, -3.8589842)
 item_data = ExtResource("12_vxglm")
 
-[node name="CollisionShape3D" parent="Items/rod" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod2" parent="Items" unique_id=648759031 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod2" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod2" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod3" parent="Items" unique_id=2100202129 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod3" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod3" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod4" parent="Items" unique_id=960621010 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod4" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod4" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod5" parent="Items" unique_id=1257213728 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod5" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod5" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod6" parent="Items" unique_id=9593890 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod6" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod6" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod7" parent="Items" unique_id=42217552 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod7" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod7" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod8" parent="Items" unique_id=1744244673 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod8" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod8" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod9" parent="Items" unique_id=202503233 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod9" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod9" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="rod10" parent="Items" unique_id=2069191815 instance=ExtResource("6_yc10j")]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1.0084028, 1.1837265, -3.7494326)
-item_data = ExtResource("12_vxglm")
-
-[node name="CollisionShape3D" parent="Items/rod10" index="0" unique_id=489335696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2972535, -0.013476849)
-shape = SubResource("BoxShape3D_cegan")
-
-[node name="MeshInstance3D" parent="Items/rod10" index="1" unique_id=948636537]
-mesh = ExtResource("13_2f3dj")
-
-[node name="Player" parent="." unique_id=1947708472 node_paths=PackedStringArray("external_inventory_node") instance=ExtResource("14_yq6so")]
+[node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4952376, -0.10000014)
-external_inventory_node = NodePath("../ExternalInventoryUI")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
 environment = SubResource("Environment_0xm2m")
@@ -282,7 +135,7 @@ transform = Transform3D(12.8, 0, 0, 0, 1, 0, 0, 0, 6.9, 0, -1.5, 0)
 use_collision = true
 size = Vector3(39.7, 0.001, 55)
 
-[node name="terrain1" parent="Terrain" unique_id=637846351 instance=ExtResource("16_tel4y")]
+[node name="terrain1" parent="Terrain" unique_id=1660077549 instance=ExtResource("16_tel4y")]
 transform = Transform3D(91.79869, 0, 53, 0, 31.6, 0, -53, 0, 91.79869, 155.4, 13, -22.6)
 
 [node name="Chest" parent="." unique_id=714947045 instance=ExtResource("17_dp3eg")]
@@ -293,34 +146,3 @@ transform = Transform3D(4.4, 0, 0, 0, 1, 0, 0, 0, 3.9, 0, 0, 0)
 
 [node name="NPC" parent="." unique_id=968812797 instance=ExtResource("19_0ld40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7, 2.4, -6.5)
-
-[node name="ExternalInventoryUI" parent="." unique_id=1439749107 instance=ExtResource("18_dp3eg")]
-unique_name_in_owner = true
-
-[connection signal="body_entered" from="Items/fish" to="Items/fish" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/tuna" to="Items/tuna" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/flyingfish" to="Items/flyingfish" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/fishagain" to="Items/fishagain" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod" to="Items/rod" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod2" to="Items/rod2" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod3" to="Items/rod3" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod4" to="Items/rod4" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod5" to="Items/rod5" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod6" to="Items/rod6" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod7" to="Items/rod7" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod8" to="Items/rod8" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod9" to="Items/rod9" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/rod10" to="Items/rod10" method="_on_body_entered"]
-
-[editable path="Items/tuna"]
-[editable path="Items/flyingfish"]
-[editable path="Items/rod"]
-[editable path="Items/rod2"]
-[editable path="Items/rod3"]
-[editable path="Items/rod4"]
-[editable path="Items/rod5"]
-[editable path="Items/rod6"]
-[editable path="Items/rod7"]
-[editable path="Items/rod8"]
-[editable path="Items/rod9"]
-[editable path="Items/rod10"]
