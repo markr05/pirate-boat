@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://caqvxsjihogmm"]
 
-[ext_resource type="Script" uid="uid://7rvwcd4mk3ix" path="res://scripts/item_grid.gd" id="1_2nrou"]
-[ext_resource type="PackedScene" uid="uid://keayugj7s60d" path="res://scenes/slot.tscn" id="2_tyapc"]
+[ext_resource type="Script" path="res://scripts/item_grid.gd" id="1_2nrou"]
+[ext_resource type="PackedScene" uid="uid://keayugj7s60d" path="res://scenes/ui/slot.tscn" id="2_tyapc"]
+
 
 [node name="Node2D" type="CanvasLayer" unique_id=128967801]
 layer = 10

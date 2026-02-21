@@ -1,6 +1,7 @@
+Area3D
+RigidBody3D
 MeshInstance3D
 StaticBody3D
-RigidBody3D
 CanvasLayer
 MarginContainer
 Label
@@ -11,4 +12,3 @@ GridContainer
 Panel
 Node
 CollisionShape3D
-Area3D

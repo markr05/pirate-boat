@@ -1,7 +1,7 @@
 extends Control
 class_name ExternalInventoryUI
 
-var slot_prefab = preload("res://scenes/slot.tscn")
+var slot_prefab = preload("res://scenes/ui/slot.tscn")
 @onready var grid = $Panel/MarginContainer/GridContainer
 
 var current_inventory = null

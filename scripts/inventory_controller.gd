@@ -2,7 +2,7 @@ extends Control
 class_name InventoryController
 
 var item_slots_count: int = 27
-var inventory_slot_prefab: PackedScene = load("res://scenes/slot.tscn")
+var inventory_slot_prefab: PackedScene = load("res://scenes/ui/slot.tscn")
 @onready var inventory_grid: GridContainer = %GridContainer
 var inventory_slots: Array[InventorySlot] = []
 var inventory_full: bool = false

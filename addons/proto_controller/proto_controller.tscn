@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bb8jjc6xsmrcq"]
 
 [ext_resource type="Script" uid="uid://dappoyx5kwie2" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/inventory_controller.tscn" id="2_wr06p"]
-[ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ExternalInventoryUI.tscn" id="3_6dqce"]
-[ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/game_info.tscn" id="4_0rk7u"]
+[ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/ui/inventory_controller.tscn" id="2_wr06p"]
+[ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ui/ExternalInventoryUI.tscn" id="3_6dqce"]
+[ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/ui/game_info.tscn" id="4_0rk7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)

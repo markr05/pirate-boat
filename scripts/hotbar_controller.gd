@@ -2,7 +2,7 @@ extends Control
 class_name HotbarController
 
 var item_slots_count: int = 9 # Only 9 slots for the hotbar
-var inventory_slot_prefab: PackedScene = load("res://scenes/slot.tscn")
+var inventory_slot_prefab: PackedScene = load("res://scenes/ui/slot.tscn")
 var current_active_index: int = 0
 
 
