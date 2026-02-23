@@ -4,6 +4,7 @@ extends EquippableItem
 @export var fishing_manager: Node 
 
 @onready var bobber: CharacterBody3D = %Bobber
+@onready var alert: Label3D = %Bobber/Alert
 @onready var fishing_line_starter_marker: Marker3D = %FishingLineStarterMarker
 @onready var bobber_start_marker: Marker3D = %BobberStartMarker
 @onready var fishing_line: MeshInstance3D = %FishingLine
@@ -146,10 +147,41 @@ func start_fishing():
 	bobber.velocity.y += THROW_ARC
 
 func _on_fish_bite_received(fish_data: ItemData):
+	if Input.is_action_pressed("fire_secondary"):
+		if fishing_manager:
+			fishing_manager.start_waiting() # Reset the timer for a new fish
+		return
 	fish_hooked = true
 	fish_caught = fish_data
+	
 	if is_fishing and bobber:
-		bobber.velocity.y -= 4.0 
+		alert.visible = true
+		bobber.velocity.y -= 4.0
+		
+		var timer = 0.0
+		var reaction_time = 1.0 # 1 second to react
+		var caught_successfully = false
+		
+		while timer < reaction_time:
+			if Input.is_action_just_pressed("fire_secondary"):
+				caught_successfully = true
+				break
+			
+			await get_tree().process_frame
+			timer += get_process_delta_time()
+		
+		if caught_successfully:
+			alert.visible = false
+		else:
+			_fail_fishing()
+
+func _fail_fishing():
+	alert.visible = false
+	fish_hooked = false
+	fish_caught = null
+	
+	if fishing_manager:
+		fishing_manager.start_waiting() 
 	
 
 func stop_fishing():

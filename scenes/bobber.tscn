@@ -15,6 +15,17 @@ radius = 0.06
 [node name="Bobber" type="CharacterBody3D" unique_id=1361057172]
 script = ExtResource("1_i5s1t")
 
+[node name="Alert" type="Label3D" parent="." unique_id=1158859764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85947883, 0)
+visible = false
+pixel_size = 0.01
+no_depth_test = true
+render_priority = 10
+outline_render_priority = 10
+modulate = Color(1, 0, 0, 1)
+text = "!"
+font_size = 128
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1753508796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4901161e-08, 3.7252903e-08, 0)
 mesh = SubResource("SphereMesh_x0c03")

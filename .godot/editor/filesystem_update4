@@ -1,12 +1,9 @@
-res://addons/proto_controller/proto_controller.tscn
-res://shaders/mask.gdshader
+res://shaders/boat.gdshader
 res://models/meshes/fish_mesh.tres
-res://shaders/item_holding.gdshader
 res://models/meshes/rod1.tres
 res://models/meshes/rod.tres
 res://models/meshes/chest.tres
 res://shaders/water.gdshader
-res://scenes/main.tscn
-res://scripts/external_inventory.gd
-res://scripts/inventory_controller.gd
-res://scripts/hotbar_controller.gd
+res://shaders/dock.gdshader
+res://addons/proto_controller/proto_controller.tscn
+res://addons/proto_controller/proto_controller.gd

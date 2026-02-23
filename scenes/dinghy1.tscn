@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3bciyaok16cu" path="res://scripts/boat_physics.gd" id="1_ny2ge"]
 [ext_resource type="Material" uid="uid://c0spcbdakvf1c" path="res://shaders/mask.tres" id="2_p4fp6"]
+[ext_resource type="Shader" uid="uid://b0ymqouu624ed" path="res://shaders/boat.gdshader" id="2_x20fu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pge34"]
 
@@ -35,8 +36,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g8hlu")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u12p8"]
-albedo_color = Color(0.31, 0.14074, 0.027899992, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axk4j"]
+render_priority = 0
+shader = ExtResource("2_x20fu")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fc4re"]
 points = PackedVector3Array(1.123797, 0.5997925, 1.7409973, 1.0135733, 0.6249062, 1.5797944, 0.63186073, 0.6223694, 3.873148, 0.69434285, 0.5997925, 3.9987254, 0.85494816, -0.044411838, 2.962041, 1.0049931, -0.13332444, -0.00017023087, 1.123797, 0.5997925, -1.742228, -1.0148935, 0.6249062, 1.5628724, 1.0135733, 0.6249062, -1.5801349, -0.6287807, 0.62211573, 3.8838353, -0.0026401281, 0.6128566, 5.070145, 0, 0.5997925, 5.1912694, 0.31043017, -0.13332444, 4.4351306, 0.5024965, -0.5015318, 1.7409973, 0.5024965, -0.5015318, -1.742228, 0.85494816, -0.044411838, -2.9632719, 0.69434285, 0.5997925, -3.9055505, 0.63186073, 0.6223694, -3.7879884, -1.123797, 0.5997925, 1.7409973, -1.0148935, 0.6249062, -1.5641036, -0.6945629, 0.5997925, 3.9987254, -0.32671082, -0.044411838, 4.6043487, -0.19206637, -0.5015318, 2.81776, 0, -0.67073214, -0.00017023087, -0.19206637, -0.5015318, -2.8181005, 0.31043017, -0.13332444, -3.8307383, -0.32671082, -0.044411838, -3.8734882, 0, 0.5997925, -3.9064412, -0.6287807, 0.62211573, -3.7906604, -1.0569148, -0.044411838, -0.00017023087, -0.81336683, -0.13332444, 2.81776, -1.123797, 0.5997925, -1.742228, -0.6213005, -0.5015318, -0.00017023087, -0.81336683, -0.13332444, -2.8181005, -0.6945629, 0.5997925, -3.9055505)
@@ -64,7 +66,7 @@ float_force = 240.0
 [node name="dinghy" type="MeshInstance3D" parent="RigidBody3D" unique_id=96882418]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_485bt")
-surface_material_override/0 = SubResource("StandardMaterial3D_u12p8")
+surface_material_override/0 = SubResource("ShaderMaterial_axk4j")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D" unique_id=1592962160]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

@@ -1,39 +1,34 @@
 [gd_scene format=3 uid="uid://bb8jjc6xsmrcq"]
 
 [ext_resource type="Script" uid="uid://dappoyx5kwie2" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="PackedScene" uid="uid://bm2crvtoqylah" path="res://player.tscn" id="2_0rk7u"]
 [ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/ui/inventory_controller.tscn" id="2_wr06p"]
 [ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ui/ExternalInventoryUI.tscn" id="3_6dqce"]
 [ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/ui/game_info.tscn" id="4_0rk7u"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
-albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
-radius = 0.4
-height = 1.8
+[sub_resource type="BoxShape3D" id="BoxShape3D_6dqce"]
+size = Vector3(0.81103516, 1.4401855, 0.37200928)
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
 script = ExtResource("1_ucva2")
 coins = 10
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1540594731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-material_override = SubResource("StandardMaterial3D_iof21")
-cast_shadow = 0
-mesh = SubResource("CapsuleMesh_ucva2")
+[node name="player" parent="." unique_id=1606263150 instance=ExtResource("2_0rk7u")]
+transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 0, 1.41, 0)
+
+[node name="Skeleton3D" parent="player/Player" parent_id_path=PackedInt32Array(1606263150, 235630161) index="0" unique_id=531399515]
+bones/16/rotation = Quaternion(-0.34794787, 3.9223966e-08, 3.57174e-06, 0.9375139)
+bones/18/rotation = Quaternion(0.068737954, -0.053210996, 0.60989153, 0.787703)
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1686505244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_iof21")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.7552246, 0.05508423)
+shape = SubResource("BoxShape3D_6dqce")
 
 [node name="Head" type="Node3D" parent="." unique_id=1792126765]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6369691, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=179159592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10347009, -0.15338832)
 
 [node name="HandPosition" type="Marker3D" parent="Head/Camera3D" unique_id=281423080]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, -0.6, -0.7999999)
@@ -53,3 +48,5 @@ unique_name_in_owner = true
 [node name="ExternalInventoryUI" parent="CanvasLayer" unique_id=79095522 instance=ExtResource("3_6dqce")]
 unique_name_in_owner = true
 z_index = 10
+
+[editable path="player"]

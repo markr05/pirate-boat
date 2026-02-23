@@ -49,6 +49,7 @@ func set_highlight(is_active: bool):
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if slot_filled:
 		var preview = icon_rect.duplicate()
+		preview.z_index = 100
 		preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		preview.size = icon_rect.size
 		preview.pivot_offset = icon_rect.size / 2.0

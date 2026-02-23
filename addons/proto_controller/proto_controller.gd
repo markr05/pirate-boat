@@ -10,6 +10,7 @@ signal inventory_closed
 @onready var interact_ray: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var collider: CollisionShape3D = $Collider
 @onready var camera: Camera3D = $Head/Camera3D
+@onready var anim_player = $player/AnimationPlayer
 
 # --- NEW UI REFERENCES ---
 @onready var inventory_controller: Node = %InventoryController/CanvasLayer/InventoryUI
@@ -129,9 +130,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# 7. HOTKEYS
 	if not is_menu_open:
+		if event is InputEventMouseButton and event.is_pressed():
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				_change_active_slot(-1)
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				_change_active_slot(1)
 		for i in range(1, 10):
 			if event.is_action_pressed("hotkey_" + str(i)):
 				select_slot(i - 1)
+				
+func _change_active_slot(direction: int) -> void:
+	# 1. Prevent switching if the tool is busy (e.g., fishing)
+	if current_tool and current_tool.has_method("is_fishing") and current_tool.is_fishing:
+		return
+	
+	# 2. Calculate the new index (wrapping between 0 and 8 for the hotbar)
+	# posmod ensures that scrolling up from 0 wraps to 8 correctly
+	var new_index = posmod(current_slot + direction, 9)
+	
+	# 3. Use your existing select_slot function to handle the actual logic
+	select_slot(new_index)
 
 func toggle_inventory(open: bool):
 	is_menu_open = open
@@ -173,28 +191,46 @@ func toggle_inventory(open: bool):
 func _physics_process(delta: float) -> void:
 	if seat_target:
 		global_transform = seat_target.global_transform
+		# Play a sitting/rowing animation if you have one
+		if anim_player.current_animation != "Pirate_Sit":
+			anim_player.play("Pirate_Sit", 0.2)
 		return 
 	
 	if is_menu_open or is_locked: 
 		if not is_on_floor(): velocity += get_gravity() * delta
 		move_and_slide()
+		anim_player.play("RESET", 0.3) # Stay in idle if locked
 		return
 	
-	if not is_on_floor(): velocity += get_gravity() * delta
+	if not is_on_floor(): 
+		velocity += get_gravity() * delta
+		# Optional: anim.play("Player_jump_loop")
 	
 	if Input.is_action_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var speed = sprint_speed if Input.is_action_pressed("sprint") else base_speed
+	var is_sprinting = Input.is_action_pressed("sprint")
+	var speed = sprint_speed if is_sprinting else base_speed
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		
+		# Play walk animation
+		anim_player.play("Player_Walking", 0.3)
+		
+		# Adjust animation speed: faster if sprinting, slower if walking
+		# (Assumes base_speed is 1.0; tweak the math to fit your move speeds)
+		anim_player.speed_scale = (speed / base_speed) * 2.0
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		
+		# Return to Idle
+		anim_player.play("RESET", 0.3)
+		anim_player.speed_scale = 1.0 * 2.08
 
 	move_and_slide()
 
@@ -212,8 +248,6 @@ func try_interact():
 			target.interact(self)
 		elif target.get_parent().has_method("interact"):
 			target.get_parent().interact(self)
-		else:
-			print("Hit something, but it has no interact method: ", target.name)
 
 # --- INVENTORY ---
 func add_to_inventory(item: ItemData):

@@ -6,9 +6,10 @@ signal entered_water
 @export var wave_height: float = 0.5 
 @export var wave_speed: float = 1.0 
 
+
 var is_floating: bool = false
 var has_fish: bool = false
-var base_water_level: float = 0.0
+var base_water_level: float = 10.0
 
 @onready var water_detector: Area3D = $WaterDetector
 

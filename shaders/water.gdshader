@@ -13,7 +13,7 @@ void fragment() {
 	// Called for every pixel the material is visible on.
 	ALBEDO = vec3(0.0, 0.4, 0.8);
 	
-	ALPHA = 0.99;
+	ALPHA = 0.80;
 }
 
 //void light() {

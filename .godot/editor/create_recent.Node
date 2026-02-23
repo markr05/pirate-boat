@@ -1,14 +1,1 @@
-Area3D
-RigidBody3D
-MeshInstance3D
-StaticBody3D
-CanvasLayer
-MarginContainer
-Label
-Control
-Button
-ColorRect
-GridContainer
-Panel
-Node
-CollisionShape3D
+Label3D

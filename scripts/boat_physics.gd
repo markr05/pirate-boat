@@ -4,7 +4,7 @@ extends RigidBody3D
 @export var float_force: float = 60.0
 @export var water_drag: float = 3.0
 @export var wave_influence: float = 0.6
-@export var water_height_offset: float = 0.0
+@export var water_height_offset: float = 10.0
 @export var oar_impulse: float = 30.0
 @export var oar_side_offset: float = 1.0
 
