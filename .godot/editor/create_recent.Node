@@ -1,1 +1,10 @@
+CollisionShape3D
+Node3D
+StaticBody3D
+Label
+MarginContainer
+CSGBox3D
+Area3D
+ColorRect
+MeshInstance3D
 Label3D

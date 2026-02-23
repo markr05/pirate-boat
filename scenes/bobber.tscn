@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dctd8ojxxt6lu"]
 
-[ext_resource type="Script" uid="uid://dbxcpt1o1qy8y" path="res://scripts/bobber.gd" id="1_i5s1t"]
+[ext_resource type="Script" uid="uid://dbxcpt1o1qy8y" path="res://scripts/fishing/bobber.gd" id="1_i5s1t"]
+[ext_resource type="Script" uid="uid://cpvfher248ulb" path="res://scripts/fishing/mesh_centering.gd" id="2_rn3pg"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_x0c03"]
 radius = 0.05
@@ -13,6 +14,8 @@ size = Vector3(0.1, 0.1, 0.1)
 radius = 0.06
 
 [node name="Bobber" type="CharacterBody3D" unique_id=1361057172]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_i5s1t")
 
 [node name="Alert" type="Label3D" parent="." unique_id=1158859764]
@@ -38,3 +41,7 @@ shape = SubResource("BoxShape3D_1tjrd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WaterDetector" unique_id=1957220228]
 shape = SubResource("SphereShape3D_2wku4")
+
+[node name="CaughtMesh" type="MeshInstance3D" parent="." unique_id=472037983]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0.026151478, -0.24825323, 0)
+script = ExtResource("2_rn3pg")

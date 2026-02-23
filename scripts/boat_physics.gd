@@ -67,7 +67,7 @@ func _apply_sustained_push(side: String):
 		tween.tween_property(self, "right_oar_force", 1.0, 0.2)
 		tween.tween_property(self, "right_oar_force", 0.0, stroke_duration - 0.2)
 
-@export var turn_multiplier: float = 0.2 # 0.0 = perfectly straight, 1.0 = very spinny
+@export var turn_multiplier: float = 0.4 # 0.0 = perfectly straight, 1.0 = very spinny
 
 func _physics_process(delta: float) -> void:
 	_apply_buoyancy()

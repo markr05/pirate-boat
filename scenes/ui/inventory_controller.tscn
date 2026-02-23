@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5heaetsevcxf"]
 
-[ext_resource type="Script" uid="uid://bg5eyry54lfoh" path="res://scripts/inventory_controller.gd" id="1_hnk7b"]
-[ext_resource type="Script" uid="uid://dpk7nacdqxiwe" path="res://scripts/hotbar_controller.gd" id="2_c5dg5"]
+[ext_resource type="Script" uid="uid://bg5eyry54lfoh" path="res://scripts/ui/inventory_controller.gd" id="1_hnk7b"]
+[ext_resource type="Script" uid="uid://dpk7nacdqxiwe" path="res://scripts/ui/hotbar_controller.gd" id="2_c5dg5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en4lt"]
 content_margin_left = 0.0
@@ -24,6 +24,7 @@ corner_detail = 5
 [node name="InventoryController" type="Node" unique_id=1775436220]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=424236658]
+layer = 2
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer" unique_id=1290782037]
 visible = false

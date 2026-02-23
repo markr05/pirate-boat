@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ds6qkkeu1tyfu"]
 
-[ext_resource type="Script" uid="uid://cnd26own65wi8" path="res://scripts/chest.gd" id="1_oii8l"]
+[ext_resource type="Script" uid="uid://cnd26own65wi8" path="res://scripts/ui/chest.gd" id="1_oii8l"]
 [ext_resource type="ArrayMesh" uid="uid://dp0llho4e5qg5" path="res://models/meshes/chest.tres" id="2_sy5e1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sy5e1"]

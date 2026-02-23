@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://2lhvn6qyr455"]
 
-[ext_resource type="Script" uid="uid://ius5wly7l02u" path="res://scripts/npc.gd" id="1_nh2m4"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="2_rv78h"]
-[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="3_7n8xq"]
+[ext_resource type="Script" uid="uid://ius5wly7l02u" path="res://scripts/ui/npc.gd" id="1_nh2m4"]
+[ext_resource type="ArrayMesh" uid="uid://dl4lsa16qm84h" path="res://models/meshes/fisherman.tres" id="2_abqhh"]
+[ext_resource type="Shader" uid="uid://cpr24pjfi72xy" path="res://scenes/fisherman.gdshader" id="2_rv78h"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_tcuxl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n8xq"]
+render_priority = 0
+shader = ExtResource("2_rv78h")
+shader_parameter/speed = 1.0
+shader_parameter/frequency = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tcuxl"]
 size = Vector3(1, 1.8, 1)
@@ -12,11 +16,11 @@ size = Vector3(1, 1.8, 1)
 [node name="NPC" type="StaticBody3D" unique_id=968812797]
 collision_layer = 129
 script = ExtResource("1_nh2m4")
-menu_inventory = Array[ExtResource("2_rv78h")]([ExtResource("3_7n8xq")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=178605318]
-transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_tcuxl")
+transform = Transform3D(0.45931378, 0.0151528455, -0.01341648, -0.0012919565, 0.32610878, 0.32408357, 0.020197563, -0.32373178, 0.32583532, 0, 0, 0.30398715)
+material_override = SubResource("ShaderMaterial_7n8xq")
+mesh = ExtResource("2_abqhh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=259268538]
 shape = SubResource("BoxShape3D_tcuxl")

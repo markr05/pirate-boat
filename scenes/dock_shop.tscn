@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cjvhstja16kl4"]
+
+[ext_resource type="PackedScene" uid="uid://8vv0gamf17lf" path="res://glbs/dock_shop_full.glb" id="1_eq4xw"]
+[ext_resource type="Shader" uid="uid://bw87pi8l1dkew" path="res://shaders/dock.gdshader" id="2_eq4xw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s78mc"]
+render_priority = 0
+shader = ExtResource("2_eq4xw")
+
+[node name="dock_shop_full" unique_id=1628401207 instance=ExtResource("1_eq4xw")]
+
+[node name="dock_shop" parent="." index="0" unique_id=149875237]
+material_override = SubResource("ShaderMaterial_s78mc")

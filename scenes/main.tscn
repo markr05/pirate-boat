@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dnrvraq4w0fgq" path="res://scripts/main.gd" id="1_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://c013d2f1iwmfv" path="res://glbs/fish2.glb" id="3_dp3eg"]
-[ext_resource type="PackedScene" uid="uid://r87e80am0ugc" path="res://scenes/barrel_closed.tscn" id="4_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/dinghy1.tscn" id="5_gqmmt"]
 [ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="7_jscy8"]
 [ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="8_a8y0u"]
@@ -19,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c0lhtvbl8dbn1" path="res://data/textures/main_slot1_normal_roughness.png" id="18_yc10j"]
 [ext_resource type="PackedScene" uid="uid://2lhvn6qyr455" path="res://scenes/npc.tscn" id="19_0ld40"]
 [ext_resource type="PackedScene" uid="uid://b4c2klpvf6ep4" path="res://scenes/dock_part.tscn" id="19_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://cjvhstja16kl4" path="res://scenes/dock_shop.tscn" id="19_yc10j"]
+[ext_resource type="PackedScene" uid="uid://pucdycf3a8jr" path="res://scenes/lugger.tscn" id="20_gqmmt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.11329044, 0.3852801, 0.96997505, 1)
@@ -49,11 +50,7 @@ script = ExtResource("1_jbj1t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 
 [node name="fish2" parent="Objects" unique_id=475846853 instance=ExtResource("3_dp3eg")]
-transform = Transform3D(0.15875, 0.28730956, -0.9445909, -0.34522855, 0.9124838, 0.21952389, 0.92499495, 0.29125026, 0.24404426, -5.186196, 2.2844338, 13.259562)
-
-[node name="closed_barrel" parent="Objects" unique_id=621081290 instance=ExtResource("4_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4094634, 0.09883118, -6.0407934)
-mass = 70.0
+transform = Transform3D(0.15875, 0.28730956, -0.9445909, -0.34522855, 0.9124838, 0.21952389, 0.92499495, 0.29125026, 0.24404426, -5.186196, -1.1062946, 13.259562)
 
 [node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.0033240318, -1.5071306, 1.6433663)
@@ -80,75 +77,38 @@ environment = SubResource("Environment_0xm2m")
 transform = Transform3D(-0.8137978, -0.2358888, 0.5311212, 0.57964003, -0.26366562, 0.77103674, -0.04184054, 0.9353272, 0.35130116, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Terrain" type="Node" parent="." unique_id=743599336]
-
-[node name="pier" type="Node3D" parent="Terrain" unique_id=1190533252]
+[node name="pier" type="Node3D" parent="." unique_id=1190533252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.992664, 0)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/pier" unique_id=1102750442]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 0.8576672, -7.155118)
-use_collision = true
-size = Vector3(8.114258, 0.29296875, 3.0839844)
+[node name="dock1" parent="pier" unique_id=1516264505 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.53692, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/pier" unique_id=1046130139]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.563326, 0.8576672, -8.74799)
-use_collision = true
-size = Vector3(6.3, 0.29296875, 3.0839844)
+[node name="dock2" parent="pier" unique_id=916407244 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.538199, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/pier" unique_id=606313333]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 0.8576672, -10.324859)
-use_collision = true
-size = Vector3(8.114258, 0.29296875, 3.0839844)
+[node name="dock3" parent="pier" unique_id=1541332876 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.504042, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/pier" unique_id=326351967]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 4.9576674, -7.155118)
-use_collision = true
-size = Vector3(8.114258, 0.29296875, 3.0839844)
+[node name="dock4" parent="pier" unique_id=1547266415 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.4803653, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/pier" unique_id=2039178574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.163325, 4.9576674, -10.324859)
-use_collision = true
-size = Vector3(8.114258, 0.29296875, 3.0839844)
+[node name="dock5" parent="pier" unique_id=152380481 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5494223, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/pier" unique_id=104259917]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2066274, 3.063133, -8.713966)
-use_collision = true
-size = Vector3(0.2, 4.105713, 6.3)
+[node name="dock6" parent="pier" unique_id=163639283 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.575738, 0.5422125, -3.3276215)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/pier/CSGBox3D4" unique_id=1318042598]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3528564, -2)
-operation = 2
-use_collision = true
-size = Vector3(0.4, 3.4, 1.5)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/pier" unique_id=1448856983]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 3.063133, -11.813967)
-use_collision = true
-size = Vector3(0.2, 4.105713, 7.8)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/pier" unique_id=112776031]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 1.5602765, -5.6139665)
-use_collision = true
-size = Vector3(0.2, 1.1, 7.8)
-
-[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/pier" unique_id=703822127]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.156628, 4.4602766, -5.6139665)
-use_collision = true
-size = Vector3(0.2, 1.3000001, 7.8)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/pier" unique_id=740734619]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.106627, 3.063133, -8.713966)
-use_collision = true
-size = Vector3(0.2, 4.105713, 6.3)
+[node name="dock_shop_full" parent="pier" unique_id=1628401207 instance=ExtResource("19_yc10j")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 14.753188, 0.32572174, -8.917433)
 
 [node name="Chest" parent="." unique_id=714947045 instance=ExtResource("17_dp3eg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11.471462, -4.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11.418514, -4.9)
 
 [node name="Ocean" parent="." unique_id=1402291055 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0, 10, 0)
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -0.009788513, 9.950912, 0.03823471)
 
 [node name="NPC" parent="." unique_id=968812797 instance=ExtResource("19_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7, 12.064487, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.615792, 12.083982, -6.5)
 
 [node name="HTerrain" type="Node3D" parent="." unique_id=403749254]
 script = ExtResource("12_a8y0u")
@@ -170,20 +130,11 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 metadata/_custom_type_script = "uid://dlffwarmrpdk0"
 
-[node name="dock1" parent="." unique_id=1516264505 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 17.97311, 10.534877, -3.3276215)
+[node name="House" type="Node3D" parent="." unique_id=1652977768]
 
-[node name="dock2" parent="." unique_id=916407244 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 12.974389, 10.534877, -3.3276215)
+[node name="CSGBox3D" type="CSGBox3D" parent="House" unique_id=308089874]
+transform = Transform3D(33.46206, 0, 0, 0, 12.272632, 0, 0, 0, 13.70482, 88.86471, 23.715326, -7.4495764)
+size = Vector3(0.32226563, 0.65234375, 1)
 
-[node name="dock3" parent="." unique_id=1541332876 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7.9402313, 10.534877, -3.3276215)
-
-[node name="dock4" parent="." unique_id=1547266415 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.916555, 10.534877, -3.3276215)
-
-[node name="dock5" parent="." unique_id=152380481 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1132326, 10.534877, -3.3276215)
-
-[node name="dock6" parent="." unique_id=163639283 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -7.1395483, 10.534877, -3.3276215)
+[node name="dinghy1" parent="." unique_id=936590279 instance=ExtResource("20_gqmmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.221086, 11.521418, -0.55411625)

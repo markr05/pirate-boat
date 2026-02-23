@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://8lcl4suftttc"]
 
-[ext_resource type="Script" uid="uid://ddwtx8xr6rnod" path="res://scripts/fishing_rod.gd" id="1_m2mym"]
+[ext_resource type="Script" uid="uid://ddwtx8xr6rnod" path="res://scripts/fishing/fishing_rod.gd" id="1_m2mym"]
 [ext_resource type="ArrayMesh" uid="uid://bme8jrvmm6f41" path="res://models/meshes/rod1.tres" id="2_liwt3"]
 [ext_resource type="PackedScene" uid="uid://dctd8ojxxt6lu" path="res://scenes/bobber.tscn" id="3_1l1uq"]
-[ext_resource type="Script" uid="uid://cv283ja2d0w1i" path="res://scripts/fishing_manager.gd" id="4_rcwkp"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="5_3ws28"]
+[ext_resource type="Script" uid="uid://cv283ja2d0w1i" path="res://scripts/fishing/fishing_manager.gd" id="4_rcwkp"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ui/ItemData.gd" id="5_3ws28"]
 [ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="6_8bbw0"]
 [ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="7_otkvh"]
 [ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_jgl7u"]

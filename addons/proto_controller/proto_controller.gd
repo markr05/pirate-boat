@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 signal inventory_changed(new_inventory)
 signal coins_changed(coins_amount)
+signal item_changed(item_data: ItemData)
 signal inventory_closed
 
 # --- REFERENCES ---
@@ -23,6 +24,8 @@ signal inventory_closed
 @export var sprint_speed: float = 10.0
 @export var jump_velocity: float = 4.5
 @export var look_speed: float = 0.002
+var gravity_multiplier: float = 1.0
+var speed_multiplier: float = 1.0
 
 # --- STATE ---
 var look_rotation: Vector2 = Vector2.ZERO
@@ -30,6 +33,8 @@ var seat_target: Node3D = null
 var is_menu_open: bool = false
 var is_locked: bool = false 
 @onready var external_inventory_node = $CanvasLayer/ExternalInventoryUI
+@onready var water_overlay = $CanvasLayer/GameInfo/WaterVision
+@onready var standard_overlay = $CanvasLayer/GameInfo/StandardVision
 
 # Fishing / Limits
 var look_limit_center: Vector2 = Vector2.ZERO
@@ -63,15 +68,27 @@ func _ready() -> void:
 		
 	# 4. Connect Coins -> Game Info
 	if game_info_ui:
-		if game_info_ui.has_method("update_coins_display"):
-			if not coins_changed.is_connected(game_info_ui.update_coins_display):
-				coins_changed.connect(game_info_ui.update_coins_display)
-			game_info_ui.update_coins_display(coins)
-		else:
-			printerr("ERROR: Game Info UI missing function 'update_coins_display'")
+	# Existing coins connection
+		if not coins_changed.is_connected(game_info_ui.update_coins_display):
+			coins_changed.connect(game_info_ui.update_coins_display)
+		game_info_ui.update_coins_display(coins)
+	
+		# NEW: Connect Item Changed to Item Display
+		if game_info_ui.has_method("update_item_display"):
+			if not item_changed.is_connected(game_info_ui.update_item_display):
+				item_changed.connect(game_info_ui.update_item_display)
+				
+			# Initial UI update (starts empty)
+			item_changed.emit(null)
 	
 	_refresh_inventory()
 	coins_changed.emit(coins)
+	var head_detector = $Head/Camera3D/HeadDetector
+	# Water vision
+	head_detector.area_entered.connect(_on_head_detector_area_entered)
+	head_detector.area_exited.connect(_on_head_detector_area_exited)
+	water_overlay.visible = false
+	standard_overlay.visible = true
 
 # --- INPUT ---
 func _unhandled_input(event: InputEvent) -> void:
@@ -93,7 +110,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			look_rotation.x -= event.relative.y * look_speed
 			look_rotation.y -= event.relative.x * look_speed
 			
-			look_rotation.x = clamp(look_rotation.x, deg_to_rad(-85), deg_to_rad(85))
+			look_rotation.x = clamp(look_rotation.x, deg_to_rad(-75), deg_to_rad(85))
 			
 			if is_look_limited:
 				look_rotation.x = clamp(look_rotation.x, look_limit_center.x - deg_to_rad(45), look_limit_center.x + deg_to_rad(45))
@@ -197,9 +214,9 @@ func _physics_process(delta: float) -> void:
 		return 
 	
 	if is_menu_open or is_locked: 
-		if not is_on_floor(): velocity += get_gravity() * delta
+		if not is_on_floor(): velocity += (get_gravity() * gravity_multiplier) * delta
 		move_and_slide()
-		anim_player.play("RESET", 0.3) # Stay in idle if locked
+		#anim_player.play("RESET", 0.3) # Stay in idle if locked
 		return
 	
 	if not is_on_floor(): 
@@ -211,7 +228,7 @@ func _physics_process(delta: float) -> void:
 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var is_sprinting = Input.is_action_pressed("sprint")
-	var speed = sprint_speed if is_sprinting else base_speed
+	var speed = (sprint_speed if is_sprinting else base_speed) * speed_multiplier
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
@@ -229,7 +246,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 		
 		# Return to Idle
-		anim_player.play("RESET", 0.3)
+		#anim_player.play("RESET", 0.3)
 		anim_player.speed_scale = 1.0 * 2.08
 
 	move_and_slide()
@@ -327,9 +344,10 @@ func handle_global_swap(from_id: int, to_id: int):
 	_refresh_inventory()
 	if external_ui and chest:
 		external_ui.update_ui(chest.inventory_slots)
+	select_slot(current_slot)
 
 func select_slot(index: int):
-	# 1. Prevent switching if the tool is busy (e.g., fishing)
+	# 1. Prevent switching if the tool is busy
 	if current_tool and "is_fishing" in current_tool and current_tool.is_fishing: 
 		return
 		
@@ -339,15 +357,14 @@ func select_slot(index: int):
 	if hotbar_controller and hotbar_controller.has_method("set_active_slot"): 
 		hotbar_controller.set_active_slot(index)
 	
-	# 3. Handle Equipping from Dictionary
-	# Check if the slot is not null (meaning it contains a dictionary)
-	if inventory_slots[index] != null:
-		# Extract the ItemData from the "data" key of the dictionary
+	# 3. Handle Equipping and UI Update
+	if index >= 0 and inventory_slots[index] != null:
 		var item_to_equip = inventory_slots[index]["data"]
 		equip_item(item_to_equip)
+		item_changed.emit(item_to_equip) # Tell UI what we are holding
 	else:
-		# If the dictionary is null, the slot is empty
 		unequip_hand()
+		item_changed.emit(null) # Tell UI hand is empty
 
 func equip_item(item_data: ItemData):
 	unequip_hand()
@@ -390,3 +407,22 @@ func open_external_inventory(chest):
 	if external_inventory_node and external_inventory_node.has_method("open_container"):
 		external_inventory_node.open_container(chest)
 		toggle_inventory(true)
+
+func _on_head_detector_area_entered(area):
+	if area.is_in_group("water"):
+		water_overlay.visible = true
+		standard_overlay.visible = false
+		water_overlay.material.set_shader_parameter("blue_tint", Color(0.0, 0.4, 0.8, 0.4))
+		
+		gravity_multiplier = 0.2
+		speed_multiplier = 0.6 # 80% reduction in speed
+		velocity.y *= 0.2
+
+func _on_head_detector_area_exited(area):
+	if area.is_in_group("water"):
+		water_overlay.visible = false
+		standard_overlay.visible = true
+		water_overlay.material.set_shader_parameter("blue_tint", Color(0.0, 0.4, 0.8, 0.0))
+		
+		gravity_multiplier = 1.0
+		speed_multiplier = 1.0 # Reset to full speed

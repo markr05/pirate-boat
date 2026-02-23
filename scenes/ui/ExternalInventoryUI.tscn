@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsvnlfedyl7mf"]
 
-[ext_resource type="Script" uid="uid://b4x3exg25g5kp" path="res://scripts/external_inventory.gd" id="1_o24sl"]
+[ext_resource type="Script" uid="uid://b4x3exg25g5kp" path="res://scripts/ui/external_inventory.gd" id="1_o24sl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srcgb"]
 content_margin_left = 0.0

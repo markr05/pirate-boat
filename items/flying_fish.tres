@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bj3u37at7kdbw"]
 
 [ext_resource type="Texture2D" uid="uid://c0s0psvn6h8lj" path="res://items/flying_icon.PNG" id="1_ce6kr"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="1_mk6nu"]
+[ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/meshes/flying_fish_mesh.tres" id="1_dk5t1"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ui/ItemData.gd" id="3_wepo3"]
 
 [resource]
-script = ExtResource("1_mk6nu")
+script = ExtResource("3_wepo3")
 name = "Flying Fish"
 icon = ExtResource("1_ce6kr")
 description = "This fish can fly"
+ground_mesh = ExtResource("1_dk5t1")
 stackable = true
 price = 15
 metadata/_custom_type_script = "uid://buhi2og5nuwaj"

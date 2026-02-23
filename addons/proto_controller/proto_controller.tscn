@@ -9,6 +9,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dqce"]
 size = Vector3(0.81103516, 1.4401855, 0.37200928)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rk7u"]
+size = Vector3(0.4940796, 0.4510498, 1)
+
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
 script = ExtResource("1_ucva2")
 coins = 10
@@ -28,7 +31,7 @@ shape = SubResource("BoxShape3D_6dqce")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6369691, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=179159592]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10347009, -0.15338832)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 
 [node name="HandPosition" type="Marker3D" parent="Head/Camera3D" unique_id=281423080]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, -0.6, -0.7999999)
@@ -36,6 +39,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, -0.6, -0.7999999)
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=375180249]
 target_position = Vector3(0, 0, -3)
 collision_mask = 128
+
+[node name="HeadDetector" type="Area3D" parent="Head/Camera3D" unique_id=1980867275]
+collision_layer = 129
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Camera3D/HeadDetector" unique_id=1764203158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014556885, 0.54972076, 0)
+shape = SubResource("BoxShape3D_0rk7u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1029312430]
 

@@ -7,7 +7,18 @@
 render_priority = 0
 shader = ExtResource("2_udaeg")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_udaeg"]
+size = Vector3(4.9375, 9.404144, 6.402313)
+
 [node name="dock" unique_id=1516264505 instance=ExtResource("1_r0nb5")]
 
 [node name="dock" parent="." index="0" unique_id=249241547]
 material_override = SubResource("ShaderMaterial_3ig78")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=1191568602]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1241256826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2607965, -4.8139215, -0.016602993)
+shape = SubResource("BoxShape3D_udaeg")

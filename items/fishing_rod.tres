@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cts4hsulrxu7j"]
 
 [ext_resource type="PackedScene" uid="uid://8lcl4suftttc" path="res://items/item_scenes/fishing_rod.tscn" id="1_31046"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ItemData.gd" id="1_m2u4d"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ui/ItemData.gd" id="1_m2u4d"]
 [ext_resource type="Texture2D" uid="uid://4lxy1ic7nbru" path="res://items/fishing_rod.PNG" id="2_31046"]
 [ext_resource type="ArrayMesh" uid="uid://b66fueaqwqldg" path="res://models/meshes/rod.tres" id="2_kp5br"]
 

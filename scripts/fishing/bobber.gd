@@ -61,6 +61,12 @@ func _on_area_exited(area: Area3D) -> void:
 		if global_position.y > base_water_level + wave_height + 2.0:
 			is_floating = false
 
+func set_mesh(caught: ItemData):
+	$CaughtMesh.mesh = caught.ground_mesh
+	
+func reset_mesh():
+	$CaughtMesh.mesh = null
+
 func reset_bobber():
 	is_floating = false
 	has_fish = false
