@@ -41,5 +41,5 @@ func update_item_display(item_data: ItemData):
 	fade_tween.parallel().tween_property(item_label, "modulate:a", 1.0, 0.15)
 	
 	# 4. Continue with the rest of the sequence
-	fade_tween.tween_interval(2.0)
+	fade_tween.tween_interval(1.0)
 	fade_tween.tween_property(item_label, "modulate:a", 0.0, 0.5)

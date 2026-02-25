@@ -1,4 +1,4 @@
-res://scenes/lugger.tscn
+res://scenes/main.tscn
 res://shaders/boat.gdshader
 res://models/meshes/fish_mesh.tres
 res://models/meshes/rod1.tres
@@ -9,12 +9,11 @@ res://shaders/underwater.gdshader
 res://shaders/standardvision.gdshader
 res://models/meshes/chest.tres
 res://shaders/water.gdshader
-res://shaders/dock.gdshader
-res://models/boats/lugger_mesh.tres
-res://scenes/main.tscn
-res://addons/proto_controller/proto_controller.tscn
-res://addons/proto_controller/proto_controller.gd
-res://scenes/npc.tscn
 res://models/meshes/fisherman.tres
 res://scenes/fisherman.gdshader
-res://scenes/dock_part.tscn
+res://shaders/dock.gdshader
+res://models/boats/lugger_mesh.tres
+res://scenes/lugger.tscn
+res://scenes/ui/game_info.tscn
+res://scripts/ui/game_info.gd
+res://shaders/house.gdshader
