@@ -1,3 +1,7 @@
+MeshInstance3D
+WorldEnvironment
+DirectionalLight3D
+Terrain3D
 CollisionShape3D
 Node3D
 StaticBody3D
@@ -6,5 +10,4 @@ MarginContainer
 CSGBox3D
 Area3D
 ColorRect
-MeshInstance3D
 Label3D

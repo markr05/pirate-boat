@@ -9,6 +9,7 @@ extends EquippableItem
 @onready var bobber_start_marker: Marker3D = %BobberStartMarker
 @onready var fishing_line: MeshInstance3D = %FishingLine
 
+
 # --- SETTINGS ---
 const THROW_FORCE = 15.0
 const THROW_ARC = 3.0
@@ -26,9 +27,11 @@ var current_rope_length: float = 1.0
 var cast_timer: float = 0.0
 var fish_hooked: bool = false
 var fish_caught: ItemData = null
+@export var rod: RodData = null
 
 func setup(player):
 	super.setup(player)
+		
 	bobber.set_as_top_level(true)
 	if fishing_line: fishing_line.set_as_top_level(true)
 	bobber.set_physics_process(true)
@@ -39,6 +42,10 @@ func setup(player):
 	
 	if not bobber.is_connected("entered_water", _on_bobber_entered_water):
 		bobber.entered_water.connect(_on_bobber_entered_water)
+
+func set_item_data(item_data: ItemData):
+	if item_data is RodData:
+		rod = item_data
 
 func _on_bobber_entered_water():
 	if is_fishing and not in_water:

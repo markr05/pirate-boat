@@ -21,7 +21,8 @@ void fragment() {
     
     // Posterization & Brightness
     screen_color.rgb = floor(screen_color.rgb * color_levels) / color_levels;
+	//screen_color.rgb = round(screen_color.rgb * color_levels) / color_levels;
     screen_color.rgb *= brightness;
-    
-    COLOR = screen_color;
+    screen_color.g *= 1.00; 
+	COLOR = screen_color;
 }

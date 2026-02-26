@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cwtoe18xoktf2"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_r8y6d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r8y6d"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[resource]
+script = ExtResource("1_r8y6d")
+name = "Cube Fish"
+description = "This fish is a cube"
+ground_mesh = SubResource("BoxMesh_r8y6d")
+stackable = true
+price = 40
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

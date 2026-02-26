@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LureData" format=3 uid="uid://creq7aw5a62y1"]
+
+[ext_resource type="Texture2D" uid="uid://cljqdumybk2u3" path="res://data/textures/main_slot0_normal_roughness.png" id="1_d7f5w"]
+[ext_resource type="Script" uid="uid://bb0p8dna31sx0" path="res://scripts/itemtypes/lure.gd" id="1_xk0co"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d7f5w"]
+
+[resource]
+script = ExtResource("1_xk0co")
+bait_power = 10.0
+hook_size = 1.0
+name = "Lure1"
+icon = ExtResource("1_d7f5w")
+ground_mesh = SubResource("BoxMesh_d7f5w")
+is_sellable = false
+metadata/_custom_type_script = "uid://bb0p8dna31sx0"

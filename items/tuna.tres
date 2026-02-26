@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://uq5raon5donk" path="res://models/meshes/tuna_mesh.tres" id="1_dmian"]
 [ext_resource type="Texture2D" uid="uid://b61u08jvg3rea" path="res://items/tuna_icon.PNG" id="1_hpcv6"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/ui/ItemData.gd" id="3_8ligj"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="3_8ligj"]
 
 [resource]
 script = ExtResource("3_8ligj")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ius5wly7l02u" path="res://scripts/ui/npc.gd" id="1_nh2m4"]
 [ext_resource type="ArrayMesh" uid="uid://dl4lsa16qm84h" path="res://models/meshes/fisherman.tres" id="2_abqhh"]
-[ext_resource type="Shader" uid="uid://cpr24pjfi72xy" path="res://scenes/fisherman.gdshader" id="2_rv78h"]
+[ext_resource type="Shader" uid="uid://cpr24pjfi72xy" path="res://shaders/fisherman.gdshader" id="2_rv78h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n8xq"]
 render_priority = 0

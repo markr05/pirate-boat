@@ -372,6 +372,36 @@ func equip_item(item_data: ItemData):
 		current_tool = item_data.equippable_scene.instantiate()
 		hand_position.add_child(current_tool)
 		if current_tool.has_method("setup"): current_tool.setup(self)
+		if current_tool.has_method("set_item_data"):
+			current_tool.set_item_data(item_data)
+
+func get_item_at_index(id: int):
+	if id >= 0 and id < inventory_slots.size():
+		return inventory_slots[id]
+	return null
+	
+func attach_lure_to_rod(lure_id: int, rod_id: int):
+	# Use 'as Dictionary' to tell Godot what type to expect
+	var lure_slot = get_item_at_index(lure_id) as Dictionary
+	var rod_slot = get_item_at_index(rod_id) as Dictionary
+	
+	# Only proceed if BOTH are actually dictionaries (not null)
+	if lure_slot and rod_slot:
+		var lure_data = lure_slot["data"]
+		var rod_data = rod_slot["data"]
+		
+		if lure_data is LureData and rod_data is RodData:
+			rod_data.current_lure = lure_data
+			
+			inventory_slots[lure_id] = null
+			
+			_refresh_inventory()
+			if current_slot == rod_id:
+				select_slot(rod_id)
+			
+			print("Successfully attached ", lure_data.item_name, " to ", rod_data.item_name)
+	else:
+		print("Lure or Rod slot was empty - cannot attach.")
 
 func unequip_hand():
 	if current_tool and current_tool.has_method("unequip"):

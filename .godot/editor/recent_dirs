@@ -1,7 +1,10 @@
-res://models/boats/
-res://scenes/
-res://shaders/
+res://scripts/itemtypes/
+res://items/
 res://models/meshes/
 res://
+res://terrain_data/
+res://scenes/
+res://models/boats/
+res://shaders/
 res://data/terrain/
 res://data/textures/
