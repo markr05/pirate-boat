@@ -391,15 +391,18 @@ func attach_lure_to_rod(lure_id: int, rod_id: int):
 		var rod_data = rod_slot["data"]
 		
 		if lure_data is LureData and rod_data is RodData:
-			rod_data.current_lure = lure_data
+			if not rod_data.resource_path.is_empty(): 
+				rod_data = rod_data.duplicate()
+				inventory_slots[rod_id]["data"] = rod_data
 			
+			rod_data.lure = lure_data
 			inventory_slots[lure_id] = null
 			
 			_refresh_inventory()
 			if current_slot == rod_id:
 				select_slot(rod_id)
 			
-			print("Successfully attached ", lure_data.item_name, " to ", rod_data.item_name)
+			print("Successfully attached ", lure_data.name, " to ", rod_data.name)
 	else:
 		print("Lure or Rod slot was empty - cannot attach.")
 
@@ -456,3 +459,39 @@ func _on_head_detector_area_exited(area):
 		
 		gravity_multiplier = 1.0
 		speed_multiplier = 1.0 # Reset to full speed
+
+func remove_lure_from_rod(rod_slot_id: int):
+	var item_entry = get_item_at_index(rod_slot_id) as Dictionary
+	
+	if item_entry and item_entry["data"] is RodData:
+		var rod_data = item_entry["data"]
+		
+		if rod_data.lure != null:
+			var lure_to_pop = rod_data.lure
+			var empty_slot = find_first_empty_slot()
+			
+			if empty_slot != -1:
+				# 1. Remove the lure from the rod data
+				rod_data.lure = null
+				
+				# 2. Add the lure to the empty slot
+				inventory_slots[empty_slot] = {
+					"data": lure_to_pop,
+					"quantity": 1
+				}
+				
+				# 3. Refresh UI and re-select the rod to update the hand model/lure display
+				_refresh_inventory()
+				if current_slot == rod_slot_id:
+					select_slot(rod_slot_id)
+					
+				print("Lure removed and placed in slot: ", empty_slot)
+			else:
+				print("Inventory full! Cannot remove lure.")
+				
+func find_first_empty_slot() -> int:
+	# Iterate through all player slots (0 to 35)
+	for i in range(inventory_slots.size()):
+		if inventory_slots[i] == null:
+			return i
+	return -1 # Returns -1 if no space is found

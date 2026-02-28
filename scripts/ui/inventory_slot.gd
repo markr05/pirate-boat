@@ -4,6 +4,7 @@ class_name InventorySlot
 @onready var icon_rect: TextureRect = $MarginContainer/Icon 
 @onready var quantity_label: Label = $MarginContainer/Icon/Label
 @onready var highlight_rect: ColorRect = $Highlight
+@onready var attachment_rect: TextureRect = $MarginContainer/Icon/Attachment
 
 var inventory_slot_id: int = -1
 var slot_filled: bool = false
@@ -20,8 +21,14 @@ func display_item(item_data: ItemData, amount: int):
 	if slot_data != null:
 		slot_filled = true
 		icon_rect.texture = item_data.icon
-		
-		# Handle the Quantity Label
+		# Handle Attachments
+		if slot_data is RodData and slot_data.lure != null:
+			attachment_rect.texture = slot_data.lure.icon
+			attachment_rect.show() # Make sure it's visible
+		else:
+			attachment_rect.texture = null
+			attachment_rect.hide()
+
 		if quantity_label:
 			# Only show text if stack is greater than 1
 			if amount > 1:
@@ -37,6 +44,8 @@ func clear_slot():
 	slot_filled = false
 	if icon_rect:
 		icon_rect.texture = null
+	if attachment_rect:
+		attachment_rect.texture = null
 	if quantity_label:
 		quantity_label.hide()
 

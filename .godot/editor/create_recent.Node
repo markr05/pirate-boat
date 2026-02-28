@@ -1,3 +1,6 @@
+Area3D
+RigidBody3D
+TextureRect
 MeshInstance3D
 WorldEnvironment
 DirectionalLight3D
@@ -8,6 +11,4 @@ StaticBody3D
 Label
 MarginContainer
 CSGBox3D
-Area3D
 ColorRect
-Label3D

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxlndtpik8jm1" path="res://scripts/ui/inventory_slot.gd" id="1_4v6ba"]
 
 [node name="InventorySlot" type="Button" unique_id=2049754340]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(100, 100)
 offset_right = 128.0
 offset_bottom = 128.0
 script = ExtResource("1_4v6ba")
@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1834895630]
@@ -25,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -32,8 +34,9 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Icon" type="TextureRect" parent="MarginContainer" unique_id=1872948942]
 z_index = 1
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 
 [node name="Label" type="Label" parent="MarginContainer/Icon" unique_id=1063689515]
@@ -52,6 +55,17 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
+
+[node name="Attachment" type="TextureRect" parent="MarginContainer/Icon" unique_id=1154544606]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_right = 31.0
+grow_vertical = 0
+mouse_filter = 2
+expand_mode = 1
 
 [node name="KeyLabel" type="Label" parent="." unique_id=295609461]
 layout_mode = 0
