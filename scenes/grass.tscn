@@ -1,53 +1,20 @@
 [gd_scene format=3 uid="uid://ddrfgv4jxh2ej"]
 
-[ext_resource type="ArrayMesh" uid="uid://dkh2aad46cauc" path="res://models/meshes/grass1.tres" id="1_e1kak"]
+[ext_resource type="ArrayMesh" uid="uid://kw8prbe20vyo" path="res://models/meshes/grass.tres" id="1_yarb5"]
+[ext_resource type="Shader" uid="uid://ctmjw8il1juvj" path="res://shaders/grass.gdshader" id="2_yarb5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kunl"]
+render_priority = 0
+shader = ExtResource("2_yarb5")
+shader_parameter/grass_color = Color(0.5, 0.6, 0.2, 1)
+shader_parameter/tint_color = Color(0.4, 0.5, 0.1, 1)
+shader_parameter/variation_amount = 0.3
+shader_parameter/wind_speed = 1.5
+shader_parameter/wind_strength = 0.1
 
 [node name="Node3D" type="Node3D" unique_id=1806035435]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1112730128]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01757437, 0)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1425778615]
-transform = Transform3D(0.05975923, 0, 0.9982129, 0, 1, 0, -0.9982129, 0, 0.05975923, 0.054905355, -0.01757437, -0.109030545)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1407236679]
-transform = Transform3D(-0.97597003, 0, -0.21790494, 0, 1, 0, 0.21790494, 0, -0.97597003, -0.0335595, -0.01757437, -0.050886452)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=751412790]
-transform = Transform3D(-0.9998978, 0, -0.014293939, 0, 1, 0, 0.014293939, 0, -0.9998978, 0.117382705, -0.01757437, -0.019423187)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=681567919]
-transform = Transform3D(0.9625026, 0, -0.2712724, 0, 1, 0, 0.2712724, 0, 0.9625026, 0.016509712, -0.01757437, -0.050886452)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=735114360]
-transform = Transform3D(0.6240842, 0, -0.7813571, 0, 1, 0, 0.7813571, 0, 0.6240842, 0.07190555, -0.01757437, 0.040979713)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1912049908]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.02499279, -0.01757437, -0.07075988)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=1228285805]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.13561735, -0.01757437, -0.122378334)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=979261584]
-transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 0.03014886, -0.01757437, -0.13149773)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1104436893]
-transform = Transform3D(-0.9999999, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.9999999, 0.12919319, -0.01757437, -0.013329592)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="." unique_id=1442710163]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.06946528, -0.01757437, -0.10049538)
-mesh = ExtResource("1_e1kak")
-
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="." unique_id=247580378]
-transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 0.05608178, -0.01757437, 0.00594227)
-mesh = ExtResource("1_e1kak")
+transform = Transform3D(0.9998797, -0.009058319, 0, 0.01551538, 0.5837592, 0, 0, 0, 0.90928006, 0, -0.01757437, 0)
+mesh = ExtResource("1_yarb5")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")

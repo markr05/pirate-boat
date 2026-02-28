@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://l1gsq1pxsitx"]
+
+[ext_resource type="ArrayMesh" uid="uid://dkh2aad46cauc" path="res://models/meshes/grass1.tres" id="1_6bxoa"]
+[ext_resource type="Shader" uid="uid://ctmjw8il1juvj" path="res://shaders/grass.gdshader" id="2_otx53"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kunl"]
+render_priority = 0
+shader = ExtResource("2_otx53")
+shader_parameter/grass_color = Color(0.5, 0.6, 0.2, 1)
+shader_parameter/wind_speed = 1.5
+shader_parameter/wind_strength = 0.1
+
+[node name="Node3D" type="Node3D" unique_id=1806035435]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1112730128]
+transform = Transform3D(0.9236992, 0.22367598, 0, -0.3831188, 0.5392827, 0, 0, 0, 0.9092801, 0, -0.01757437, 0)
+mesh = ExtResource("1_6bxoa")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1178763962]
+transform = Transform3D(0.919801, -0.22908607, 0, 0.39238536, 0.53700686, 0, 0, 0, 0.9092801, 0, -0.01757437, 0)
+mesh = ExtResource("1_6bxoa")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1254794227]
+transform = Transform3D(0.2836749, 0.068692565, 0.865339, -0.38311884, 0.53928274, 0, -0.8790613, -0.21286678, 0.2792467, 0, -0.01757437, 0)
+mesh = ExtResource("1_6bxoa")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1094949546]
+transform = Transform3D(0.2824777, -0.070354044, 0.86533886, 0.39238536, 0.53700686, 0, -0.87535137, 0.21801543, 0.27924666, 0, -0.01757437, 0)
+mesh = ExtResource("1_6bxoa")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=153699780]
+transform = Transform3D(0.99968493, -0.014651336, 0, 0.025095236, 0.5836455, 0, 0, 0, 0.90927994, 0, -0.01757437, 0)
+mesh = ExtResource("1_6bxoa")
+surface_material_override/0 = SubResource("ShaderMaterial_3kunl")

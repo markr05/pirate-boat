@@ -8,14 +8,14 @@
 [ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="6_8bbw0"]
 [ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="7_otkvh"]
 [ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_jgl7u"]
-[ext_resource type="Resource" uid="uid://cwtoe18xoktf2" path="res://items/cube_fish.tres" id="9_liwt3"]
+[ext_resource type="Resource" uid="uid://brf33m3d41o57" path="res://items/grouper.tres" id="9_liwt3"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uokpy"]
 top_radius = 0.003
 bottom_radius = 0.003
 
-[node name="FishingRod" type="Node3D" unique_id=1495022637 node_paths=PackedStringArray("fishing_manager")]
-transform = Transform3D(-0.1736482, 0, 0.9848077, 0, 1, 0, -0.9848077, 0, -0.1736482, 0, -0.056438982, 0)
+[node name="FishingRod" type="Node3D" unique_id=1495022637 node_paths=PackedStringArray("fishing_manager") groups=["fishing_rod"]]
+transform = Transform3D(0.4193311, -0.7503587, 0.51100206, 0.8382869, 0.5361068, 0.09931974, -0.34847713, 0.38671854, 0.8538222, 0.116, 0.26, -0.121)
 script = ExtResource("1_m2mym")
 fishing_manager = NodePath("FishingManager")
 
@@ -29,6 +29,9 @@ mesh = ExtResource("2_liwt3")
 [node name="Bobber" parent="." unique_id=1361057172 instance=ExtResource("3_1l1uq")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 1.43, 0)
+
+[node name="Alert" parent="Bobber" index="0" unique_id=1158859764]
+transform = Transform3D(-0.14261699, -0.8669837, -0.47749263, 0.6680754, -0.440272, 0.5998635, -0.73029876, -0.23345037, 0.6420008, -0.6521979, -0.29855132, -0.16668168)
 
 [node name="FishingLineStarterMarker" type="Marker3D" parent="." unique_id=419719904]
 unique_name_in_owner = true
@@ -46,3 +49,5 @@ mesh = SubResource("CylinderMesh_uokpy")
 [node name="FishingManager" type="Node" parent="." unique_id=839389139]
 script = ExtResource("4_rcwkp")
 fish_types = Array[ExtResource("5_3ws28")]([ExtResource("6_8bbw0"), ExtResource("7_otkvh"), ExtResource("8_jgl7u"), ExtResource("9_liwt3")])
+
+[editable path="Bobber"]

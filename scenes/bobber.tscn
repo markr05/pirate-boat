@@ -29,7 +29,7 @@ modulate = Color(1, 0, 0, 1)
 text = "!"
 font_size = 128
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1753508796]
+[node name="BobberMesh" type="MeshInstance3D" parent="." unique_id=1753508796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4901161e-08, 3.7252903e-08, 0)
 mesh = SubResource("SphereMesh_x0c03")
 

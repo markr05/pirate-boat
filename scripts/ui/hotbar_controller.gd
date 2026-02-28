@@ -16,6 +16,8 @@ func _ready() -> void:
 		inventory_slots.append(slot)
 		
 		slot.inventory_slot_id = i
+		if slot.has_method("set_key_text"):
+			slot.set_key_text(str(i + 1))
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)
 		slot.on_item_double_clicked.connect(_on_item_double_clicked)
 		slot.on_item_right_clicked.connect(_on_item_right_clicked)

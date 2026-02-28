@@ -21,8 +21,8 @@ func _process(delta):
 			trigger_bite()
 
 func calculate_chances():
-	var lure: LureData = fishing_rod.rod.lure
 	var bait_power: float = 0.0
+	var lure: LureData = fishing_rod.rod.lure
 	if lure != null:
 		bait_power = lure.bait_power
 	# uncommon chance is weird because it goes up then down

@@ -45,6 +45,7 @@ var current_tool: Node3D = null
 var current_slot: int = 0
 var inventory_slots: Array = [] 
 const MAX_SLOTS = 36
+@export var world_item_scene: PackedScene
 
 @export var coins: int = 0:
 	set(value):
@@ -103,6 +104,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	# 2. INVENTORY TOGGLE (TAB/I)
 	if event.is_action_pressed("inventory"):
 		toggle_inventory(!is_menu_open)
+	
+	if event.is_action_pressed("drop_item") and not is_menu_open:
+		drop_current_item()
 
 	# 3. MOUSE LOOK LOGIC
 	if event is InputEventMouseMotion and not is_menu_open:
@@ -235,19 +239,25 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 		
-		# Play walk animation
+		# Keep your blend for starting to walk (feels natural)
 		anim_player.play("Player_Walking", 0.3)
-		
-		# Adjust animation speed: faster if sprinting, slower if walking
-		# (Assumes base_speed is 1.0; tweak the math to fit your move speeds)
 		anim_player.speed_scale = (speed / base_speed) * 2.0
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 		
-		# Return to Idle
-		#anim_player.play("RESET", 0.3)
-		anim_player.speed_scale = 1.0 * 2.08
+		if current_tool:
+			if current_tool.has_method("is_fishing") and current_tool.is_fishing:
+				pass 
+			elif current_tool.is_in_group("fishing_rod"):
+				anim_player.play("holding_rod", 0.3)
+				anim_player.speed_scale = 1.0
+			else:
+				anim_player.play("player_idle", 0.2)
+				anim_player.speed_scale = 1.0
+		else:
+			anim_player.play("player_idle", 0.2)
+			anim_player.speed_scale = 1.0
 
 	move_and_slide()
 
@@ -368,12 +378,22 @@ func select_slot(index: int):
 
 func equip_item(item_data: ItemData):
 	unequip_hand()
-	if item_data.equippable_scene:
-		current_tool = item_data.equippable_scene.instantiate()
-		hand_position.add_child(current_tool)
-		if current_tool.has_method("setup"): current_tool.setup(self)
-		if current_tool.has_method("set_item_data"):
-			current_tool.set_item_data(item_data)
+	
+	for child in %HandSocket.get_children():
+		child.queue_free()
+		
+	if not item_data.equippable_scene:
+		return
+
+	var new_tool = item_data.equippable_scene.instantiate()
+	%HandSocket.add_child(new_tool)
+	
+	current_tool = new_tool
+	if current_tool.has_method("setup"): 
+		current_tool.setup(self)
+		
+	if current_tool.has_method("set_item_data"):
+		current_tool.set_item_data(item_data)
 
 func get_item_at_index(id: int):
 	if id >= 0 and id < inventory_slots.size():
@@ -495,3 +515,32 @@ func find_first_empty_slot() -> int:
 		if inventory_slots[i] == null:
 			return i
 	return -1 # Returns -1 if no space is found
+
+func drop_current_item():
+	var slot_data = inventory_slots[current_slot]
+	if slot_data == null: return
+	
+	var dropped_item = world_item_scene.instantiate()
+	
+	# SET DATA FIRST
+	dropped_item.item_data = slot_data["data"]
+	
+	# THEN ADD TO WORLD
+	get_parent().add_child(dropped_item)
+	
+	dropped_item.global_position = head.global_position + (-head.global_transform.basis.z * 1.5)
+	
+	# Toss it
+	var throw_direction = -head.global_transform.basis.z + Vector3(0, 0.5, 0)
+	dropped_item.apply_central_impulse(throw_direction * 5.0)
+
+	# Inventory Cleanup...
+	if slot_data["quantity"] > 1:
+		slot_data["quantity"] -= 1
+	else:
+		# If it was the last one, clear the slot and unequip
+		inventory_slots[current_slot] = null
+		unequip_hand()
+		item_changed.emit(null)
+
+	_refresh_inventory()

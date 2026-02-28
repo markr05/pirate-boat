@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://8lcl4suftttc"]
+
+[ext_resource type="Script" uid="uid://ddwtx8xr6rnod" path="res://scripts/fishing/fishing_rod.gd" id="1_m2mym"]
+[ext_resource type="ArrayMesh" uid="uid://bme8jrvmm6f41" path="res://models/meshes/rod1.tres" id="2_liwt3"]
+[ext_resource type="PackedScene" uid="uid://dctd8ojxxt6lu" path="res://scenes/bobber.tscn" id="3_1l1uq"]
+[ext_resource type="Script" uid="uid://cv283ja2d0w1i" path="res://scripts/fishing/fishing_manager.gd" id="4_rcwkp"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="5_3ws28"]
+[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="6_8bbw0"]
+[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/flying_fish.tres" id="7_otkvh"]
+[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/tuna.tres" id="8_jgl7u"]
+[ext_resource type="Resource" uid="uid://brf33m3d41o57" path="res://items/grouper.tres" id="9_liwt3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uokpy"]
+top_radius = 0.003
+bottom_radius = 0.003
+
+[node name="FishingRod" type="Node3D" unique_id=1495022637 node_paths=PackedStringArray("fishing_manager") groups=["fishing_rod"]]
+transform = Transform3D(0.4193311, -0.7503587, 0.51100206, 0.8382869, 0.5361068, 0.09931974, -0.34847713, 0.38671854, 0.8538222, 0.116, 0.26, -0.121)
+script = ExtResource("1_m2mym")
+fishing_manager = NodePath("FishingManager")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=726578768]
+transform = Transform3D(1.0000005, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1.0000005, 0, -0.056138337, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2137123414]
+transform = Transform3D(-0.0011153957, 0, 0.02080363, 0, 0.020833485, 0, -0.02080363, 0, -0.0011153957, 0.07216326, 0.57121843, -0.0002968246)
+mesh = ExtResource("2_liwt3")
+
+[node name="Bobber" parent="." unique_id=1361057172 instance=ExtResource("3_1l1uq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 1.43, 0)
+
+[node name="FishingLineStarterMarker" type="Marker3D" parent="." unique_id=419719904]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 1.43, 0)
+
+[node name="BobberStartMarker" type="Marker3D" parent="." unique_id=1275167389]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 1.43, 0)
+
+[node name="FishingLine" type="MeshInstance3D" parent="." unique_id=2061414447]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.48999998, 0)
+mesh = SubResource("CylinderMesh_uokpy")
+
+[node name="FishingManager" type="Node" parent="." unique_id=839389139]
+script = ExtResource("4_rcwkp")
+fish_types = Array[ExtResource("5_3ws28")]([ExtResource("6_8bbw0"), ExtResource("7_otkvh"), ExtResource("8_jgl7u"), ExtResource("9_liwt3")])
+
+[editable path="Bobber"]

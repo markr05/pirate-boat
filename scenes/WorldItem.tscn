@@ -1,37 +1,59 @@
 [gd_scene format=3 uid="uid://d38i0pyiwty6h"]
 
 [sub_resource type="GDScript" id="GDScript_f1e4b"]
-script/source = "extends Area3D
+script/source = "extends RigidBody3D
 
-# The specific item data (e.g., Fishing Rod, Apple, Ammo)
-@export var item_data: ItemData
+@export var item_data: ItemData:
+	set(value):
+		item_data = value
+		_update_visuals()
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+# Make sure to link this to your new Area3D child
+@onready var pickup_area: Area3D = $PickupArea 
+@onready var pickup_shape: CollisionShape3D = $PickupArea/PickupShape
 
 func _ready() -> void:
-	# 1. Connect the signal via code (cleaner than using the Node tab)
-	body_entered.connect(_on_body_entered)
+	# We use the Area3D signal instead of the RigidBody signal
+	pickup_area.body_entered.connect(_on_pickup_entered)
+	_update_visuals()
+
+func _update_visuals():
+	if not is_inside_tree(): await ready 
 	
-	# 2. Update the visual mesh if data exists
 	if item_data and item_data.ground_mesh:
 		mesh_instance.mesh = item_data.ground_mesh
+		_autofit_collision_shapes()
 
-func _process(delta: float) -> void:
-	# Optional: Rotate slowly to look like a \"pickup\"
-	rotate_y(1.0 * delta)
+func _autofit_collision_shapes():
+	if not mesh_instance.mesh: return
+	var aabb: AABB = mesh_instance.get_aabb()
+	
+	# 1. Physics Shape (The actual box that hits the floor)
+	var phys_box = BoxShape3D.new()
+	phys_box.size = aabb.size
+	collision_shape.shape = phys_box
+	collision_shape.position = aabb.get_center()
+	
+	# 2. Pickup Shape (Make this 1.5x to 2x bigger so it's easy to grab)
+	var area_box = BoxShape3D.new()
+	area_box.size = aabb.size * 2.0 
+	pickup_shape.shape = area_box
+	pickup_shape.position = aabb.get_center()
 
-func _on_body_entered(body: Node3D) -> void:
-	# Check if the body is the player and has an inventory
+func _on_pickup_entered(body: Node3D) -> void:
+	# Use a group check or method check
 	if body.has_method(\"add_to_inventory\"):
-		if item_data:
-			body.add_to_inventory(item_data)
-			queue_free() # Delete this object from the world
+		body.add_to_inventory(item_data)
+		queue_free()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1e4b"]
 size = Vector3(0.41, 0.87, 0.24)
 
-[node name="WorldItem" type="Area3D" unique_id=891127075]
+[node name="WorldItem" type="RigidBody3D" unique_id=942997380]
+collision_layer = 64
 script = SubResource("GDScript_f1e4b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=168091223]
@@ -40,3 +62,7 @@ shape = SubResource("BoxShape3D_f1e4b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=694148133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42999998, 0)
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=1264172411]
+
+[node name="PickupShape" type="CollisionShape3D" parent="PickupArea" unique_id=345411821]

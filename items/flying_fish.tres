@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bj3u37at7kdbw"]
 
 [ext_resource type="Texture2D" uid="uid://c0s0psvn6h8lj" path="res://items/flying_icon.PNG" id="1_ce6kr"]
-[ext_resource type="ArrayMesh" uid="uid://dr5s48khceyqi" path="res://models/meshes/flying_fish_mesh.tres" id="1_dk5t1"]
+[ext_resource type="ArrayMesh" uid="uid://72iad8nsx6hj" path="res://models/meshes/flying_fish.tres" id="1_dk5t1"]
 [ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="3_wepo3"]
 
 [resource]

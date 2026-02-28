@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bb0p8dna31sx0" path="res://scripts/itemtypes/lure.gd" id="1_xk0co"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d7f5w"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [resource]
 script = ExtResource("1_xk0co")

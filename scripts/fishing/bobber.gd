@@ -66,6 +66,12 @@ func set_mesh(caught: ItemData):
 	
 func reset_mesh():
 	$CaughtMesh.mesh = null
+	
+func set_bobber_mesh(mesh: LureData):
+	$BobberMesh.mesh = mesh.ground_mesh
+	
+func reset_bobber_mesh():
+	$BobberMesh.mesh = null
 
 func reset_bobber():
 	is_floating = false

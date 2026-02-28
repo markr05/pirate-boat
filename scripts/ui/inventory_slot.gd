@@ -73,6 +73,9 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	on_item_swapped.emit(data, inventory_slot_id)
 
+func set_key_text(text: String):
+	%KeyLabel.text = text
+
 # --- INPUTS ---
 
 func _gui_input(event: InputEvent) -> void:

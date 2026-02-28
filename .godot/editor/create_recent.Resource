@@ -1,1 +1,1 @@
-res://scripts/itemtypes/lure.gd
+res://scripts/itemtypes/ItemData.gd
