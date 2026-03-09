@@ -1,8 +1,11 @@
+AudioListener3D
+AudioStreamPlayer
+AudioStreamPlayer3D
+Node
 Label
 VBoxContainer
 PanelContainer
 AnimationTree
-Node
 CSGPolygon3D
 CollisionPolygon3D
 CollisionShape3D
@@ -10,6 +13,3 @@ Area3D
 RigidBody3D
 BoneAttachment3D
 CSGBox3D
-TextureRect
-MeshInstance3D
-WorldEnvironment

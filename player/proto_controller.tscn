@@ -918,6 +918,9 @@ collision_layer = 129
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014556885, 0.54972076, 0)
 shape = SubResource("BoxShape3D_0rk7u")
 
+[node name="AudioListener3D" type="AudioListener3D" parent="Head" unique_id=963149457]
+current = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1029312430]
 
 [node name="GameInfo" parent="CanvasLayer" unique_id=1154610763 instance=ExtResource("4_0rk7u")]
