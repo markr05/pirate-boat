@@ -1,0 +1,54 @@
+# =========================
+# Godot Specific
+# =========================
+
+# Godot 4+ project folder
+.godot/
+
+# Godot 3 project folder (safe to keep even if using Godot 4)
+.import/
+
+# Compiled translation files
+*.translation
+
+# Mono/C# specific ignores
+.mono/
+bin/
+obj/
+
+# Common export/build folders (customize if you use a different name)
+export/
+build/
+builds/
+*.apk
+*.aab
+*.exe
+*.app
+*.ipa
+
+# =========================
+# macOS Specific
+# =========================
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
