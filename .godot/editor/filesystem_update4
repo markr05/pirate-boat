@@ -28,3 +28,4 @@ res://addons/proto_controller/proto_controller.gd
 res://scripts/inventory_component.gd
 res://scenes/ui/slot.tscn
 res://scripts/camera_controller.gd
+res://scripts/fishing/fishing_rod.gd

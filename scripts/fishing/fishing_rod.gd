@@ -164,7 +164,7 @@ func start_fishing():
 
 	player_ref.look_limit_center = player_ref.look_rotation
 	player_ref.is_look_limited = true
-	player_ref.is_locked = true 
+	#player_ref.is_locked = true 
 	
 	if bobber.has_method("reset_bobber"): bobber.reset_bobber()
 	if fishing_line: fishing_line.show()
@@ -286,7 +286,7 @@ func stop_fishing():
 	# 3. Clean up physics/managers
 	if fishing_manager: fishing_manager.reset()
 	player_ref.is_look_limited = false
-	player_ref.is_locked = false
+	#player_ref.is_locked = false
 	if fishing_line: fishing_line.hide()
 
 func _refresh_line():

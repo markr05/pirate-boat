@@ -16,6 +16,10 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Run")
 		return
 
+	if player.current_tool and "is_fishing" in player.current_tool and player.current_tool.is_fishing:
+		state_machine.transition_to("Fish")
+		return
+
 	var speed = player.base_speed * player.speed_multiplier
 	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	

@@ -16,13 +16,16 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Walk")
 		return
 
+	if player.current_tool and "is_fishing" in player.current_tool and player.current_tool.is_fishing:
+		state_machine.transition_to("Fish")
+		return
+
 	var speed = player.sprint_speed * player.speed_multiplier
 	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	player.velocity.x = direction.x * speed
 	player.velocity.z = direction.z * speed
 	
-	# Assuming you use the same animation but faster, or change to "Player_Running"
 	player.anim_player.play("Player_Walking", 0.3) 
 	player.anim_player.speed_scale = (speed / player.base_speed) * 2.0
 	
