@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwcpy"]
 shader = ExtResource("2_rurq7")
-shader_parameter/pixel_size = 1
+shader_parameter/pixel_size = 2
 shader_parameter/color_levels = 16.0
 shader_parameter/brightness = 1.05
 shader_parameter/blue_tint = Color(0, 0.4, 0.8, 0.8)
@@ -14,7 +14,7 @@ shader_parameter/distortion_strength = 0.010000000475
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tyd5r"]
 shader = ExtResource("3_tyd5r")
-shader_parameter/pixel_size = 1
+shader_parameter/pixel_size = 2
 shader_parameter/color_levels = 16.0
 shader_parameter/brightness = 1.05
 

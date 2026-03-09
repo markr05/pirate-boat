@@ -45,6 +45,10 @@ func setup(player):
 	if not bobber.is_connected("entered_water", _on_bobber_entered_water):
 		bobber.entered_water.connect(_on_bobber_entered_water)
 
+	# NEW: Play the holding animation as soon as we equip the rod!
+	if anim_player and not is_fishing:
+		anim_player.play("holding_rod", 0.2)
+		
 func set_item_data(item_data: ItemData):
 	if item_data is RodData:
 		rod = item_data
@@ -156,30 +160,31 @@ func _handle_physics(delta: float):
 
 func start_fishing():
 	is_fishing = true
-	is_winding_up = true # Lock physics
+	is_winding_up = true 
 	in_water = false
 	cast_timer = 2.0 
 	
-	anim_player.play("player_fishing", 0.3)
+	# 1. Fire the OneShot action in the Tree
+	# This overrides the 'holding_rod' pose temporarily
+	player_ref.anim_tree.set("parameters/FishingAction/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	player_ref.look_limit_center = player_ref.look_rotation
 	player_ref.is_look_limited = true
-	#player_ref.is_locked = true 
 	
 	if bobber.has_method("reset_bobber"): bobber.reset_bobber()
 	if fishing_line: fishing_line.show()
 	
-	# Snap the bobber to the rod tip immediately
+	# Snap the bobber to the rod tip
 	bobber.global_position = fishing_line_starter_marker.global_position
 	bobber.velocity = Vector3.ZERO
 	
-	# Wait for the animation to swing forward
-	await get_tree().create_timer(0.5).timeout
+	# 2. Wait for the "Forward Swing" point of your animation
+	# Adjust this timer so the bobber flies out exactly when the arm moves forward
+	await get_tree().create_timer(1.0).timeout
 	
 	if not is_fishing: return
 
-	is_winding_up = false # Unlock physics!
-	
+	is_winding_up = false
 	current_rope_length = 1.5 
 	var camera = player_ref.camera
 	var throw_dir = -camera.global_transform.basis.z 
@@ -188,9 +193,7 @@ func start_fishing():
 	bobber.velocity = throw_dir * THROW_FORCE
 	bobber.velocity.y += THROW_ARC
 	
-	await anim_player.animation_finished
-	if is_fishing:
-		anim_player.play("idle_fishing", 0.3)
+	anim_player.play("idle_fishing", 0.5)
 
 func _on_fish_bite_received(fish_data: ItemData):
 	if Input.is_action_pressed("fire_secondary"):
@@ -264,30 +267,42 @@ func _fail_fishing():
 		fishing_manager.start_waiting() 
 	
 func stop_fishing():
-	# ... your existing bobber/inventory code ...
+	# 1. Handle Fish Logic
 	bobber.reset_mesh()
 	bobber.set("has_fish", false)
-	if fish_hooked:
+	alert.visible = false
+	
+	if fish_hooked and fish_caught:
 		player_ref.add_to_inventory(fish_caught)
-
-	# 1. Set state to false FIRST so the await above fails its check
+	
+	# 2. Reset State Variables
 	is_fishing = false
 	in_water = false
 	fish_hooked = false
+	fish_caught = null
+	is_winding_up = false
 	
-	# 2. Kill all fishing animations
+	# 3. Physics & Bobber Cleanup
+	# Reset the bobber's parent-level velocity and move it back
+	bobber.velocity = Vector3.ZERO
+	bobber.global_position = bobber_start_marker.global_position
+	if fishing_line: fishing_line.hide()
+	
+	# 4. Animation & Camera Cleanup
+	player_ref.is_look_limited = false
+	
+	# Reset the AnimationTree OneShot (stops the throw if it was still playing)
+	player_ref.anim_tree.set("parameters/FishingAction/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	
+	
+	# Play the base holding animation
 	if anim_player:
-		if anim_player.has_animation("RESET"):
-			anim_player.play("RESET", 0.3)
-		else:
-			anim_player.stop() # Stops the idle_fishing loop
+		anim_player.play("holding_rod", 0.4)
 		anim_player.speed_scale = 1.0
 
-	# 3. Clean up physics/managers
-	if fishing_manager: fishing_manager.reset()
-	player_ref.is_look_limited = false
-	#player_ref.is_locked = false
-	if fishing_line: fishing_line.hide()
+	# 5. Manager Cleanup
+	if fishing_manager: 
+		fishing_manager.reset()
 
 func _refresh_line():
 	if not fishing_line: return

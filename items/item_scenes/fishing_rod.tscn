@@ -15,7 +15,7 @@ top_radius = 0.003
 bottom_radius = 0.003
 
 [node name="FishingRod" type="Node3D" unique_id=1495022637 node_paths=PackedStringArray("fishing_manager") groups=["fishing_rod"]]
-transform = Transform3D(0.4193311, -0.7503587, 0.51100206, 0.8382869, 0.5361068, 0.09931974, -0.34847713, 0.38671854, 0.8538222, 0.116, 0.26, -0.121)
+transform = Transform3D(0.41933107, -0.75035864, 0.5110021, 0.8382868, 0.53610677, 0.09931971, -0.34847713, 0.38671857, 0.8538222, 0.116, 0.26, -0.121)
 script = ExtResource("1_m2mym")
 fishing_manager = NodePath("FishingManager")
 
