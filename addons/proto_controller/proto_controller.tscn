@@ -1,10 +1,16 @@
 [gd_scene format=4 uid="uid://bb8jjc6xsmrcq"]
 
 [ext_resource type="Script" uid="uid://dappoyx5kwie2" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="2_0rk7u"]
+[ext_resource type="Script" uid="uid://bki16yaay3g1g" path="res://scripts/camera_controller.gd" id="2_q1ipm"]
 [ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/ui/inventory_controller.tscn" id="2_wr06p"]
 [ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ui/ExternalInventoryUI.tscn" id="3_6dqce"]
 [ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/ui/game_info.tscn" id="4_0rk7u"]
+[ext_resource type="Script" uid="uid://dd53cdnd3uqdb" path="res://scripts/state_machine.gd" id="6_h60nn"]
+[ext_resource type="Script" uid="uid://bnyoq57ysa6sy" path="res://scripts/idle.gd" id="7_ujot4"]
+[ext_resource type="Script" uid="uid://duwu22pk57h07" path="res://scripts/walk.gd" id="8_1tksx"]
+[ext_resource type="Script" uid="uid://cspphqiguot2t" path="res://scripts/run.gd" id="9_ths8c"]
+[ext_resource type="Script" uid="uid://dwvf3rtrjugp2" path="res://scripts/fish.gd" id="10_x436g"]
+[ext_resource type="Script" uid="uid://2t7hbt3up3q1" path="res://scripts/inventory_component.gd" id="11_q1ipm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chj2n"]
 
@@ -726,7 +732,6 @@ size = Vector3(0.4940796, 0.4510498, 1)
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
 script = ExtResource("1_ucva2")
-world_item_scene = ExtResource("2_0rk7u")
 coins = 10
 
 [node name="player" type="Node3D" parent="." unique_id=1508990070]
@@ -894,8 +899,10 @@ libraries/ = SubResource("AnimationLibrary_6dqce")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.7552246, 0.05508423)
 shape = SubResource("BoxShape3D_6dqce")
 
-[node name="Head" type="Node3D" parent="." unique_id=1792126765]
+[node name="Head" type="Node3D" parent="." unique_id=1792126765 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6369691, 0)
+script = ExtResource("2_q1ipm")
+player = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=179159592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
@@ -925,3 +932,22 @@ unique_name_in_owner = true
 [node name="ExternalInventoryUI" parent="CanvasLayer" unique_id=79095522 instance=ExtResource("3_6dqce")]
 unique_name_in_owner = true
 z_index = 10
+
+[node name="StateMachine" type="Node" parent="." unique_id=1497306239 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_h60nn")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1146053668]
+script = ExtResource("7_ujot4")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=2107334772]
+script = ExtResource("8_1tksx")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=249446954]
+script = ExtResource("9_ths8c")
+
+[node name="Fish" type="Node" parent="StateMachine" unique_id=2080882013]
+script = ExtResource("10_x436g")
+
+[node name="InventoryComponent" type="Node" parent="." unique_id=1210457029]
+script = ExtResource("11_q1ipm")
