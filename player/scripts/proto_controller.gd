@@ -1,7 +1,7 @@
 extends CharacterBody3D
+class_name Player
 
 signal coins_changed(coins_amount)
-signal inventory_closed
 
 # --- REFERENCES ---
 @onready var camera_controller: CameraController = $Head
@@ -47,7 +47,6 @@ var current_boat: RigidBody3D = null
 			
 func _ready() -> void:
 	state_machine.init(self)
-
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if not game_info_ui:
@@ -125,12 +124,11 @@ func toggle_inventory(open: bool):
 	
 	if external_inventory_node and not open:
 		external_inventory_node.visible = false
-		var external_ui = get_tree().get_first_node_in_group("external_inventory_ui")
-		
-		if external_ui and external_ui.current_inventory:
-			if external_ui.current_inventory.has_method("on_player_closed_npc"):
-				external_ui.current_inventory.on_player_closed_npc(self)
-			external_ui.current_inventory = null
+		if external_inventory_node.current_inventory:
+			var container = external_inventory_node.current_inventory
+			if container.has_method("close_inventory"):
+				container.close_inventory(self)
+			external_inventory_node.current_inventory = null
 	
 	if open:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -142,67 +140,60 @@ func toggle_inventory(open: bool):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		interact_ray.enabled = true
 
-func open_external_inventory(chest):
+func open_external_inventory(container):
 	if external_inventory_node and external_inventory_node.has_method("open_container"):
-		external_inventory_node.open_container(chest)
+		external_inventory_node.open_container(container)
 		toggle_inventory(true)
 		
+
 func _on_inventory_equip_requested(item_data: ItemData):
 	# 1. Clean up old tool
 	if current_tool and current_tool.has_method("unequip"):
 		current_tool.unequip()
 	current_tool = null
 	
-	# 2. Clear the bone-attached socket
 	for child in hand_socket.get_children():
 		child.queue_free()
 		
-	# 3. If there's no item, stop here (unequip finished)
+	# 2. Handle Case: Unequipping everything
 	if not item_data or not item_data.equippable_scene:
 		if anim_tree:
+			# Slide back to "Idle/Walk" (Empty hands)
 			var tween = create_tween()
-			tween.tween_property(anim_tree, "parameters/Blend2/blend_amount", 0.0, 0.3)
+			tween.tween_property(anim_tree, "parameters/Blend2/blend_amount", 0.0, 0.2)
 		
 		inventory.active_item_changed.emit(null)
 		return
 
-	# 4. Instantiate and attach to the BONE
+	# 3. Handle Case: Equipping an item
 	var new_tool = item_data.equippable_scene.instantiate()
 	hand_socket.add_child(new_tool)
-	
 	current_tool = new_tool
 	
 	if anim_tree:
-		# Use a Tween for a smooth transition so the arms don't "snap"
 		var tween = create_tween()
-		tween.tween_property(anim_tree, "parameters/Blend2/blend_amount", 1.0, 0.3)
+		tween.tween_property(anim_tree, "parameters/Blend2/blend_amount", 1.0, 0.2)
 	
-	# 5. Setup
 	if current_tool.has_method("setup"): 
 		current_tool.setup(self)
 	if current_tool.has_method("set_item_data"):
 		current_tool.set_item_data(item_data)
 		
 	inventory.active_item_changed.emit(item_data)
-	
 
-# --- PHYSICS ---
+# --- PHYSICS, INTERACTION, & WATER DETECTION REMAIN UNCHANGED ---
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor(): 
 		velocity += (get_gravity() * gravity_multiplier) * delta
 
 func _physics_process(delta: float) -> void:
-		
 	if is_menu_open or is_locked: 
 		apply_gravity(delta)
 		move_and_slide()
 		return
-	
 	state_machine.process_physics(delta)
 
-# --- INTERACTION ---
 func try_interact():
-
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
 		if target.has_method("interact"):
@@ -210,12 +201,10 @@ func try_interact():
 		elif target.get_parent().has_method("interact"):
 			target.get_parent().interact(self)
 
-# --- WATER DETECTION ---
 func _on_head_detector_area_entered(area):
 	if area.is_in_group("water"):
 		water_overlay.visible = true
 		standard_overlay.visible = false
-		water_overlay.material.set_shader_parameter("blue_tint", Color(0.0, 0.4, 0.8, 0.4))
 		gravity_multiplier = 0.2
 		speed_multiplier = 0.6 
 		velocity.y *= 0.2
@@ -224,15 +213,21 @@ func _on_head_detector_area_exited(area):
 	if area.is_in_group("water"):
 		water_overlay.visible = false
 		standard_overlay.visible = true
-		water_overlay.material.set_shader_parameter("blue_tint", Color(0.0, 0.4, 0.8, 0.0))
 		gravity_multiplier = 1.0
 		speed_multiplier = 1.0
 
-# --- INVENTORY HELPERS ---
 func add_to_inventory(item: ItemData):
 	inventory.add_to_inventory(item)
 
-func handle_global_swap(from_id: int, to_id: int):
+func handle_global_swap(from_id: int, to_id: int, new_data = null):
+	# If we passed in new_data, it means we are BUYING/SPAWNING an item
+	if from_id == -1 and new_data != null:
+		# Check if your inventory component has a direct 'set' method
+		# or access the array directly if it's in this script
+		inventory.set_item_at_index(to_id, new_data)
+		return
+
+	# Otherwise, do your normal swapping logic
 	inventory.handle_global_swap(from_id, to_id)
 
 func attach_lure_to_rod(lure_id: int, rod_id: int):
@@ -244,7 +239,6 @@ func remove_lure_from_rod(rod_slot_id: int):
 func get_item_at_index(id: int):
 	return inventory.get_item_at_index(id)
 	
-# --- CAMERA HELPERS ---
 var look_rotation: Vector2:
 	get: return camera_controller.look_rotation
 	set(value): camera_controller.look_rotation = value

@@ -10,12 +10,16 @@ var current_active_index: int = 0
 var inventory_slots: Array[InventorySlot] = []
 
 func _ready() -> void:
+	var player = get_tree().get_first_node_in_group("player") 
+
 	for i in item_slots_count:
 		var slot = inventory_slot_prefab.instantiate() as InventorySlot
 		inventory_grid.add_child(slot)
 		inventory_slots.append(slot)
 		
+		slot.parent_inventory = player
 		slot.inventory_slot_id = i
+		
 		if slot.has_method("set_key_text"):
 			slot.set_key_text(str(i + 1))
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)

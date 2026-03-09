@@ -34,6 +34,10 @@ hotbar=""
 external_inventory_ui=""
 fishing_rod=""
 
+[gui]
+
+timers/tooltip_delay_sec=0.0
+
 [input]
 
 ui_accept={

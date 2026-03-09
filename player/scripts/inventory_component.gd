@@ -149,6 +149,18 @@ func handle_global_swap(from_id: int, to_id: int):
 	if external_ui and chest: external_ui.update_ui(chest.inventory_slots)
 	select_slot(current_slot)
 
+func set_item_at_index(index: int, item_data: ItemData):
+	if index >= 0 and index < inventory_slots.size():
+		# 1. Update the actual data array
+		inventory_slots[index] = {
+			"data": item_data,
+			"quantity": 1
+		}
+		
+		active_item_changed.emit(item_data) 
+		
+		_refresh_inventory()
+
 func attach_lure_to_rod(lure_id: int, rod_id: int):
 	var lure_slot = get_item_at_index(lure_id) as Dictionary
 	var rod_slot = get_item_at_index(rod_id) as Dictionary

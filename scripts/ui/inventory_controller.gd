@@ -8,16 +8,19 @@ var inventory_slots: Array[InventorySlot] = []
 var inventory_full: bool = false
 
 func _ready() -> void:
+	var player = get_tree().get_first_node_in_group("player") 
+
 	for i in item_slots_count:
 		var slot = inventory_slot_prefab.instantiate() as InventorySlot
 		inventory_grid.add_child(slot)
 		inventory_slots.append(slot)
 		
+		slot.parent_inventory = player # Now the slot knows it belongs to the Player
+		
 		slot.inventory_slot_id = i + 9
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)
 		slot.on_item_double_clicked.connect(_on_item_double_clicked)
 		slot.on_item_right_clicked.connect(_on_item_right_clicked)
-
 
 func update_inventory_ui(inventory_data: Array):
 	# 1. Get all the slot UI nodes we currently have

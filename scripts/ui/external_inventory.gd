@@ -22,6 +22,9 @@ func open_container(external_inventory_object):
 		var slot = slot_prefab.instantiate()
 		grid.add_child(slot)
 		
+		slot.parent_inventory = external_inventory_object # Tell slot it belongs to NPC
+		slot.inventory_slot_id = i + 36 # Your global offset
+		
 		# Assign Global ID
 		slot.inventory_slot_id = i + 36
 		slot.on_item_swapped.connect(_on_item_swapped_on_slot)

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="LureData" format=3 uid="uid://7q2n5yqeibd4"]
+
+[ext_resource type="Texture2D" uid="uid://cljqdumybk2u3" path="res://data/textures/main_slot0_normal_roughness.png" id="1_ykg1l"]
+[ext_resource type="Script" uid="uid://bb0p8dna31sx0" path="res://scripts/itemtypes/lure.gd" id="2_28ie8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykg1l"]
+albedo_color = Color(0.34090745, 0.9999998, 0.8848445, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d7f5w"]
+material = SubResource("StandardMaterial3D_ykg1l")
+size = Vector3(0.1, 0.1, 0.1)
+
+[resource]
+script = ExtResource("2_28ie8")
+bait_power = 40.0
+hook_size = 1.0
+name = "Lure4"
+icon = ExtResource("1_ykg1l")
+ground_mesh = SubResource("BoxMesh_d7f5w")
+is_sellable = false
+price = 40
+metadata/_custom_type_script = "uid://bb0p8dna31sx0"

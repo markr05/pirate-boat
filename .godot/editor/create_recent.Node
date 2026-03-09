@@ -1,3 +1,6 @@
+Label
+VBoxContainer
+PanelContainer
 AnimationTree
 Node
 CSGPolygon3D
@@ -10,6 +13,3 @@ CSGBox3D
 TextureRect
 MeshInstance3D
 WorldEnvironment
-DirectionalLight3D
-Terrain3D
-Node3D

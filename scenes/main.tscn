@@ -170,7 +170,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1460075, -0.32929134, -1.7
 item_data = ExtResource("7_dp3eg")
 
 [node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8116293, 11.368447, -2.819304)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.238529, 11.277137, -3.2694037)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
 environment = SubResource("Environment_0xm2m")
@@ -205,9 +205,10 @@ transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, 
 
 [node name="NPC" parent="pier" unique_id=968812797 instance=ExtResource("19_0ld40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.615792, 2.0913181, -6.5)
+inventory_size = 18
 
 [node name="Chest" parent="." unique_id=714947045 instance=ExtResource("17_dp3eg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11.065886, -4.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11, -4.9)
 
 [node name="Ocean" parent="." unique_id=1402291055 instance=ExtResource("17_muem4")]
 transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -0.009788513, 9.950912, 1.0382347)

@@ -14,4 +14,5 @@ name = "Lure1"
 icon = ExtResource("1_d7f5w")
 ground_mesh = SubResource("BoxMesh_d7f5w")
 is_sellable = false
+price = 10
 metadata/_custom_type_script = "uid://bb0p8dna31sx0"

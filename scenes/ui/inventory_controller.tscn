@@ -24,7 +24,6 @@ corner_detail = 5
 [node name="InventoryController" type="Node" unique_id=1775436220]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=424236658]
-layer = 2
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer" unique_id=1290782037]
 visible = false
