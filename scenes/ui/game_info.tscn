@@ -56,6 +56,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 19.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
@@ -95,3 +99,59 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 50
 text = "
 "
+
+[node name="Crosshair" type="MarginContainer" parent="." unique_id=1169413402]
+unique_name_in_owner = true
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="Crosshair" unique_id=1814803387]
+visible = false
+position = Vector2(8, 23)
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(24, -16, -32, -16, -32, -24, 24, -24)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Crosshair" unique_id=1492580139]
+visible = false
+position = Vector2(8, 23)
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(0, 8, -8, 8, -8, -48, 0, -48)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Crosshair" unique_id=1373456655]
+position = Vector2(14.1345825, 29.01892)
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(-24.134659, -48.018906, -24, -24, -32, -24, -32.134567, -47.980446)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Crosshair" unique_id=1080168893]
+position = Vector2(14.1345825, 29.01892)
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(-24, -48, -8, -48, -8, -40, -24, -40)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="Polygon2D5" type="Polygon2D" parent="Crosshair" unique_id=1890555710]
+position = Vector2(-14, -30)
+rotation = 3.1415927
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(-24.134659, -48.018906, -24, -24, -32, -24, -32.134567, -47.980446)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="Polygon2D6" type="Polygon2D" parent="Crosshair" unique_id=634589203]
+position = Vector2(-14, -30)
+rotation = 3.1415927
+color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
+polygon = PackedVector2Array(-24, -48, -8, -48, -8, -40, -24, -40)
+uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)

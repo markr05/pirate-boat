@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dwvf3rtrjugp2" path="res://player/scripts/fish.gd" id="10_x436g"]
 [ext_resource type="Script" uid="uid://cepad3jgr8jwo" path="res://player/scripts/boat.gd" id="11_08y0n"]
 [ext_resource type="Script" uid="uid://2t7hbt3up3q1" path="res://player/scripts/inventory_component.gd" id="11_q1ipm"]
+[ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="13_5r5k5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chj2n"]
 
@@ -952,5 +953,7 @@ script = ExtResource("10_x436g")
 [node name="Boat" type="Node" parent="StateMachine" unique_id=732006325]
 script = ExtResource("11_08y0n")
 
-[node name="InventoryComponent" type="Node" parent="." unique_id=1210457029]
+[node name="InventoryComponent" type="Node" parent="." unique_id=1210457029 node_paths=PackedStringArray("drop_origin")]
 script = ExtResource("11_q1ipm")
+world_item_scene = ExtResource("13_5r5k5")
+drop_origin = NodePath("../Head/Camera3D/HandPosition")

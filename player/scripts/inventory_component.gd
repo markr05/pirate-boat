@@ -91,7 +91,21 @@ func change_active_slot(direction: int, is_fishing: bool = false) -> void:
 	select_slot(new_index, false)
 
 func drop_current_item():
+	print("Drop requested for slot: ", current_slot)
 	var slot_data = inventory_slots[current_slot]
+	
+	if slot_data == null: 
+		print("Failed: Slot is empty")
+		return
+	if not world_item_scene: 
+		print("Failed: world_item_scene not assigned")
+		return
+	if not drop_origin: 
+		print("Failed: drop_origin (Head node) not assigned")
+		return
+
+	print("Dropping: ", slot_data["data"].resource_name)
+	#var slot_data = inventory_slots[current_slot]
 	if slot_data == null or not world_item_scene or not drop_origin: return
 	
 	var dropped_item = world_item_scene.instantiate()

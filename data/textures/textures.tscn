@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://x5syrhuye3dl"]
+
+[ext_resource type="Script" uid="uid://dcahy5vmf3m7x" path="res://data/textures/textures.gd" id="1_vx2hu"]
+[ext_resource type="Texture2D" uid="uid://cfj2ob3un713n" path="res://data/textures/grass.tres" id="2_dqd4b"]
+
+[node name="Textures" type="Node2D" unique_id=500662139]
+script = ExtResource("1_vx2hu")
+noise_res = ExtResource("2_dqd4b")

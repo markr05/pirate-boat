@@ -1,1 +1,2 @@
-res://scripts/itemtypes/ItemData.gd
+Shader
+NoiseTexture2D

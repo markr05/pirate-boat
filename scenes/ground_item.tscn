@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dbl7pbboxv465"]
+
+[ext_resource type="Script" uid="uid://b17lwb6toqe38" path="res://scripts/ground_item.gd" id="1_oe8gi"]
+[ext_resource type="Resource" uid="uid://c1q63eejybysf" path="res://items/guava.tres" id="2_m7nn2"]
+[ext_resource type="Shader" uid="uid://dtsihjs083dg7" path="res://shaders/item_highlight.gdshader" id="3_dy2gb"]
+[ext_resource type="ArrayMesh" uid="uid://7bc5k6as541w" path="res://models/meshes/guava.tres" id="4_1cp1s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_23fnm"]
+render_priority = 0
+shader = ExtResource("3_dy2gb")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uidyv"]
+points = PackedVector3Array(-0.14559755, -0.012106195, 0.020917818, -0.13382547, -0.012106195, -0.061127603, -0.12632896, -0.092494234, 0.018152878, -0.11119342, -0.012106195, 0.09630482, -0.114100814, 0.07510799, 0.01640363, -0.104865566, 0.07510799, -0.04789538, -0.062337853, 0.07510799, -0.09698722, -0.079525664, -0.012106195, -0.12376201, -0.06900775, -0.092494234, -0.107369855, -0.11609608, -0.092494234, -0.053030275, -0.064447135, -0.15661995, -0.029443622, -0.070119396, -0.15661995, 0.010055557, -0.09645694, -0.092494234, 0.08355223, -0.035971805, -0.092494234, 0.1224307, -0.04144454, -0.012106195, 0.1411364, -0.08713619, 0.07510799, 0.07548311, -0.021748394, 0.25029927, 0.020466402, -0.016304165, 0.25282902, 0.011155888, -2.8476119e-05, 0.07510799, -0.11526969, -2.8476119e-05, -0.012106195, -0.14709474, -2.8476119e-05, -0.092494234, -0.12762728, -0.03830912, -0.15661995, -0.059604064, -0.053530164, -0.15661995, 0.046366572, -0.01998116, -0.15661995, 0.067950055, 0.03594336, -0.092494234, 0.1224307, 0.04141611, -0.012106195, 0.1411364, -0.032494336, 0.07510799, 0.110580966, -0.012313619, 0.2510221, 0.026193783, -0.0068693906, 0.2535919, 0.016911477, 0.03064166, 0.15770449, -0.047697887, -2.8476119e-05, 0.15770449, -0.056698054, 0.062309414, 0.07510799, -0.09698722, 0.07949722, -0.012106195, -0.12376201, 0.06897931, -0.092494234, -0.107369855, 0.03828068, -0.15661995, -0.059604064, -2.8476119e-05, -0.15661995, -0.07083312, 0.019952714, -0.15661995, 0.067950055, 0.0964285, -0.092494234, 0.08355223, 0.11116499, -0.012106195, 0.09630482, 0.08710775, 0.07510799, 0.07548311, 0.032465905, 0.07510799, 0.110580966, 0.11407238, 0.07510799, 0.01640363, 0.10483712, 0.07510799, -0.04789538, 0.051534966, 0.15770449, -0.02357518, 0.13379702, -0.012106195, -0.061127603, 0.11606765, -0.092494234, -0.053030275, 0.06441869, -0.15661995, -0.029443622, 0.053501725, -0.15661995, 0.046366572, 0.070090964, -0.15661995, 0.010055557, 0.12630051, -0.092494234, 0.018152878, 0.1455976, -0.012106195, 0.020917818)
+
+[node name="GroundItem" type="StaticBody3D" unique_id=1499670269 node_paths=PackedStringArray("mesh_node", "collision_node")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_oe8gi")
+mesh_node = NodePath("Mesh")
+collision_node = NodePath("Collision")
+item_data = ExtResource("2_m7nn2")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=767475311]
+unique_name_in_owner = true
+material_overlay = SubResource("ShaderMaterial_23fnm")
+mesh = ExtResource("4_1cp1s")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=937776614]
+unique_name_in_owner = true
+shape = SubResource("ConvexPolygonShape3D_uidyv")

@@ -21,6 +21,7 @@ signal coins_changed(coins_amount)
 @onready var external_inventory_node = $CanvasLayer/ExternalInventoryUI
 @onready var water_overlay = $CanvasLayer/GameInfo/WaterVision
 @onready var standard_overlay = $CanvasLayer/GameInfo/StandardVision
+@onready var crosshair = $CanvasLayer/GameInfo/Crosshair
 
 # --- SETTINGS ---
 @export_group("Movement")
@@ -33,6 +34,7 @@ var speed_multiplier: float = 1.0
 # --- STATE ---
 var is_menu_open: bool = false
 var is_locked: bool = false 
+var last_focused_target = null
 
 # Tool
 var current_tool: Node3D = null
@@ -70,18 +72,21 @@ func _ready() -> void:
 	head_detector.area_exited.connect(_on_head_detector_area_exited)
 	water_overlay.visible = false
 	standard_overlay.visible = true
+	crosshair.visible = true
 
 # --- INPUT ---
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if is_menu_open:
 			toggle_inventory(false)
+			crosshair.visible = !crosshair.visible
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		return
 
 	if event.is_action_pressed("inventory"):
 		toggle_inventory(!is_menu_open)
+		crosshair.visible = !crosshair.visible
 	
 	if event.is_action_pressed("drop_item") and not is_menu_open:
 		inventory.drop_current_item()
@@ -191,14 +196,47 @@ func _physics_process(delta: float) -> void:
 		apply_gravity(delta)
 		move_and_slide()
 		return
+	_handle_highlighting()
 	state_machine.process_physics(delta)
+	
+func _handle_highlighting():
+	if interact_ray.is_colliding():
+		var target = interact_ray.get_collider()
+		
+		if not target:
+			_clear_highlight()
+			return
+		
+		var focus_target = null
+		if target.has_method("focus"):
+			focus_target = target
+		elif target.get_parent() and target.get_parent().has_method("focus"):
+			focus_target = target.get_parent()
+		
+		if focus_target:
+			if last_focused_target != focus_target:
+				_clear_highlight()
+				focus_target.focus()
+				last_focused_target = focus_target
+		else:
+			_clear_highlight()
+	else:
+		_clear_highlight()
 
+func _clear_highlight():
+	if last_focused_target:
+		if is_instance_valid(last_focused_target):
+			last_focused_target.unfocused()
+		last_focused_target = null
+		
 func try_interact():
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
 		if target.has_method("interact"):
+			_clear_highlight()
 			target.interact(self)
 		elif target.get_parent().has_method("interact"):
+			_clear_highlight()
 			target.get_parent().interact(self)
 
 func _on_head_detector_area_entered(area):

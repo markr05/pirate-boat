@@ -126,17 +126,13 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 			if parent_inventory.has_method("handle_global_swap"):
 				parent_inventory.handle_global_swap(-1, inventory_slot_id, item_data)
 				
-				# --- ADD THIS LINE TO SHOW THE ICON IMMEDIATELY ---
 				display_item(item_data, 1) 
-				# --------------------------------------------------
-			
+
 			print("Purchased: ", item_data.name, " exactly at slot ", inventory_slot_id)
 		return
 
-	# 2. Normal Swap (Internal movement)
 	on_item_swapped.emit(data["origin_slot_id"], inventory_slot_id)
 
-# --- UTILITY & INPUT ---
 
 func set_highlight(is_active: bool):
 	if highlight_rect: highlight_rect.visible = is_active

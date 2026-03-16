@@ -1,8 +1,21 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://bl52mf8haeh10"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tr48p"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h4g8r"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_tr48p")
+as_normal_map = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkrqv"]
 resource_name = "Material"
 cull_mode = 2
+albedo_color = Color(1, 0.7921569, 0.16862746, 1)
+metallic = 0.95
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_h4g8r")
 
 [resource]
 resource_name = "Cube_Cube"

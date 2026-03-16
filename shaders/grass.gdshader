@@ -1,9 +1,9 @@
 shader_type spatial;
 render_mode cull_disabled;
 
-uniform vec3 grass_color : source_color = vec3(0.5, 0.6, 0.2);
-uniform vec3 tint_color : source_color = vec3(0.4, 0.5, 0.1); // The "alternative" grass color
-uniform float variation_amount : hint_range(0.0, 1.0) = 0.3; // How much to mix the tint
+uniform vec3 grass_color : source_color = vec3(0.15, 0.85, 0.25); // Lush Primary Green
+uniform vec3 tint_color : source_color = vec3(0.1, 0.95, 0.45);  // Vibrant Teal-ish Green for depth
+uniform float variation_amount : hint_range(0.0, 1.0) = 0.3;
 uniform float wind_speed = 1.5;
 uniform float wind_strength = 0.1;
 

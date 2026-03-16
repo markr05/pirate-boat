@@ -6,7 +6,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3kunl"]
 render_priority = 0
 shader = ExtResource("2_otx53")
-shader_parameter/grass_color = Color(0.5, 0.6, 0.2, 1)
+shader_parameter/grass_color = Color(0.29312453, 0.5715593, 0.022429315, 1)
+shader_parameter/tint_color = Color(0.16790038, 0.42459232, 0.06760908, 1)
+shader_parameter/variation_amount = 0.3
 shader_parameter/wind_speed = 1.5
 shader_parameter/wind_strength = 0.1
 

@@ -1,14 +1,9 @@
 [gd_scene format=3 uid="uid://dy6wr2f4ho38y"]
 
 [ext_resource type="ArrayMesh" uid="uid://bl52mf8haeh10" path="res://models/meshes/fish_mesh.tres" id="1_aywf6"]
-[ext_resource type="Shader" uid="uid://dhtehpffgay26" path="res://shaders/item_holding.gdshader" id="2_iqoii"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h243t"]
-render_priority = 0
-shader = ExtResource("2_iqoii")
 
 [node name="Fish1" type="StaticBody3D" unique_id=1825337783]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1434527191]
+transform = Transform3D(0.39902192, 0, -0.6989646, 0, 0.80484164, 0, 0.6989646, 0, 0.39902192, -0.18039495, 0.42062318, -0.011908293)
 mesh = ExtResource("1_aywf6")
-surface_material_override/0 = SubResource("ShaderMaterial_h243t")

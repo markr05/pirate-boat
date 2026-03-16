@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d245pk2wglf6b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nptfh"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fsdlh"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_nptfh")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_e28qr"]
+frequency = 0.2242
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1a431"]
+width = 128
+height = 128
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_e28qr")
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mv81"]
+transparency = 2
+alpha_scissor_threshold = 0.578
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.31624004, 0.67, 0.026800016, 1)
+albedo_texture = SubResource("NoiseTexture2D_fsdlh")
+albedo_texture_msdf = true
+normal_enabled = true
+normal_scale = 0.64
+normal_texture = SubResource("NoiseTexture2D_1a431")
+texture_filter = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dab6e"]
+radial_segments = 5
+rings = 5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nptfh"]
+radius = 0.21849172
+
+[node name="Bush1" type="StaticBody3D" unique_id=1084324177]
+
+[node name="Leaves" type="MeshInstance3D" parent="." unique_id=1728265239]
+transform = Transform3D(0.7680009, -0.43699965, 0.009542431, 0.43880647, 0.7648387, 0.005452183, -0.00807419, -3.6101108e-10, 1.2039655, 0, 0.21209979, 0.051624775)
+material_override = SubResource("StandardMaterial3D_4mv81")
+mesh = SubResource("SphereMesh_dab6e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1854855586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15009177, 0)
+shape = SubResource("SphereShape3D_nptfh")
