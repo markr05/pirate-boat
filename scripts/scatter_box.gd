@@ -3,7 +3,7 @@ extends Node3D
 @export_group("Scatter Settings")
 @export var custom_seed: int = 238
 @export var items_to_spawn: Array[PackedScene]
-@export var spawn_count: int = 50
+@export var spawn_count: int = 9000
 @export var box_size: Vector3 = Vector3(50, 20, 50)
 
 @export_group("Randomization")

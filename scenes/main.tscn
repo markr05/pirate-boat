@@ -971,7 +971,6 @@ transform = Transform3D(-0.9745162, -0.22280551, 0.025998114, -0.22312598, 0.974
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
 custom_seed = 3298
 items_to_spawn = Array[PackedScene]([ExtResource("20_yc10j"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("25_og1vs"), ExtResource("25_og1vs")])
-spawn_count = 320
 box_size = Vector3(100, 25, 100)
 max_tilt_degrees = 5.0
 
