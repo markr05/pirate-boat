@@ -2,6 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://dxr46hyfwlt16" path="res://models/meshes/palm.tres" id="1_6xm6d"]
 [ext_resource type="ArrayMesh" uid="uid://dbb76y3dbf0lj" path="res://models/meshes/palm_leaf.tres" id="2_4jeic"]
+[ext_resource type="Shader" uid="uid://dal3ump3a14px" path="res://shaders/palm_leaf.gdshader" id="2_glgb5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xuq4r"]
 frequency = 0.0067
@@ -38,20 +39,33 @@ generate_mipmaps = false
 noise = SubResource("FastNoiseLite_nd427")
 as_normal_map = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ebog"]
-albedo_color = Color(0.31764707, 0.67058825, 0.02745098, 1)
-albedo_texture = SubResource("NoiseTexture2D_fsdlh")
-albedo_texture_msdf = true
-normal_enabled = true
-normal_scale = -0.43
-normal_texture = SubResource("NoiseTexture2D_1a431")
-subsurf_scatter_strength = 0.11
-subsurf_scatter_transmittance_enabled = true
-subsurf_scatter_transmittance_color = Color(0.7529412, 1, 0.16862746, 1)
-subsurf_scatter_transmittance_depth = 3.293
-backlight_enabled = true
-backlight = Color(0.80274993, 0.95, 0.06649999, 1)
-texture_filter = 0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibulm"]
+render_priority = 0
+shader = ExtResource("2_glgb5")
+shader_parameter/albedo = Color(0.31764707, 0.67058825, 0.02745098, 1)
+shader_parameter/texture_albedo = SubResource("NoiseTexture2D_fsdlh")
+shader_parameter/wind_direction = Vector2(1, 0.5)
+shader_parameter/wind_speed = 1.0
+shader_parameter/wind_strength = 0.15
+shader_parameter/leaf_length = 2.0
+shader_parameter/msdf_pixel_range = 4.0
+shader_parameter/msdf_outline_size = 0.0
+shader_parameter/albedo_texture_size = Vector2i(256, 256)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_1a431")
+shader_parameter/normal_scale = -0.43
+shader_parameter/transmittance_color = Color(0.7529412, 1, 0.16862746, 1)
+shader_parameter/transmittance_depth = 3.293
+shader_parameter/transmittance_boost = 0.0
+shader_parameter/backlight = Color(0.80274993, 0.95, 0.06649999, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="Tree1" type="StaticBody3D" unique_id=1641612274]
 
@@ -66,85 +80,85 @@ shape = SubResource("ConcavePolygonShape3D_glgb5")
 
 [node name="Leaves" type="MeshInstance3D" parent="Leaf" unique_id=754516317]
 transform = Transform3D(0.49399433, 0.37476608, 0.0044129426, -0.32869378, 0.5632361, -0.002936282, -0.005416334, -2.3692312e-10, 0.5806701, 0.6750872, 4.187974, 0.09564972)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves2" type="MeshInstance3D" parent="Leaf" unique_id=873244049]
 transform = Transform3D(-0.4755258, -0.3104009, -0.22284438, -0.29893214, 0.5842545, 0.011320009, 0.19134806, 0.14135963, -0.5361138, -1.5808647, 4.2558374, 0.52678967)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves3" type="MeshInstance3D" parent="Leaf" unique_id=444495134]
 transform = Transform3D(0.20946954, 0.15317632, -0.5271598, -0.23507415, 0.6191394, 0.043089166, 0.5029533, 0.22558361, 0.23969053, 0.010298371, 4.393381, 1.061353)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves4" type="MeshInstance3D" parent="Leaf" unique_id=1941628893]
 transform = Transform3D(-0.20358856, -0.18854783, 0.52088237, -0.35658634, 0.5405971, 0.010695605, -0.42836574, -0.36040103, -0.25646228, -1.117459, 4.1764555, -1.0658069)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves5" type="MeshInstance3D" parent="Leaf" unique_id=1539916187]
 transform = Transform3D(0.4150403, 0.16302675, 0.39070743, -0.19177653, 0.6402136, -0.0017131742, -0.37823626, -0.14571673, 0.42959368, 0.3360831, 4.5185394, -0.67414623)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves6" type="MeshInstance3D" parent="Leaf" unique_id=252113982]
 transform = Transform3D(-0.2484029, -0.09036745, -0.52162725, -0.24752694, 0.61352974, 0.034578487, 0.4786706, 0.27036893, -0.252814, -1.0585928, 4.586403, 1.1502203)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves7" type="MeshInstance3D" parent="Leaf" unique_id=53927171]
 transform = Transform3D(0.5148748, 0.17262034, -0.24772741, -0.15037185, 0.6530961, 0.035980355, 0.2537544, 0.036766008, 0.52396756, 0.48398882, 4.6691365, 0.48840487)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves9" type="MeshInstance3D" parent="Leaf" unique_id=1795226625]
 transform = Transform3D(0.07652173, 0.021072505, 0.5755614, 0.076180965, 0.6701442, -0.027776781, -0.58347255, 0.09026088, 0.07185761, -0.6277745, 4.940216, -0.67414623)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves14" type="MeshInstance3D" parent="Leaf" unique_id=1005731668]
 transform = Transform3D(0.31208628, -0.18027045, 0.4690255, 0.33646044, 0.5531754, -0.057762444, -0.37615928, 0.3452304, 0.33746794, -0.15202856, 5.594251, -0.6526962)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves15" type="MeshInstance3D" parent="Leaf" unique_id=1546323031]
 transform = Transform3D(0.49257538, -0.36691946, -0.07515053, 0.31696457, 0.5683447, -0.054793216, 0.09487948, 0.0062234118, 0.5731981, 0.2312994, 5.503371, 0.31055456)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves16" type="MeshInstance3D" parent="Leaf" unique_id=654047121]
 transform = Transform3D(-0.36517903, 0.2096636, -0.42083663, 0.31696457, 0.5683447, -0.054793224, 0.34391403, -0.30118066, -0.3963586, -1.1512272, 5.503371, 0.6249028)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves17" type="MeshInstance3D" parent="Leaf" unique_id=78507816]
 transform = Transform3D(-0.4100012, 0.26881343, 0.35067973, 0.25167298, 0.60841244, -0.06181141, -0.34735993, 0.12352333, -0.4587036, -1.5289195, 5.503371, -0.44480222)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves10" type="MeshInstance3D" parent="Leaf" unique_id=463842136]
 transform = Transform3D(-0.42713854, -0.011749007, -0.40295637, 0.029517066, 0.67370003, -0.04443722, 0.41082898, -0.060619015, -0.41576082, -1.6829658, 4.9361067, 0.8032898)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves11" type="MeshInstance3D" parent="Leaf" unique_id=1362140404]
 transform = Transform3D(0.4985147, -0.04145941, -0.31294435, 0.061340332, 0.67210907, 0.027977422, 0.31594223, -0.06507243, 0.4883529, 0.33581716, 5.0790434, 0.5875054)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves12" type="MeshInstance3D" parent="Leaf" unique_id=987727777]
 transform = Transform3D(0.07329537, 0.023841338, -0.5758834, 0.06134033, 0.672109, 0.02797742, 0.5856314, -0.073381834, 0.06914501, -0.84665483, 5.0790434, 0.5875054)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves13" type="MeshInstance3D" parent="Leaf" unique_id=170074196]
 transform = Transform3D(-0.5536323, 0.06675967, 0.20094305, 0.043689653, 0.6722411, -0.049268667, -0.20900112, -0.03631793, -0.5425862, -1.7513252, 5.0790434, -0.48686093)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
 
 [node name="Leaves8" type="MeshInstance3D" parent="Leaf" unique_id=1044493137]
 transform = Transform3D(-0.49393806, -0.26587006, 0.22687288, -0.21692863, 0.62192154, 0.084660985, -0.24711636, -0.01452513, -0.5277943, -1.7744174, 4.507021, -0.34600955)
-material_override = SubResource("StandardMaterial3D_0ebog")
+material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")

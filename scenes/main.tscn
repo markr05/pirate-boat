@@ -25,11 +25,12 @@
 [ext_resource type="PackedScene" uid="uid://cjb4i3v0l6mi6" path="res://scenes/tree1.tscn" id="20_yc10j"]
 [ext_resource type="PackedScene" uid="uid://dqp56pc4707y4" path="res://scenes/foliage.tscn" id="24_y6deb"]
 [ext_resource type="PackedScene" uid="uid://d245pk2wglf6b" path="res://scenes/bush1.tscn" id="25_og1vs"]
+[ext_resource type="PackedScene" uid="uid://doe5702kxetjg" path="res://scenes/callaloo.tscn" id="26_2wyq8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_top_color = Color(0.3850069, 0.58907235, 0.99444765, 1)
-sky_horizon_color = Color(0.58011764, 0.7817356, 1, 1)
-ground_bottom_color = Color(0.32941177, 0.2509804, 0.32941177, 1)
+sky_top_color = Color(0.089645155, 0.3675001, 0.97487515, 1)
+sky_horizon_color = Color(0.45054615, 0.7570229, 1, 1)
+ground_bottom_color = Color(0.65705484, 0.9999998, 0.99759156, 1)
 ground_horizon_color = Color(0.5803922, 0.78039217, 1, 1)
 
 [sub_resource type="Sky" id="Sky_2wyq8"]
@@ -40,9 +41,16 @@ background_mode = 2
 sky = SubResource("Sky_2wyq8")
 ambient_light_color = Color(0.6921118, 0.6841188, 0.62486446, 1)
 ambient_light_sky_contribution = 0.1
-tonemap_mode = 2
+tonemap_mode = 3
+tonemap_exposure = 0.8
+ssao_enabled = true
 glow_enabled = true
-volumetric_fog_density = 0.0
+glow_blend_mode = 2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.68, 0.76533324, 1, 1)
+adjustment_enabled = true
+adjustment_saturation = 1.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 
@@ -745,6 +753,8 @@ environment = SubResource("Environment_0xm2m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1523047921]
 transform = Transform3D(-0.8137978, -0.2358888, 0.5311212, 0.57964003, -0.26366562, 0.77103674, -0.04184054, 0.9353272, 0.35130116, 0, 0, 0)
+light_color = Color(1, 0.95686275, 0.9019608, 1)
+light_energy = 2.0
 shadow_enabled = true
 
 [node name="pier" type="Node3D" parent="." unique_id=1190533252]
@@ -914,63 +924,13 @@ transform = Transform3D(0.99599135, 0.08945061, 0, -0.083895825, 0.93414134, 0.3
 [node name="GroundItem5" parent="." unique_id=857016251 instance=ExtResource("19_jscy8")]
 transform = Transform3D(0.6471518, -0.21364506, 0.7318129, -0.083895825, 0.9341412, 0.3469029, -0.7577308, -0.2858949, 0.5866072, 30.049706, 11.8087845, 1.1487265)
 
-[node name="Trees" type="Node3D" parent="." unique_id=422224721]
-visible = false
-
-[node name="Tree1" parent="Trees" unique_id=1641612274 instance=ExtResource("20_yc10j")]
-transform = Transform3D(0.9476124, 0, 0.31942245, 0, 1, 0, -0.31942245, 0, 0.9476124, 23.537666, 9.908045, -24.693064)
-
-[node name="Tree16" parent="Trees" unique_id=1555663803 instance=ExtResource("20_yc10j")]
-transform = Transform3D(0.8881124, 0, -0.45962635, -0.03952362, 0.9962959, -0.076369464, 0.45792386, 0.085990764, 0.8848228, 40.475975, 12.690607, -2.650795)
-
-[node name="Tree2" parent="Trees" unique_id=730243376 instance=ExtResource("20_yc10j")]
-transform = Transform3D(0.19753769, 0, -0.9802954, 0, 1, 0, 0.9802954, 0, 0.19753769, 19.591015, 10.549976, -45.96035)
-
-[node name="Tree3" parent="Trees" unique_id=1738856585 instance=ExtResource("20_yc10j")]
-transform = Transform3D(-0.5503781, 0, -0.58845216, 0, 1, 0, 0.96229935, 0, -0.33655977, 25.181038, 9.908045, 34.08583)
-
-[node name="Tree4" parent="Trees" unique_id=17633625 instance=ExtResource("20_yc10j")]
-transform = Transform3D(0.13171633, 0, -0.91447407, 0, 1, 0, 0.653652, 0, 0.18427414, 23.43674, 9.813883, 29.480156)
-
-[node name="Tree5" parent="Trees" unique_id=1989920682 instance=ExtResource("20_yc10j")]
-transform = Transform3D(0.19194368, 0, 0.89336973, 0, 1, 0, -0.638567, 0, 0.2685336, 26.522598, 9.989109, 15.994053)
-
-[node name="Tree6" parent="Trees" unique_id=1756121082 instance=ExtResource("20_jscy8")]
-transform = Transform3D(0.9977934, -0.065890685, -0.00817442, 0.066395804, 0.9902024, 0.122844845, 0, -0.123116516, 0.99239224, 23.494202, 9.903349, 5.2989693)
-
-[node name="Tree7" parent="Trees" unique_id=1952995973 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.5276972, -3.6951031e-09, -0.84943247, -0.1451512, 0.9852919, 0.09017302, 0.8369389, 0.17088021, -0.5199358, 23.998789, 9.845075, 6.3110723)
-
-[node name="Tree8" parent="Trees" unique_id=29106719 instance=ExtResource("20_jscy8")]
-transform = Transform3D(0.86324614, -0.17663276, -0.47287095, 0.2214921, 0.974325, 0.040401105, 0.4535937, -0.13961324, 0.88020504, 23.746626, 10.595246, -11.212526)
-
-[node name="Tree9" parent="Trees" unique_id=957287780 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.8117619, -0.24956563, -0.5279767, -0.29230413, 0.9563217, -0.0026205864, 0.50556976, 0.15220255, -0.8492547, 23.746365, 10.536005, -10.081665)
-
-[node name="Tree10" parent="Trees" unique_id=1233941150 instance=ExtResource("20_jscy8")]
-transform = Transform3D(0.9141104, -0.01101, -0.40531582, 0.066395804, 0.9902024, 0.12284485, 0.3999921, -0.13920502, 0.90588534, 29.065674, 10.895123, 13.367916)
-
-[node name="Tree11" parent="Trees" unique_id=951793045 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.8189497, -0.06850192, -0.56976205, -0.14515117, 0.98529184, 0.090173, 0.55520505, 0.15654884, -0.81684744, 29.122213, 10.836848, 14.497414)
-
-[node name="Tree12" parent="Trees" unique_id=944655038 instance=ExtResource("20_jscy8")]
-transform = Transform3D(0.6090122, -0.10585122, -0.7860659, 0.2214921, 0.97432494, 0.040401112, 0.7616069, -0.1987121, 0.616821, 35.92912, 12.478658, -1.6233072)
-
-[node name="Tree13" parent="Trees" unique_id=1481076710 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.9552676, -0.29185098, 0.047821507, -0.27900314, 0.94296753, 0.18157585, -0.09808706, 0.16011125, -0.9822135, 35.475548, 12.245951, 0.94601345)
-
-[node name="Tree14" parent="Trees" unique_id=1586788970 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.9745162, -0.22280553, 0.025998121, -0.22054462, 0.9305042, -0.2924417, 0.040966373, -0.29072294, -0.9559299, 31.363659, 12.668659, -12.311732)
-
-[node name="Tree15" parent="Trees" unique_id=1912433894 instance=ExtResource("20_jscy8")]
-transform = Transform3D(-0.9745162, -0.22280551, 0.025998114, -0.22312598, 0.9747371, -0.010121375, -0.023086105, -0.01566431, -0.9996109, 31.363659, 11.828524, -26.085167)
-
 [node name="Foliage" type="Node3D" parent="." unique_id=1173263318]
 
 [node name="ScatterBox" parent="Foliage" unique_id=406734948 instance=ExtResource("24_y6deb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
 custom_seed = 3298
-items_to_spawn = Array[PackedScene]([ExtResource("20_yc10j"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("25_og1vs"), ExtResource("25_og1vs")])
+items_to_spawn = Array[PackedScene]([ExtResource("20_yc10j"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("25_og1vs"), ExtResource("26_2wyq8")])
+spawn_count = 200
 box_size = Vector3(100, 25, 100)
 max_tilt_degrees = 5.0
 

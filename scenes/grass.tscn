@@ -6,11 +6,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3kunl"]
 render_priority = 0
 shader = ExtResource("2_yarb5")
-shader_parameter/grass_color = Color(0.27058825, 0.62352943, 0.09411765, 1)
-shader_parameter/tint_color = Color(0.12941177, 0.48235294, 0.0627451, 1)
+shader_parameter/grass_color = Color(0.24031413, 0.61843896, 0.05547206, 1)
+shader_parameter/tint_color = Color(0.13172477, 0.49394238, 0.06270344, 1)
 shader_parameter/variation_amount = 0.3
 shader_parameter/wind_speed = 1.5
 shader_parameter/wind_strength = 0.1
+shader_parameter/backlight_color = Color(0.32453725, 0.6936475, 0.18854514, 1)
 
 [node name="Node3D" type="Node3D" unique_id=1806035435]
 

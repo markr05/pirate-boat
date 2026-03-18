@@ -7,6 +7,8 @@
 render_priority = 0
 shader = ExtResource("1_tiovm")
 shader_parameter/sync_time = 0.0
+shader_parameter/deep_water_color = Color(0, 0.2, 0.5, 1)
+shader_parameter/shallow_water_color = Color(0, 0.6, 0.9, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nb2vx"]
 size = Vector2(100, 100)
