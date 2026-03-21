@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LureData" format=3 uid="uid://coce7ojl0k6vt"]
+
+[ext_resource type="ArrayMesh" uid="uid://cy5m026lomia" path="res://models/meshes/lures/lure10.tres" id="1_vcfbb"]
+[ext_resource type="Script" uid="uid://bb0p8dna31sx0" path="res://scripts/itemtypes/lure.gd" id="2_3mrsf"]
+[ext_resource type="Texture2D" uid="uid://cvxb4p33vhyh" path="res://items/item_icons/lure10_icon.png" id="2_ogyvr"]
+
+[resource]
+script = ExtResource("2_3mrsf")
+bait_power = 100.0
+hook_size = 1.0
+name = "Lure10"
+icon = ExtResource("2_ogyvr")
+ground_mesh = ExtResource("1_vcfbb")
+is_sellable = false
+price = 100
+metadata/_custom_type_script = "uid://bb0p8dna31sx0"

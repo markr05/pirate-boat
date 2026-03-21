@@ -46,7 +46,7 @@ func _update_item_visuals():
 		mat.shader = OUTLINE_SHADER
 		mat.set_shader_parameter("outline_color", Color(1.0, 1.0, 1.0, 1.0)) 
 		
-		var initial_width = 2.0 if is_focused else 0.0
+		var initial_width = 5.0 if is_focused else 0.0
 		mat.set_shader_parameter("outline_width", initial_width)
 		
 		mesh_node.material_overlay = mat

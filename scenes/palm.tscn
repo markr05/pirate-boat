@@ -43,6 +43,7 @@ as_normal_map = true
 render_priority = 0
 shader = ExtResource("2_glgb5")
 shader_parameter/albedo = Color(0.31764707, 0.67058825, 0.02745098, 1)
+shader_parameter/albedo_variance = Color(0.4, 0.5, 0.1, 1)
 shader_parameter/texture_albedo = SubResource("NoiseTexture2D_fsdlh")
 shader_parameter/wind_direction = Vector2(1, 0.5)
 shader_parameter/wind_speed = 1.0
@@ -66,6 +67,10 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4jeic"]
+height = 5.0
+radius = 2.0
 
 [node name="Tree1" type="StaticBody3D" unique_id=1641612274]
 
@@ -162,3 +167,10 @@ mesh = ExtResource("2_4jeic")
 transform = Transform3D(-0.49393806, -0.26587006, 0.22687288, -0.21692863, 0.62192154, 0.084660985, -0.24711636, -0.01452513, -0.5277943, -1.7744174, 4.507021, -0.34600955)
 material_override = SubResource("ShaderMaterial_ibulm")
 mesh = ExtResource("2_4jeic")
+
+[node name="CoconutZone" type="StaticBody3D" parent="." unique_id=1713932710]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CoconutZone" unique_id=835445412]
+shape = SubResource("CylinderShape3D_4jeic")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://c1q63eejybysf"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_062qe"]
+[ext_resource type="ArrayMesh" uid="uid://7bc5k6as541w" path="res://models/meshes/guava.tres" id="1_xyirv"]
+[ext_resource type="Texture2D" uid="uid://fqw1pbsu60s6" path="res://items/item_icons/guava_icon.png" id="2_02vbp"]
+
+[resource]
+script = ExtResource("1_062qe")
+name = "Guava"
+icon = ExtResource("2_02vbp")
+description = "This is a guava"
+ground_mesh = ExtResource("1_xyirv")
+stackable = true
+price = 10
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

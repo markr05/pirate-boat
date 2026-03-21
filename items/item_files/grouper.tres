@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://brf33m3d41o57"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_gnvd4"]
+[ext_resource type="ArrayMesh" uid="uid://c6p12oqh3hq4r" path="res://models/meshes/grouper.tres" id="1_ljen8"]
+[ext_resource type="Texture2D" uid="uid://batxf0nn7g8kl" path="res://items/item_icons/grouper.PNG" id="2_0uav8"]
+
+[resource]
+script = ExtResource("1_gnvd4")
+name = "Grouper"
+icon = ExtResource("2_0uav8")
+description = "This is a grouper"
+ground_mesh = ExtResource("1_ljen8")
+stackable = true
+price = 20
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

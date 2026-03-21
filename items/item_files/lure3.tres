@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LureData" format=3 uid="uid://dqn6sctomtyxx"]
+
+[ext_resource type="ArrayMesh" uid="uid://ok12wh5tlt2p" path="res://models/meshes/lures/lures.tres" id="1_hbnl3"]
+[ext_resource type="Texture2D" uid="uid://cljqdumybk2u3" path="res://data/textures/main_slot0_normal_roughness.png" id="1_vwthx"]
+[ext_resource type="Script" uid="uid://bb0p8dna31sx0" path="res://scripts/itemtypes/lure.gd" id="2_mwp4f"]
+
+[resource]
+script = ExtResource("2_mwp4f")
+bait_power = 30.0
+hook_size = 1.0
+name = "Lure3"
+icon = ExtResource("1_vwthx")
+ground_mesh = ExtResource("1_hbnl3")
+is_sellable = false
+price = 30
+metadata/_custom_type_script = "uid://bb0p8dna31sx0"

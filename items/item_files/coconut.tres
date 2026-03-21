@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cs8p2ggxdbiu8"]
+
+[ext_resource type="ArrayMesh" uid="uid://b7d51u07yf4wg" path="res://models/meshes/coconut.tres" id="1_wwhg5"]
+[ext_resource type="Texture2D" uid="uid://bc2h4lln2wnr2" path="res://items/item_icons/coconut_icon.png" id="2_cn3gn"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="3_uyw24"]
+
+[resource]
+script = ExtResource("3_uyw24")
+name = "Coconut"
+icon = ExtResource("2_cn3gn")
+description = "This is a coconut"
+ground_mesh = ExtResource("1_wwhg5")
+stackable = true
+price = 25
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

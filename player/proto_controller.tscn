@@ -720,6 +720,7 @@ size = Vector3(0.81103516, 1.4401855, 0.37200928)
 size = Vector3(0.4940796, 0.4510498, 1)
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
+wall_min_slide_angle = 1.134464
 script = ExtResource("1_ucva2")
 coins = 500
 

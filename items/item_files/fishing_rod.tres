@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RodData" format=3 uid="uid://cts4hsulrxu7j"]
+
+[ext_resource type="PackedScene" uid="uid://8lcl4suftttc" path="res://items/item_scenes/fishing_rod.tscn" id="1_31046"]
+[ext_resource type="Texture2D" uid="uid://4lxy1ic7nbru" path="res://items/item_icons/fishing_rod.PNG" id="2_31046"]
+[ext_resource type="ArrayMesh" uid="uid://b66fueaqwqldg" path="res://models/meshes/rod.tres" id="2_kp5br"]
+[ext_resource type="Script" uid="uid://6yy8d1xe7kon" path="res://scripts/itemtypes/rod_stats.gd" id="4_31046"]
+
+[resource]
+script = ExtResource("4_31046")
+name = "Fishing Rod"
+icon = ExtResource("2_31046")
+description = "This is a sample fishing rod."
+equippable_scene = ExtResource("1_31046")
+ground_mesh = ExtResource("2_kp5br")
+is_sellable = false
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

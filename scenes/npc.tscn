@@ -4,16 +4,11 @@
 [ext_resource type="ArrayMesh" uid="uid://dl4lsa16qm84h" path="res://models/meshes/fisherman.tres" id="2_abqhh"]
 [ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="2_nyaq3"]
 [ext_resource type="Shader" uid="uid://cpr24pjfi72xy" path="res://shaders/fisherman.gdshader" id="2_rv78h"]
-[ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/lure1.tres" id="3_yf2ql"]
-[ext_resource type="Resource" uid="uid://4qsfxs2v3li0" path="res://items/lure2.tres" id="4_8gbmn"]
-[ext_resource type="Resource" uid="uid://dqn6sctomtyxx" path="res://items/lure3.tres" id="5_pvipr"]
-[ext_resource type="Resource" uid="uid://7q2n5yqeibd4" path="res://items/lure4.tres" id="6_n0klm"]
-[ext_resource type="Resource" uid="uid://dy5shglj5m7qq" path="res://items/lure5.tres" id="7_u2tho"]
-[ext_resource type="Resource" uid="uid://cv8571o4ieh36" path="res://items/lure6.tres" id="8_ca6vw"]
-[ext_resource type="Resource" uid="uid://b475pf5887hcq" path="res://items/lure7.tres" id="9_t8u8m"]
-[ext_resource type="Resource" uid="uid://dr5xi24kejhoh" path="res://items/lure8.tres" id="10_d56e8"]
-[ext_resource type="Resource" uid="uid://brm64d1jwjjiv" path="res://items/lure9.tres" id="11_ewlk4"]
-[ext_resource type="Resource" uid="uid://coce7ojl0k6vt" path="res://items/lure10.tres" id="12_bw2c7"]
+[ext_resource type="Resource" uid="uid://4qsfxs2v3li0" path="res://items/item_files/lure2.tres" id="4_8gbmn"]
+[ext_resource type="Resource" uid="uid://7q2n5yqeibd4" path="res://items/item_files/lure4.tres" id="6_n0klm"]
+[ext_resource type="Resource" uid="uid://cv8571o4ieh36" path="res://items/item_files/lure6.tres" id="8_ca6vw"]
+[ext_resource type="Resource" uid="uid://dr5xi24kejhoh" path="res://items/item_files/lure8.tres" id="10_d56e8"]
+[ext_resource type="Resource" uid="uid://coce7ojl0k6vt" path="res://items/item_files/lure10.tres" id="12_bw2c7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n8xq"]
 render_priority = 0
@@ -27,7 +22,7 @@ size = Vector3(1, 1.8, 1)
 [node name="NPC" type="StaticBody3D" unique_id=968812797]
 collision_layer = 129
 script = ExtResource("1_nh2m4")
-starting_items = Array[ExtResource("2_nyaq3")]([ExtResource("3_yf2ql"), ExtResource("4_8gbmn"), ExtResource("5_pvipr"), ExtResource("6_n0klm"), ExtResource("7_u2tho"), ExtResource("8_ca6vw"), ExtResource("9_t8u8m"), ExtResource("10_d56e8"), ExtResource("11_ewlk4"), ExtResource("12_bw2c7")])
+starting_items = Array[ExtResource("2_nyaq3")]([ExtResource("4_8gbmn"), ExtResource("6_n0klm"), ExtResource("8_ca6vw"), ExtResource("10_d56e8"), ExtResource("12_bw2c7")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=178605318]
 transform = Transform3D(0.45931378, 0.0151528455, -0.01341648, -0.0012919565, 0.32610878, 0.32408357, 0.020197563, -0.32373178, 0.32583532, 0, 0, 0.30398715)

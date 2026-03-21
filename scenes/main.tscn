@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dnrvraq4w0fgq" path="res://scripts/main.gd" id="1_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/objects/dinghy1.tscn" id="5_gqmmt"]
-[ext_resource type="Resource" uid="uid://c1q63eejybysf" path="res://items/guava.tres" id="7_0ld40"]
-[ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/lure1.tres" id="7_dp3eg"]
-[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/fish.tres" id="7_jscy8"]
+[ext_resource type="Resource" uid="uid://c1q63eejybysf" path="res://items/item_files/guava.tres" id="7_0ld40"]
+[ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/item_files/lure1.tres" id="7_dp3eg"]
+[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/item_files/fish.tres" id="7_jscy8"]
 [ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="8_a8y0u"]
-[ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/fishing_rod.tres" id="12_vxglm"]
+[ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/item_files/fishing_rod.tres" id="12_vxglm"]
 [ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://player/proto_controller.tscn" id="14_yq6so"]
 [ext_resource type="PackedScene" uid="uid://ddrfgv4jxh2ej" path="res://scenes/grass.tscn" id="15_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://c0kclckqe1wyj" path="res://data/textures/grass_1.png" id="16_yc10j"]
@@ -18,14 +18,14 @@
 [ext_resource type="Texture2D" uid="uid://mthde0qgu5ip" path="res://data/textures/grass_normal_baked.png" id="17_y6deb"]
 [ext_resource type="PackedScene" uid="uid://2lhvn6qyr455" path="res://scenes/npc.tscn" id="19_0ld40"]
 [ext_resource type="PackedScene" uid="uid://b4c2klpvf6ep4" path="res://scenes/dock_part.tscn" id="19_gqmmt"]
-[ext_resource type="PackedScene" uid="uid://dbl7pbboxv465" path="res://scenes/ground_item.tscn" id="19_jscy8"]
+[ext_resource type="PackedScene" uid="uid://dbl7pbboxv465" path="res://scenes/guava.tscn" id="19_jscy8"]
 [ext_resource type="PackedScene" uid="uid://cjvhstja16kl4" path="res://scenes/dock_shop.tscn" id="19_yc10j"]
 [ext_resource type="PackedScene" uid="uid://pucdycf3a8jr" path="res://scenes/objects/lugger.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cg6pcehvop8qy" path="res://scenes/palm.tscn" id="20_jscy8"]
-[ext_resource type="PackedScene" uid="uid://cjb4i3v0l6mi6" path="res://scenes/tree1.tscn" id="20_yc10j"]
-[ext_resource type="PackedScene" uid="uid://dqp56pc4707y4" path="res://scenes/foliage.tscn" id="24_y6deb"]
+[ext_resource type="PackedScene" uid="uid://bbdx7hb3m7cu6" path="res://scenes/scatterbox.tscn" id="24_y6deb"]
 [ext_resource type="PackedScene" uid="uid://d245pk2wglf6b" path="res://scenes/bush1.tscn" id="25_og1vs"]
-[ext_resource type="PackedScene" uid="uid://doe5702kxetjg" path="res://scenes/callaloo.tscn" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cgjgooyqnna7" path="res://scenes/coconut.tscn" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://0flk6u4v8nol" path="res://scenes/guava_tree.tscn" id="27_vxglm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.089645155, 0.3675001, 0.97487515, 1)
@@ -715,7 +715,10 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_81j55"), 
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_tbs4h"), SubResource("Terrain3DTextureAsset_2wyq8")])
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y6deb"]
-size = Vector3(0.86279297, 1, 0.33325195)
+size = Vector3(0.86279297, 1, 0.4864502)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_og1vs"]
+size = Vector3(40, 40, 30)
 
 [node name="Main" type="Node3D" unique_id=1774244753]
 script = ExtResource("1_jbj1t")
@@ -792,6 +795,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11, -4.9)
 transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.0033302307, 9.991999, 1.0725298)
 
 [node name="House" type="Node3D" parent="." unique_id=1652977768]
+visible = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="House" unique_id=308089874]
 transform = Transform3D(33.46206, 0, 0, 0, 12.272632, 0, 0, 0, 13.70482, 75.99733, 18.400583, -7.4495764)
@@ -909,29 +913,15 @@ stream = ExtResource("17_0ld40")
 volume_db = -15.0
 autoplay = true
 
-[node name="GroundItem" parent="." unique_id=1499670269 instance=ExtResource("19_jscy8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.497921, 11.035307, 6.0985875)
-
-[node name="GroundItem2" parent="." unique_id=87920575 instance=ExtResource("19_jscy8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.497921, 11.540898, 1.3334308)
-
-[node name="GroundItem3" parent="." unique_id=1231751429 instance=ExtResource("19_jscy8")]
-transform = Transform3D(0.9636724, 0.267087, 0, -0.267087, 0.9636724, 0, 0, 0, 1, 28.497921, 11.540898, 2.0851665)
-
-[node name="GroundItem4" parent="." unique_id=1047730765 instance=ExtResource("19_jscy8")]
-transform = Transform3D(0.99599135, 0.08945061, 0, -0.083895825, 0.93414134, 0.34690297, 0.031030677, -0.34551227, 0.937901, 30.776176, 11.972691, 2.0851665)
-
-[node name="GroundItem5" parent="." unique_id=857016251 instance=ExtResource("19_jscy8")]
-transform = Transform3D(0.6471518, -0.21364506, 0.7318129, -0.083895825, 0.9341412, 0.3469029, -0.7577308, -0.2858949, 0.5866072, 30.049706, 11.8087845, 1.1487265)
-
 [node name="Foliage" type="Node3D" parent="." unique_id=1173263318]
 
 [node name="ScatterBox" parent="Foliage" unique_id=406734948 instance=ExtResource("24_y6deb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
-custom_seed = 3298
-items_to_spawn = Array[PackedScene]([ExtResource("20_yc10j"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("25_og1vs"), ExtResource("26_2wyq8")])
-spawn_count = 200
+custom_seed = 5385
+items_to_spawn = Array[PackedScene]([ExtResource("27_vxglm"), ExtResource("20_jscy8"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("27_vxglm")])
+inclusion_layer = 1
 box_size = Vector3(100, 25, 100)
+y_offset_range = Vector2(0, 0)
 max_tilt_degrees = 5.0
 
 [node name="ExclusionZones" type="StaticBody3D" parent="Foliage" unique_id=1355103329]
@@ -957,3 +947,33 @@ shape = SubResource("BoxShape3D_y6deb")
 [node name="House5" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=2032970392]
 transform = Transform3D(12.910571, 0, 3.9161541, 0, 8.620424, 0, -4.7609134, 0, 10.619767, 33.82313, 17.008087, -9.463362)
 shape = SubResource("BoxShape3D_y6deb")
+
+[node name="House6" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1300971095]
+transform = Transform3D(12.910571, 0, 3.9161541, 0, 8.620424, 0, -4.7609134, 0, 10.619767, 28.336927, 13.315748, -6.986568)
+shape = SubResource("BoxShape3D_y6deb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1201942952]
+transform = Transform3D(0.9309985, 0, -0.36502305, 0, 1, 0, 0.36502305, 0, 0.9309985, 89.570015, 8.751832, -39.9926)
+shape = SubResource("BoxShape3D_og1vs")
+
+[node name="GroundItems" type="Node3D" parent="." unique_id=1565115211]
+
+[node name="Guavas" parent="GroundItems" unique_id=325411051 node_paths=PackedStringArray("target_scatterer") instance=ExtResource("24_y6deb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
+target_scatterer = NodePath("../../Foliage/ScatterBox")
+custom_seed = 3298
+items_to_spawn = Array[PackedScene]([ExtResource("19_jscy8")])
+box_size = Vector3(250, 25, 250)
+y_offset_range = Vector2(0, 0)
+max_tilt_degrees = 5.0
+
+[node name="Coconuts" parent="GroundItems" unique_id=1432077917 node_paths=PackedStringArray("target_scatterer") instance=ExtResource("24_y6deb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
+target_scatterer = NodePath("../../Foliage/ScatterBox")
+custom_seed = 3298
+items_to_spawn = Array[PackedScene]([ExtResource("26_2wyq8")])
+spawn_count = 50
+inclusion_layer = 11
+box_size = Vector3(250, 25, 250)
+y_offset_range = Vector2(1, 1)
+max_tilt_degrees = 5.0
