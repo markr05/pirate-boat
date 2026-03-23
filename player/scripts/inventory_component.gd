@@ -89,7 +89,17 @@ func change_active_slot(direction: int, is_fishing: bool = false) -> void:
 	if is_fishing: return
 	var new_index = posmod(current_slot + direction, 9)
 	select_slot(new_index, false)
-
+	
+func get_active_item() -> ItemData:
+	# 1. Check if the current slot has anything in it
+	var slot_data = inventory_slots[current_slot]
+	
+	if slot_data != null and slot_data.has("data"):
+		# 2. Return just the ItemData resource (the shovel, apple, etc.)
+		return slot_data["data"]
+		
+	return null
+	
 func drop_current_item():
 	print("Drop requested for slot: ", current_slot)
 	var slot_data = inventory_slots[current_slot]

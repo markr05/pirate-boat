@@ -1,5 +1,5 @@
 extends Resource
 class_name ActionData
 
-enum ActionType { INVALID, CONSUMABLE, EQUIPABLE, INSPECTABLE}
-var action_type: ActionType
+func execute_action(player: CharacterBody3D):
+	pass

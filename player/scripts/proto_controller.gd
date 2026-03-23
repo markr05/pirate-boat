@@ -99,9 +99,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		try_interact()
 
 	if current_tool and not is_menu_open:
-		if event.is_action_pressed("fire_primary") and current_tool.has_method("primary_action"):
-			current_tool.primary_action()
-		
+		# 1. Check for Primary Action (Digging, Using, etc.)
+		if event.is_action_pressed("fire_primary"):
+			# Get the item data currently held in the inventory
+			var active_item = inventory.get_active_item() 
+			if active_item and active_item.action_data:
+				# This triggers the Shovel's DigActionData
+				active_item.action_data.execute_action(self)
+			elif current_tool.has_method("primary_action"):
+				# Fallback for old tools that don't use ActionData
+				current_tool.primary_action()
+	
+		# 2. Check for Secondary Action
 		if event.is_action_pressed("fire_secondary") and current_tool.has_method("secondary_action"):
 			current_tool.secondary_action(true)
 		elif event.is_action_released("fire_secondary") and current_tool.has_method("secondary_action"):

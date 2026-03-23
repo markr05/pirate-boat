@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://belnsjuepivcc"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_1d4po"]
+[ext_resource type="Resource" uid="uid://cv407a7vq8e4u" path="res://scripts/action_data/dig_action.tres" id="1_4ybs1"]
+[ext_resource type="PackedScene" uid="uid://dwxakma3younl" path="res://items/item_scenes/shovel.tscn" id="1_yiul7"]
+[ext_resource type="ArrayMesh" uid="uid://3x2qn03l10q5" path="res://models/meshes/shovel1.tres" id="2_yiul7"]
+
+[resource]
+script = ExtResource("1_1d4po")
+name = "Shovel"
+description = "This is a shovel"
+equippable_scene = ExtResource("1_yiul7")
+ground_mesh = ExtResource("2_yiul7")
+is_sellable = false
+action_data = ExtResource("1_4ybs1")
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

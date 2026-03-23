@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DigActionData" format=3 uid="uid://cv407a7vq8e4u"]
+
+[ext_resource type="Script" uid="uid://dt0frmjkr3alw" path="res://scripts/action_data/dig_action.gd" id="1_wljt1"]
+
+[resource]
+script = ExtResource("1_wljt1")
+brush_radius = 0.5
+metadata/_custom_type_script = "uid://dt0frmjkr3alw"

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bki16yaay3g1g" path="res://player/scripts/camera_controller.gd" id="2_q1ipm"]
 [ext_resource type="PackedScene" uid="uid://c5heaetsevcxf" path="res://scenes/ui/inventory_controller.tscn" id="2_wr06p"]
 [ext_resource type="PackedScene" uid="uid://bsvnlfedyl7mf" path="res://scenes/ui/ExternalInventoryUI.tscn" id="3_6dqce"]
+[ext_resource type="Script" uid="uid://cwnyps0rbenaq" path="res://player/scripts/digging.gd" id="3_ta44y"]
 [ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/ui/game_info.tscn" id="4_0rk7u"]
 [ext_resource type="Script" uid="uid://dd53cdnd3uqdb" path="res://player/scripts/state_machine.gd" id="6_h60nn"]
 [ext_resource type="Script" uid="uid://bnyoq57ysa6sy" path="res://player/scripts/idle.gd" id="7_ujot4"]
@@ -922,6 +923,14 @@ shape = SubResource("BoxShape3D_0rk7u")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Head" unique_id=963149457]
 current = true
+
+[node name="Digging" type="Node3D" parent="Head" unique_id=1349587819]
+
+[node name="TerrainRayCast" type="RayCast3D" parent="Head/Digging" unique_id=1062111521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031843185, 0.010126114, -0.41967478)
+target_position = Vector3(0, 0, -3)
+collision_mask = 2048
+script = ExtResource("3_ta44y")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1029312430]
 

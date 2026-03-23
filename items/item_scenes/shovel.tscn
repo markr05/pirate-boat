@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dwxakma3younl"]
+
+[ext_resource type="ArrayMesh" uid="uid://3x2qn03l10q5" path="res://models/meshes/shovel1.tres" id="1_3evi7"]
+
+[node name="Shovel1" type="StaticBody3D" unique_id=1825337783]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1434527191]
+transform = Transform3D(0.19383027, -0.67559266, -0.3921408, 0.16060872, 0.42986748, -0.66120255, 0.7644636, 0.08098465, 0.23834185, -0.1780662, 0.44992024, -0.028920293)
+mesh = ExtResource("1_3evi7")

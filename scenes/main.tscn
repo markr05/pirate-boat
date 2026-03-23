@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/item_files/lure1.tres" id="7_dp3eg"]
 [ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/item_files/fish.tres" id="7_jscy8"]
 [ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="8_a8y0u"]
+[ext_resource type="Resource" uid="uid://belnsjuepivcc" path="res://items/item_files/shovel.tres" id="12_2wyq8"]
 [ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/item_files/fishing_rod.tres" id="12_vxglm"]
 [ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://player/proto_controller.tscn" id="14_yq6so"]
 [ext_resource type="PackedScene" uid="uid://ddrfgv4jxh2ej" path="res://scenes/grass.tscn" id="15_dp3eg"]
@@ -20,12 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://b4c2klpvf6ep4" path="res://scenes/dock_part.tscn" id="19_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dbl7pbboxv465" path="res://scenes/guava.tscn" id="19_jscy8"]
 [ext_resource type="PackedScene" uid="uid://cjvhstja16kl4" path="res://scenes/dock_shop.tscn" id="19_yc10j"]
-[ext_resource type="PackedScene" uid="uid://pucdycf3a8jr" path="res://scenes/objects/lugger.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cg6pcehvop8qy" path="res://scenes/palm.tscn" id="20_jscy8"]
 [ext_resource type="PackedScene" uid="uid://bbdx7hb3m7cu6" path="res://scenes/scatterbox.tscn" id="24_y6deb"]
 [ext_resource type="PackedScene" uid="uid://d245pk2wglf6b" path="res://scenes/bush1.tscn" id="25_og1vs"]
 [ext_resource type="PackedScene" uid="uid://cgjgooyqnna7" path="res://scenes/coconut.tscn" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://0flk6u4v8nol" path="res://scenes/guava_tree.tscn" id="27_vxglm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.089645155, 0.3675001, 0.97487515, 1)
@@ -51,8 +53,6 @@ volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.68, 0.76533324, 1, 1)
 adjustment_enabled = true
 adjustment_saturation = 1.1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 
 [sub_resource type="Gradient" id="Gradient_ti27t"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -729,6 +729,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 [node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.0033240318, -1.5071306, 1.6433663)
 
+[node name="pier" type="Node3D" parent="Objects" unique_id=1190533252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.077754, 0)
+
+[node name="dock1" parent="Objects/pier" unique_id=1516264505 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.53692, 0.5422125, -3.3276215)
+
+[node name="dock2" parent="Objects/pier" unique_id=916407244 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.538199, 0.5422125, -3.3276215)
+
+[node name="dock3" parent="Objects/pier" unique_id=1541332876 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.504042, 0.5422125, -3.3276215)
+
+[node name="dock4" parent="Objects/pier" unique_id=1547266415 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.4803653, 0.5422125, -3.3276215)
+
+[node name="dock5" parent="Objects/pier" unique_id=152380481 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5494223, 0.5422125, -3.3276215)
+
+[node name="dock6" parent="Objects/pier" unique_id=163639283 instance=ExtResource("19_gqmmt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.575738, 0.5422125, -3.3276215)
+
+[node name="dock_shop_full" parent="Objects/pier" unique_id=1628401207 instance=ExtResource("19_yc10j")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 14.753188, 0.32572174, -8.917433)
+
+[node name="NPC" parent="Objects/pier" unique_id=968812797 instance=ExtResource("19_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.615792, 2.0913181, -6.5)
+inventory_size = 18
+
+[node name="House" type="Node3D" parent="Objects" unique_id=1652977768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.698754, 0)
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/House" unique_id=308089874]
+transform = Transform3D(33.46206, 0, 0, 0, 12.272632, 0, 0, 0, 13.70482, 75.99733, 18.400583, -7.4495764)
+material_override = SubResource("ShaderMaterial_jscy8")
+size = Vector3(0.22277832, 0.5349121, 0.76464844)
+
+[node name="Chest" parent="Objects" unique_id=714947045 instance=ExtResource("17_dp3eg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -0.6987543, -4.9)
+
 [node name="Items" type="Node3D" parent="." unique_id=258792208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 
@@ -748,8 +788,16 @@ item_data = ExtResource("7_dp3eg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
 item_data = ExtResource("7_0ld40")
 
+[node name="shovel" parent="Items" unique_id=1102567755 instance=ExtResource("8_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0377045, -2.3114738)
+item_data = ExtResource("12_2wyq8")
+
 [node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.238529, 11.277137, -3.2694037)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.582819, 11.277137, -3.2694037)
+
+[node name="RayCast3D" parent="Player/Head/Digging" parent_id_path=PackedInt32Array(1947708472, 1349587819) index="0" unique_id=1062111521 node_paths=PackedStringArray("terrain")]
+collision_mask = 1
+terrain = NodePath("../../../../Terrain3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
 environment = SubResource("Environment_0xm2m")
@@ -760,50 +808,8 @@ light_color = Color(1, 0.95686275, 0.9019608, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="pier" type="Node3D" parent="." unique_id=1190533252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.621, 0)
-
-[node name="dock1" parent="pier" unique_id=1516264505 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.53692, 0.5422125, -3.3276215)
-
-[node name="dock2" parent="pier" unique_id=916407244 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.538199, 0.5422125, -3.3276215)
-
-[node name="dock3" parent="pier" unique_id=1541332876 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.504042, 0.5422125, -3.3276215)
-
-[node name="dock4" parent="pier" unique_id=1547266415 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.4803653, 0.5422125, -3.3276215)
-
-[node name="dock5" parent="pier" unique_id=152380481 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5494223, 0.5422125, -3.3276215)
-
-[node name="dock6" parent="pier" unique_id=163639283 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.575738, 0.5422125, -3.3276215)
-
-[node name="dock_shop_full" parent="pier" unique_id=1628401207 instance=ExtResource("19_yc10j")]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 14.753188, 0.32572174, -8.917433)
-
-[node name="NPC" parent="pier" unique_id=968812797 instance=ExtResource("19_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.615792, 2.0913181, -6.5)
-inventory_size = 18
-
-[node name="Chest" parent="." unique_id=714947045 instance=ExtResource("17_dp3eg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 11, -4.9)
-
 [node name="Ocean" parent="." unique_id=1402291055 instance=ExtResource("17_muem4")]
 transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.0033302307, 9.991999, 1.0725298)
-
-[node name="House" type="Node3D" parent="." unique_id=1652977768]
-visible = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="House" unique_id=308089874]
-transform = Transform3D(33.46206, 0, 0, 0, 12.272632, 0, 0, 0, 13.70482, 75.99733, 18.400583, -7.4495764)
-material_override = SubResource("ShaderMaterial_jscy8")
-size = Vector3(0.22277832, 0.5349121, 0.76464844)
-
-[node name="dinghy1" parent="." unique_id=936590279 instance=ExtResource("20_gqmmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.221086, 11.521418, -0.55411625)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=703888171]
 data_directory = "res://terrain_data"
@@ -977,3 +983,5 @@ inclusion_layer = 11
 box_size = Vector3(250, 25, 250)
 y_offset_range = Vector2(1, 1)
 max_tilt_degrees = 5.0
+
+[editable path="Player"]
