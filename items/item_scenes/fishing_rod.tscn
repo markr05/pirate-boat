@@ -4,11 +4,11 @@
 [ext_resource type="ArrayMesh" uid="uid://bme8jrvmm6f41" path="res://models/meshes/rod1.tres" id="2_liwt3"]
 [ext_resource type="PackedScene" uid="uid://dctd8ojxxt6lu" path="res://scenes/bobber.tscn" id="3_1l1uq"]
 [ext_resource type="Script" uid="uid://cv283ja2d0w1i" path="res://scripts/fishing/fishing_manager.gd" id="4_rcwkp"]
-[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="5_3ws28"]
-[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/item_files/fish.tres" id="6_8bbw0"]
-[ext_resource type="Resource" uid="uid://bj3u37at7kdbw" path="res://items/item_files/flying_fish.tres" id="7_otkvh"]
-[ext_resource type="Resource" uid="uid://d0ycl01f60ev5" path="res://items/item_files/tuna.tres" id="8_jgl7u"]
-[ext_resource type="Resource" uid="uid://brf33m3d41o57" path="res://items/item_files/grouper.tres" id="9_liwt3"]
+[ext_resource type="Script" uid="uid://omh18l3cqs1v" path="res://scripts/fishing/fish_data.gd" id="5_liwt3"]
+[ext_resource type="Resource" uid="uid://bvamwvlotdogx" path="res://scripts/fishing/fish_types/fish.tres" id="6_1l1uq"]
+[ext_resource type="Resource" uid="uid://d0ddfxqqoxv71" path="res://scripts/fishing/fish_types/flying_fish.tres" id="7_rcwkp"]
+[ext_resource type="Resource" uid="uid://jse64rskyjme" path="res://scripts/fishing/fish_types/grouper.tres" id="8_3ws28"]
+[ext_resource type="Resource" uid="uid://byktbjrksxlsb" path="res://scripts/fishing/fish_types/tuna.tres" id="9_8bbw0"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uokpy"]
 top_radius = 0.003
@@ -48,6 +48,6 @@ mesh = SubResource("CylinderMesh_uokpy")
 
 [node name="FishingManager" type="Node" parent="." unique_id=839389139]
 script = ExtResource("4_rcwkp")
-fish_types = Array[ExtResource("5_3ws28")]([ExtResource("6_8bbw0"), ExtResource("7_otkvh"), ExtResource("8_jgl7u"), ExtResource("9_liwt3")])
+fish_types = Array[ExtResource("5_liwt3")]([ExtResource("6_1l1uq"), ExtResource("7_rcwkp"), ExtResource("8_3ws28"), ExtResource("9_8bbw0")])
 
 [editable path="Bobber"]

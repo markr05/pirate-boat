@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bolabhjekt5m"]
+
+[ext_resource type="ArrayMesh" uid="uid://pb0b7q2ladfj" path="res://models/meshes/bottle.tres" id="1_7ybbu"]
+[ext_resource type="Texture2D" uid="uid://bc2h4lln2wnr2" path="res://items/item_icons/coconut_icon.png" id="2_4hmf8"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="3_euppw"]
+
+[resource]
+script = ExtResource("3_euppw")
+name = "Bottle"
+icon = ExtResource("2_4hmf8")
+description = "This is a bottle"
+ground_mesh = ExtResource("1_7ybbu")
+stackable = true
+price = 30
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

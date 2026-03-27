@@ -18,6 +18,7 @@ signal spawning_finished
 @export var exclusion_layer: int = 6
 @export var ground_layer: int = 1
 @export var box_size: Vector3 = Vector3(5000, 100, 5000)
+@export var freeze_spawned_items: bool = true
 
 @export_group("Randomization")
 @export var y_offset_range: Vector2 = Vector2(0.0, 0.0) # X is min offset, Y is max offset
@@ -108,6 +109,10 @@ func _spawn_mesh(pos: Vector3):
 	var instance = scene.instantiate() as Node3D
 	instance.set_meta("is_scattered_item", true) 
 	add_child(instance)
+	
+	if instance is RigidBody3D:
+		instance.freeze = freeze_spawned_items
+		instance.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 	
 	if Engine.is_editor_hint():
 		instance.owner = get_tree().edited_scene_root 

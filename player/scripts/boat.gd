@@ -1,50 +1,73 @@
 extends PlayerState
 
+var stroke_cooldown: float = 0.0
+
 func enter() -> void:
-	# 1. Put away items and turn off player collision
 	player.inventory.select_slot(-1) 
 	player.collider.disabled = true
 	player.camera_controller.enter_seat()
 	
-	# 2. Snap to the seat immediately
 	if player.current_boat and player.current_boat.seat_node:
 		player.global_transform = player.current_boat.seat_node.global_transform
 		
-	player.anim_player.play("Pirate_Sit", 0.2)
+	#player.anim_player.play("Pirate_Sit", 0.2)
+	stroke_cooldown = 0.0 # Reset the rowing rhythm
 
-func physics_update(_delta: float) -> void:
-	# Safety check in case the boat is destroyed
+func physics_update(delta: float) -> void:
 	if not player.current_boat:
 		state_machine.transition_to("Idle")
 		return
 		
-	# Continuously stick to the boat as it moves
 	player.global_transform = player.current_boat.seat_node.global_transform
 	
-	# --- SAILBOAT CONTROLS ---
+	# --- DYNAMIC CONTROLS ---
 	
-	# 1. Steer the Rudder (A and D keys / Left Joystick)
-	# This gets a value from -1.0 to 1.0
-	var steer_direction = Input.get_axis("ui_right", "ui_left") 
-	player.current_boat.set_steering(steer_direction)
+	# 1. ROWBOAT CONTROLS
+	if player.current_boat.has_method("row_left"):
+		stroke_cooldown -= delta
+		var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		
-	# 2. Drop / Raise Sail (Using your new dedicated button!)
-	if Input.is_action_just_pressed("boat_action"):
-		player.current_boat.toggle_sail()
-		
+		# If the player is pushing a direction and the boat is ready for another stroke
+		if input_dir.length() > 0.1 and stroke_cooldown <= 0.0:
+			
+			# CRITICAL: Wake up the rigidbody in case it fell asleep in the water
+			player.current_boat.sleeping = false 
+			
+			# Holding Forward (W) -> Stroke both oars to go straight
+			if input_dir.y < -0.5: 
+				player.current_boat.row_left()
+				player.current_boat.row_right()
+				stroke_cooldown = player.current_boat.stroke_duration
+				
+			# Holding Right (D) -> Stroke Left oar to push the boat right
+			elif input_dir.x > 0.5:
+				player.current_boat.row_left()
+				stroke_cooldown = player.current_boat.stroke_duration
+				
+			# Holding Left (A) -> Stroke Right oar to push the boat left
+			elif input_dir.x < -0.5:
+				player.current_boat.row_right()
+				stroke_cooldown = player.current_boat.stroke_duration
+
+	# 2. SAILBOAT CONTROLS
+	elif player.current_boat.has_method("set_steering"):
+		var steer_direction = Input.get_axis("ui_right", "ui_left") 
+		player.current_boat.set_steering(steer_direction)
+			
+		if Input.is_action_just_pressed("boat_action"):
+			if player.current_boat.has_method("toggle_sail"):
+				player.current_boat.toggle_sail()
+	
 	# --- EXIT BOAT ---
-	# Pressing jump will stand the player up
 	if Input.is_action_just_pressed("ui_accept"):
 		state_machine.transition_to("Idle")
 
 func exit() -> void:
-	# Center the rudder when we stand up so the boat stops turning
 	if player.current_boat and player.current_boat.has_method("set_steering"):
 		player.current_boat.set_steering(0.0)
 		
 	player.collider.disabled = false
 	
-	# Eject slightly upward and reset camera
 	var boat_yaw = player.global_rotation.y
 	player.global_position.y += 1.5
 	player.camera_controller.exit_seat(boat_yaw)

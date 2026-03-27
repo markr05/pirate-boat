@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 signal coins_changed(coins_amount)
+signal xp_changed(foraging_xp_amount, fishing_xp_amount)
 
 # --- REFERENCES ---
 @onready var camera_controller: CameraController = $Head
@@ -42,6 +43,26 @@ var current_tool: Node3D = null
 # Boat
 var current_boat: RigidBody3D = null
 
+# Player Level/Stats Section
+@export var max_hp: int = 100
+@export var strength: int = 0
+@export var defense: int = 0
+@export var hp: int = max_hp * .5
+@export var double_forage_chance: float = 0
+
+@export var foraging_xp: float = 1:
+	set(value):
+		foraging_xp = value
+		xp_changed.emit(foraging_xp, fishing_xp)
+var foraging_lvl: int = 0
+
+@export var fishing_xp: float = 1:
+	set(value):
+		fishing_xp = value
+		xp_changed.emit(foraging_xp, fishing_xp)
+var fishing_lvl: int = 0
+
+
 @export var coins: int = 0:
 	set(value):
 		coins = value
@@ -51,15 +72,27 @@ func _ready() -> void:
 	state_machine.init(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	
 	if not game_info_ui:
 		var found_info = get_tree().get_nodes_in_group("game_info")
 		if found_info: game_info_ui = found_info[0]
+		game_info_ui.hp_bar.update_hp(hp, max_hp)
+		print("updating hp")
 		
 	if game_info_ui:
+		game_info_ui.hp_bar.update_hp(hp, max_hp)
+		print("updating hp")
 		if not coins_changed.is_connected(game_info_ui.update_coins_display):
 			coins_changed.connect(game_info_ui.update_coins_display)
 		game_info_ui.update_coins_display(coins)
-	
+		
+		# Level Display
+		if not xp_changed.is_connected(_on_xp_changed):
+			xp_changed.connect(_on_xp_changed)
+
+			# Manually trigger the first update to sync UI on start
+		_on_xp_changed(foraging_xp, fishing_xp)
+
 		if game_info_ui.has_method("update_item_display"):
 			inventory.active_item_changed.connect(game_info_ui.update_item_display)
 			inventory.active_item_changed.emit(null)
@@ -67,6 +100,7 @@ func _ready() -> void:
 	inventory.equip_requested.connect(_on_inventory_equip_requested)
 	
 	coins_changed.emit(coins)
+	xp_changed.emit(foraging_xp, fishing_xp)
 	var head_detector = $Head/Camera3D/HeadDetector
 	head_detector.area_entered.connect(_on_head_detector_area_entered)
 	head_detector.area_exited.connect(_on_head_detector_area_exited)
@@ -265,6 +299,19 @@ func _on_head_detector_area_exited(area):
 
 func add_to_inventory(item: ItemData):
 	inventory.add_to_inventory(item)
+	
+func update_xp(xp_type: String, xp_value: float) -> void:
+	match xp_type.to_lower():
+		"foraging":
+			# This triggers the setter, which emits the signal, 
+			# which triggers the level calculation in _ready.
+			foraging_xp += xp_value
+			
+		"fishing":
+			fishing_xp += xp_value
+			
+		_:
+			push_warning("Attempted to update unknown XP type: ", xp_type)
 
 func handle_global_swap(from_id: int, to_id: int, new_data = null):
 	# If we passed in new_data, it means we are BUYING/SPAWNING an item
@@ -297,3 +344,20 @@ var is_look_limited: bool:
 var look_limit_center: Vector2:
 	get: return camera_controller.look_limit_center
 	set(value): camera_controller.look_limit_center = value
+	
+func _on_xp_changed(new_foraging_xp: float, new_fishing_xp: float) -> void:
+	var new_foraging_lvl = Math.calculate_xp_level(new_foraging_xp)
+	var new_fishing_lvl = Math.calculate_xp_level(new_fishing_xp)
+	
+	if new_foraging_lvl != foraging_lvl:
+		foraging_lvl = new_foraging_lvl
+		double_forage_chance = .05 * foraging_lvl
+		strength += 1
+	if new_fishing_lvl != fishing_lvl:
+		fishing_lvl = new_fishing_lvl
+		strength += 1
+
+
+	# Always update the UI display
+	if game_info_ui:
+		game_info_ui.update_levels_display(foraging_lvl, fishing_lvl)

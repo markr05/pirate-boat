@@ -31,6 +31,8 @@ var fish_caught: ItemData = null
 var is_winding_up: bool = false
 @export var rod: RodData = null
 
+var current_fish_xp: float = 0.0
+
 func setup(player):
 	super.setup(player)
 		
@@ -195,31 +197,51 @@ func start_fishing():
 	
 	anim_player.play("idle_fishing", 0.5)
 
-func _on_fish_bite_received(fish_data: ItemData):
+func _on_fish_bite_received(fish_data: FishData):
+	if not fish_data: return
+	
+	# 1. Use the ItemDB to find the physical ItemData that matches the fish name
+	var item_result = ItemDB.get_item_by_name(fish_data.fish_name)
+	
+	# 2. Safety check: if the database couldn't find the item, don't let the player catch nothing
+	if not item_result:
+		push_error("FishingRod: No ItemData found in ItemDb for " + fish_data.fish_name)
+		return
+
+	# 3. Check if player is already holding the reel button (prevents instant-catch exploits)
 	if Input.is_action_pressed("fire_secondary"):
 		if fishing_manager:
 			fishing_manager.start_waiting() 
 		return
+
+	# 4. Set up the "Potential Catch"
 	fish_hooked = true
-	fish_caught = fish_data
+	fish_caught = item_result       # This is the ItemData (for inventory)
+	current_fish_xp = fish_data.xp_amount # Store XP from the FishData resource
 	
 	if is_fishing and bobber:
 		alert.visible = true
 		bobber.velocity.y -= 4.0
 		
 		var timer = 0.0
-		var reaction_time = 1.0
+		var reaction_time = 1.0 # 1 second to react
 		var hooked_successfully = false
 		
+		# 5. The "Reaction" window
 		while timer < reaction_time:
 			if Input.is_action_just_pressed("fire_secondary"):
 				hooked_successfully = true
-				bobber.set_mesh(fish_data)
+				# Pass the ItemData to the bobber so it shows the fish mesh
+				bobber.set_mesh(item_result) 
 				break
 			
 			await get_tree().process_frame
 			timer += get_process_delta_time()
+			
+			# If player stops fishing or rod is unequipped during the wait
+			if not is_fishing: return
 		
+		# 6. Final Result
 		if hooked_successfully:
 			alert.visible = false
 			fish_fight()
@@ -274,6 +296,7 @@ func stop_fishing():
 	
 	if fish_hooked and fish_caught:
 		player_ref.add_to_inventory(fish_caught)
+		player_ref.update_xp("fishing", current_fish_xp)
 	
 	# 2. Reset State Variables
 	is_fishing = false

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AccessoryData" format=3 uid="uid://1shc10gdwxny"]
+
+[ext_resource type="Script" uid="uid://b6y66voi8ktw" path="res://scripts/itemtypes/accessories.gd" id="1_v8qiw"]
+[ext_resource type="ArrayMesh" uid="uid://cy5m026lomia" path="res://models/meshes/lures/lure10.tres" id="1_y8ev5"]
+[ext_resource type="Texture2D" uid="uid://cvxb4p33vhyh" path="res://items/item_icons/lure10_icon.png" id="2_d33p7"]
+
+[resource]
+script = ExtResource("1_v8qiw")
+speed = 0.2
+name = "Speed Amulet"
+icon = ExtResource("2_d33p7")
+description = "This item gives +20% speed."
+ground_mesh = ExtResource("1_y8ev5")
+price = 100
+metadata/_custom_type_script = "uid://b6y66voi8ktw"

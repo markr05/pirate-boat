@@ -1,3 +1,3 @@
-res://scripts/dig_action.gd
+res://scripts/itemtypes/accessories.gd
 Shader
 NoiseTexture2D

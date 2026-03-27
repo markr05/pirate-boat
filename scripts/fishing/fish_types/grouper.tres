@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishData" format=3 uid="uid://jse64rskyjme"]
+
+[ext_resource type="Script" uid="uid://omh18l3cqs1v" path="res://scripts/fishing/fish_data.gd" id="1_nhj4a"]
+
+[resource]
+script = ExtResource("1_nhj4a")
+fish_name = "Grouper"
+xp_amount = 25.0
+metadata/_custom_type_script = "uid://omh18l3cqs1v"

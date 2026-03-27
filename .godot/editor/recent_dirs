@@ -1,6 +1,10 @@
-res://scripts/action_data/
-res://items/item_files/
+res://items/item_files/accessories/
+res://scripts/
+res://scripts/fishing/fish_types/
+/Users/mroberts/test-game/
 res://models/meshes/
+res://items/item_files/
+res://scripts/action_data/
 res://items/item_scenes/
 res://scenes/
 res://shaders/

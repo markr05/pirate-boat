@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b6sklhqkk8h7"]
+
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_0yn3r"]
+[ext_resource type="ArrayMesh" uid="uid://yo5iqnrrbmf1" path="res://models/meshes/stone1.tres" id="1_xt745"]
+
+[resource]
+script = ExtResource("1_0yn3r")
+name = "Stone"
+description = "This is a stone"
+ground_mesh = ExtResource("1_xt745")
+stackable = true
+price = 2
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

@@ -8,7 +8,7 @@ signal fish_caught(fish_data)
 var is_waiting: bool = false
 var bite_timer: float = 0.0
 
-@export var fish_types: Array[ItemData] = []
+@export var fish_types: Array[FishData] = []
 
 func start_waiting():
 	is_waiting = true

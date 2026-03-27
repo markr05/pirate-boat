@@ -348,6 +348,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 radius = 1.75
 
 [node name="GuavaTree" type="StaticBody3D" unique_id=1641612274]
+transform = Transform3D(1, 0, 0, 0, 1.35, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=865110843]
 material_override = SubResource("StandardMaterial3D_fsdlh")

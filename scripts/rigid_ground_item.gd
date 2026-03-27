@@ -6,6 +6,8 @@ var is_focused: bool = false
 
 @export var mesh_node: MeshInstance3D
 @export var collision_node: CollisionShape3D
+@export var xp_value: float = 0.0
+@export var xp_type: String = "Foraging"
 
 @export var item_data: Resource:
 	set(value):
@@ -31,7 +33,12 @@ func _update_outline():
 
 func interact(player) -> void:
 	if item_data:
+		var doubled = RandomNumberGenerator.new().randf_range(0.0, 1.0)
+		# no double xp right now
+		if doubled <= player.double_forage_chance:
+			player.add_to_inventory(item_data)
 		player.add_to_inventory(item_data)
+		player.update_xp(xp_type, xp_value)
 		queue_free()
 
 func _update_item_visuals():

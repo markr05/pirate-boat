@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://wrbj0hkdfmhi"]
+
+[ext_resource type="Script" uid="uid://b2i2a53pbd0ky" path="res://scripts/rigid_ground_item.gd" id="1_137t8"]
+[ext_resource type="Resource" uid="uid://bolabhjekt5m" path="res://items/item_files/bottle.tres" id="2_emwc0"]
+[ext_resource type="ArrayMesh" uid="uid://pb0b7q2ladfj" path="res://models/meshes/bottle.tres" id="2_qr18b"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_emwc0"]
+points = PackedVector3Array(0.11748298, 0.06542819, -0.06908336, -0.1488508, 0.09884126, -0.029074777, -0.14876495, 0.09889512, -0.01741921, 0.008667428, 0.3869468, -0.024057887, 0.054393426, 0.08797506, 0.13861664, -0.0033034522, 0.13439977, -0.14970367, -0.050289035, 0.0043902826, -0.05267943, -0.060896065, 0.1056124, 0.13811298, 0.13888629, 0.1748805, -0.028551161, 0.09021187, 0.016437229, 0.052702125, -0.050087832, 0.016850179, 0.08756363, 0.12885347, 0.14597172, 0.074642904, -0.009011147, 0.37468767, 0.017028818, -0.0946517, 0.169132, -0.10854579, -0.12350033, 0.1690725, 0.074286945, 0.093001164, 0.1750178, -0.107777044, 0.05353582, 0.1749571, 0.13065311, -0.009193536, 0.05781995, -0.13993903, -0.14075722, 0.16905886, -0.028706796, -0.12033915, 0.051624075, 0.07021957, 0.0610358, 0.016254274, -0.081947714, -0.054214172, 0.17504124, 0.12997742, -0.09053295, 0.05826799, -0.11041533, -0.021783525, 0.3869468, -0.011859849, 0.13657255, 0.052028596, -0.017450461, 0.1005486, 0.10537373, -0.115483746, -0.108207785, 0.023013996, -0.023254806, 0.12156523, 0.174916, 0.073652305, 0.12452502, 0.058236975, 0.06974606, -0.00330156, 0.16895963, -0.1438367, 0.049197882, 0.057546135, 0.13443682, 0.031759683, 0.0043738913, 0.06451137)
+
+[node name="Bottle" type="RigidBody3D" unique_id=25143543 node_paths=PackedStringArray("mesh_node", "collision_node")]
+collision_layer = 129
+mass = 0.1
+linear_damp = 1.5
+angular_damp = 3.0
+script = ExtResource("1_137t8")
+mesh_node = NodePath("Mesh")
+collision_node = NodePath("Collision")
+xp_value = 15.0
+item_data = ExtResource("2_emwc0")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=767475311]
+unique_name_in_owner = true
+mesh = ExtResource("2_qr18b")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=103810861]
+shape = SubResource("ConvexPolygonShape3D_emwc0")

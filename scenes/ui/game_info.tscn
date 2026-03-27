@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://biy62o0qfgs5o" path="res://scripts/ui/game_info.gd" id="1_djvxw"]
 [ext_resource type="Shader" uid="uid://c4uwdirv22xhu" path="res://shaders/underwater.gdshader" id="2_rurq7"]
 [ext_resource type="Shader" uid="uid://bdelvgq0eas08" path="res://shaders/standardvision.gdshader" id="3_tyd5r"]
+[ext_resource type="Script" uid="uid://b7qjac8rcdk48" path="res://scripts/ui/progress_bar.gd" id="4_rwcpy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwcpy"]
 shader = ExtResource("2_rurq7")
@@ -17,6 +18,16 @@ shader = ExtResource("3_tyd5r")
 shader_parameter/pixel_size = 2
 shader_parameter/color_levels = 16.0
 shader_parameter/brightness = 1.05
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhm4c"]
+bg_color = Color(0.55, 0, 0.03666663, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwcpy"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Control" type="Control" unique_id=1154610763 groups=["game_info"]]
 z_index = -1
@@ -67,6 +78,16 @@ theme_override_constants/margin_bottom = 12
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="ForagingLvl" type="Label" parent="MarginContainer" unique_id=175486673]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
@@ -151,3 +172,33 @@ rotation = 3.1415927
 color = Color(0.8901961, 0.8901961, 0.8901961, 0.7058824)
 polygon = PackedVector2Array(-24, -48, -8, -48, -8, -40, -24, -40)
 uv = PackedVector2Array(24, -8, -32, -8, -32, -24, 24, -24)
+
+[node name="HpMargin" type="MarginContainer" parent="." unique_id=1683539944]
+custom_minimum_size = Vector2(458, 73)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -471.0
+offset_top = -285.0
+offset_right = -13.0
+offset_bottom = -212.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="HpMargin" unique_id=1308686489]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="HpMargin" unique_id=1574271083]
+custom_minimum_size = Vector2(450, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_hhm4c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rwcpy")
+step = 1.0
+show_percentage = false
+script = ExtResource("4_rwcpy")

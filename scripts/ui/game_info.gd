@@ -1,7 +1,9 @@
 extends Control
 
 @onready var coin_label: Label = %MarginContainer/CoinLabel
+@onready var xp_label: Label = %MarginContainer/ForagingLvl
 @onready var item_label: Label = %ItemNameMargin/ItemName
+@onready var hp_bar: ProgressBar = $HpMargin/ProgressBar
 
 var fade_tween: Tween
 var item_label_default_y: float # Store the "home" spot here
@@ -17,6 +19,10 @@ func _ready():
 func update_coins_display(amount: int):
 	if coin_label:
 		coin_label.text = "Coins: %d" % amount
+
+func update_levels_display(foraging_lvl: int, fishing_lvl: int):
+	if xp_label:
+		xp_label.text = "Foraging Level: %d\n Fishing Level: %d" % [foraging_lvl, fishing_lvl]
 
 func update_item_display(item_data: ItemData):
 	if fade_tween:

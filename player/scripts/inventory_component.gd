@@ -4,7 +4,7 @@ signal inventory_updated(slots: Array)
 signal active_item_changed(item_data: ItemData)
 signal equip_requested(item_data: ItemData) # Tells the player to spawn the 3D model
 
-const MAX_SLOTS = 36
+const MAX_SLOTS = 45
 var inventory_slots: Array = [] 
 var current_slot: int = 0
 
@@ -59,13 +59,28 @@ func add_to_inventory(item: ItemData):
 	print("Everything (including the chest) is full!")
 
 func _refresh_inventory():
+	var player = get_parent()
+	if not player: return
+	
+	var equipment_ids = [36, 37, 38]
+	player.speed_multiplier = 1.0
 	inventory_updated.emit(inventory_slots)
 	
 	if hotbar_controller and hotbar_controller.has_method("update_inventory_ui"):
 		hotbar_controller.update_inventory_ui(inventory_slots.slice(0, 9))
 	
 	if inventory_controller and inventory_controller.has_method("update_inventory_ui"):
-		inventory_controller.update_inventory_ui(inventory_slots.slice(9, 36))
+		inventory_controller.update_inventory_ui(inventory_slots)
+		
+	for id in equipment_ids:
+		var slot = get_item_at_index(id)
+		if slot and slot["data"] is AccessoryData:
+			var data = slot["data"] as AccessoryData
+			
+			# 3. Apply the stats found on the Resource
+			player.speed_multiplier += data.speed
+			player.strength += data.strength
+			player.defense += data.defense
 
 func select_slot(index: int, is_fishing: bool = false):
 	# Prevent switching if busy (Player will pass in `is_fishing` from the current_tool)
@@ -152,16 +167,22 @@ func get_item_at_index(id: int):
 
 func handle_global_swap(from_id: int, to_id: int):
 	var external_ui = get_tree().get_first_node_in_group("external_inventory_ui")
-	var chest = external_ui.current_inventory if external_ui else null
+	var chest = external_ui.current_inventory if (external_ui and external_ui.visible) else null
+
+	var chest_offset = 45
 
 	var get_data = func(id: int):
-		if id < 36: return inventory_slots[id]
-		elif chest: return chest.inventory_slots[id - 36]
+		if id < chest_offset: 
+			return inventory_slots[id]
+		elif chest: 
+			return chest.inventory_slots[id - chest_offset]
 		return null
 
 	var set_data = func(id: int, data):
-		if id < 36: inventory_slots[id] = data
-		elif chest: chest.inventory_slots[id - 36] = data
+		if id < chest_offset: 
+			inventory_slots[id] = data
+		elif chest: 
+			chest.inventory_slots[id - chest_offset] = data
 
 	var from_data = get_data.call(from_id)
 	var to_data = get_data.call(to_id)
@@ -170,8 +191,13 @@ func handle_global_swap(from_id: int, to_id: int):
 	set_data.call(to_id, from_data)
 	
 	_refresh_inventory()
-	if external_ui and chest: external_ui.update_ui(chest.inventory_slots)
-	select_slot(current_slot)
+	
+	if chest: 
+		external_ui.update_ui(chest.inventory_slots)
+	
+	# Sync the 3D model if we swapped the item currently in our hand
+	if current_slot == from_id or current_slot == to_id:
+		select_slot(current_slot)
 
 func set_item_at_index(index: int, item_data: ItemData):
 	if index >= 0 and index < inventory_slots.size():

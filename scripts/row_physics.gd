@@ -14,6 +14,10 @@ class_name RowBoat
 var left_oar_force: float = 0.0
 var right_oar_force: float = 0.0
 
+# NEW: Keep track of our tweens so they don't fight
+var left_tween: Tween
+var right_tween: Tween
+
 # --- References ---
 @onready var probes = [$Probe1, $Probe2, $Probe3, $Probe4]
 @export var seat_node: Node3D
@@ -27,31 +31,41 @@ func _ready() -> void:
 
 # --- Interaction Logic ---
 func interact(player_node):
-	# Instead of the boat managing the player, the boat just tells 
-	# the player to enter its Boat state and passes a reference to itself!
 	if player_node.state_machine.current_state.name == "Boat":
-		pass # Player handles exiting via their own input now
+		pass 
 	else:
 		player_node.current_boat = self
 		player_node.state_machine.transition_to("Boat")
 
 # --- Public Rowing Methods (Called by Player State) ---
 func row_left():
+	sleeping = false # CRITICAL: Wake the physics body up!
 	_apply_sustained_push("left")
 
 func row_right():
+	sleeping = false # CRITICAL: Wake the physics body up!
 	_apply_sustained_push("right")
 
 func _apply_sustained_push(side: String):
-	var tween = create_tween()
 	if side == "left":
+		# Kill the old tween if we are starting a new stroke early
+		if left_tween:
+			left_tween.kill() 
+			
+		left_tween = create_tween()
 		left_oar_force = 0.0
-		tween.tween_property(self, "left_oar_force", 1.0, 0.2) 
-		tween.tween_property(self, "left_oar_force", 0.0, stroke_duration - 0.2) 
+		left_tween.tween_property(self, "left_oar_force", 1.0, 0.2) 
+		left_tween.tween_property(self, "left_oar_force", 0.0, stroke_duration - 0.2) 
+		
 	else:
+		# Kill the old tween if we are starting a new stroke early
+		if right_tween:
+			right_tween.kill()
+			
+		right_tween = create_tween()
 		right_oar_force = 0.0
-		tween.tween_property(self, "right_oar_force", 1.0, 0.2)
-		tween.tween_property(self, "right_oar_force", 0.0, stroke_duration - 0.2)
+		right_tween.tween_property(self, "right_oar_force", 1.0, 0.2)
+		right_tween.tween_property(self, "right_oar_force", 0.0, stroke_duration - 0.2)
 
 # --- Physics ---
 func _physics_process(delta: float) -> void:

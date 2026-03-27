@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cffd1hqokidlj"]
+
+[ext_resource type="Texture2D" uid="uid://xhekon55nhvt" path="res://data/textures/sand.tres" id="1_5wpvx"]
+[ext_resource type="Script" uid="uid://b2i2a53pbd0ky" path="res://scripts/rigid_ground_item.gd" id="1_22eeu"]
+[ext_resource type="ArrayMesh" uid="uid://yo5iqnrrbmf1" path="res://models/meshes/stone1.tres" id="1_cxklj"]
+[ext_resource type="Resource" uid="uid://b6sklhqkk8h7" path="res://items/item_files/stone.tres" id="2_wwy51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22eeu"]
+albedo_color = Color(0.45840502, 0.45840508, 0.45840502, 1)
+normal_enabled = true
+normal_scale = -2.1
+normal_texture = ExtResource("1_5wpvx")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5wpvx"]
+points = PackedVector3Array(0.213768, -0.040743884, 0.262583, -0.01137512, -0.03300457, -0.1649723, -0.059731334, -0.032927096, -0.14817922, -0.0024150796, 0.11757613, 0.061775014, -0.1718471, -0.024729503, 0.19058254, 0.25152522, -0.11980346, 0.101508155, 0.20328893, 0.070528485, 0.0064415485, -0.16356088, -0.12109174, 0.053897634, 0.2093095, 0.07312742, 0.25041473, -0.20515826, 0.072097965, 0.07807064, 0.06091296, -0.11986292, -0.112951234, 0.22327842, -0.024843192, -0.0835609, -0.00250278, 0.07045665, -0.09627197, -0.20523797, -0.04099065, -0.091574244, 0.044892948, -0.11921704, 0.18819071, 0.28980246, -0.008697212, 0.12719178, -0.14586778, 0.06298819, 0.18911923, -0.13987064, -0.11331341, -0.09101167, 0.03716663, -0.016707191, 0.25507435, -0.22925378, -0.03290103, 0.08617281, 0.23357241, -0.098671876, 0.24194126, -0.17133367, 0.047502562, -0.058393836, 0.23700728, 0.08727999, 0.13381156, 0.2568296, -0.008689916, 0.27347037, -0.113738365, -0.10390553, 0.16501454, 0.18788977, -0.10386221, -0.065143205, 0.1813227, 0.06342581, -0.05023332, 0.021190537, -0.12772542, -0.07311491, 0.005337666, 0.0867854, 0.20492133, 0.021135448, -0.024611155, -0.16198817, 0.029150002, -0.12722039, 0.085499585, 0.28799576, -0.008669109, 0.094310604)
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=621081290 node_paths=PackedStringArray("mesh_node", "collision_node")]
+collision_layer = 129
+script = ExtResource("1_22eeu")
+mesh_node = NodePath("MeshInstance3D")
+collision_node = NodePath("CollisionShape3D")
+xp_value = 2.0
+item_data = ExtResource("2_wwy51")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1405321670]
+material_override = SubResource("StandardMaterial3D_22eeu")
+mesh = ExtResource("1_cxklj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1269875998]
+shape = SubResource("ConvexPolygonShape3D_5wpvx")
