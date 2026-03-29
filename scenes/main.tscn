@@ -879,98 +879,98 @@ metadata/SimpleGrassTextured = "2.0.5"
 [node name="waves" type="AudioStreamPlayer3D" parent="Audio" unique_id=15447010]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.310806, 10.786648, 2)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves2" type="AudioStreamPlayer3D" parent="Audio" unique_id=576968455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.521482, 10.786648, 27.513748)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves3" type="AudioStreamPlayer3D" parent="Audio" unique_id=782249885]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.340141, 10.786648, 50.161037)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves4" type="AudioStreamPlayer3D" parent="Audio" unique_id=1884683677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.26691, 10.786648, 47.801804)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves5" type="AudioStreamPlayer3D" parent="Audio" unique_id=2000314681]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.08914, 10.786648, 31.64069)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves6" type="AudioStreamPlayer3D" parent="Audio" unique_id=1782078235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.83615, 10.786648, 39.728966)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves7" type="AudioStreamPlayer3D" parent="Audio" unique_id=644454025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.48742, 10.786648, 23.447973)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves8" type="AudioStreamPlayer3D" parent="Audio" unique_id=1630412528]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.83075, 10.786648, -3.6607895)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves9" type="AudioStreamPlayer3D" parent="Audio" unique_id=1914595918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.82974, 10.786648, -35.550842)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves10" type="AudioStreamPlayer3D" parent="Audio" unique_id=804335224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.98653, 10.786648, -59.040577)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves11" type="AudioStreamPlayer3D" parent="Audio" unique_id=1345864439]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.7571, 10.786648, -87.684906)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves12" type="AudioStreamPlayer3D" parent="Audio" unique_id=660425403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.59174, 10.786648, -84.77493)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves13" type="AudioStreamPlayer3D" parent="Audio" unique_id=727330648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.459175, 10.786648, -76.73577)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves14" type="AudioStreamPlayer3D" parent="Audio" unique_id=25672143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.82761, 10.786648, -72.123024)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves15" type="AudioStreamPlayer3D" parent="Audio" unique_id=1580909856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.327475, 10.786648, -49.882534)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="waves16" type="AudioStreamPlayer3D" parent="Audio" unique_id=224859691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.730795, 10.786648, -26.903856)
 stream = ExtResource("17_0ld40")
-volume_db = -15.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="Foliage" type="Node3D" parent="." unique_id=1173263318]
 

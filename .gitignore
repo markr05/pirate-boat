@@ -52,3 +52,27 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# =========================
+# Godot Exceptions & Extras
+# =========================
+!/.godot/extension_list.cfg
+# Uncomment the line below if your repo is public and you have passwords in your export presets
+# export_presets.cfg 
+
+# =========================
+# Windows Specific
+# =========================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+
+# =========================
+# IDEs and Editors
+# =========================
+.vscode/
+.idea/
+*.sln
+*.csproj.user

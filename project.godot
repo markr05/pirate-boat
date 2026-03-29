@@ -39,17 +39,24 @@ run/main_scene="uid://dgei3sdvi5j3i"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://4kemf1gkws8n"
+
 [autoload]
 
 SimpleGrass="*uid://bfq0snth8sj3h"
 Math="*uid://b0kh6wmipl1ac"
 ItemDB="*uid://8qhg87qapvgo"
+GlobalSettings="*uid://d0irrpe070em6"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -263,7 +270,6 @@ dig={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
 
 [shader_globals]
 

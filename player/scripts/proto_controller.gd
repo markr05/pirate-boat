@@ -18,6 +18,7 @@ signal xp_changed(foraging_xp_amount, fishing_xp_amount)
 # --- UI REFERENCES ---
 @onready var inventory_controller: Node = %InventoryController/CanvasLayer/InventoryUI
 @onready var hotbar_controller: Node = %InventoryController/CanvasLayer/HotbarUI
+@onready var settings_controller: Node = $CanvasLayer/Settings
 @export var game_info_ui: Control = null
 @onready var external_inventory_node = $CanvasLayer/ExternalInventoryUI
 @onready var water_overlay = $CanvasLayer/GameInfo/WaterVision
@@ -34,6 +35,7 @@ var speed_multiplier: float = 1.0
 
 # --- STATE ---
 var is_menu_open: bool = false
+var is_settings_open: bool = false
 var is_locked: bool = false 
 var last_focused_target = null
 
@@ -77,11 +79,9 @@ func _ready() -> void:
 		var found_info = get_tree().get_nodes_in_group("game_info")
 		if found_info: game_info_ui = found_info[0]
 		game_info_ui.hp_bar.update_hp(hp, max_hp)
-		print("updating hp")
 		
 	if game_info_ui:
 		game_info_ui.hp_bar.update_hp(hp, max_hp)
-		print("updating hp")
 		if not coins_changed.is_connected(game_info_ui.update_coins_display):
 			coins_changed.connect(game_info_ui.update_coins_display)
 		game_info_ui.update_coins_display(coins)
@@ -116,6 +116,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			crosshair.visible = !crosshair.visible
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			toggle_settings(!is_settings_open)
 		return
 
 	if event.is_action_pressed("inventory"):
@@ -160,6 +161,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		for i in range(1, 10):
 			if event.is_action_pressed("hotkey_" + str(i)):
 				inventory.select_slot(i - 1, is_fishing)
+
+func toggle_settings(open: bool):
+	is_settings_open = open
+	is_locked = open
+	camera_controller.is_enabled = !open
+	if settings_controller: settings_controller.visible = open
+	
+	if open:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		interact_ray.enabled = false
+		if is_on_floor():
+			velocity.x = 0
+			velocity.z = 0 
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		interact_ray.enabled = true
 
 # --- INVENTORY & EQUIPPING ---
 func toggle_inventory(open: bool):

@@ -2,7 +2,6 @@ extends Node3D
 class_name CameraController
 
 @export var player: CharacterBody3D
-@export var look_speed: float = 0.002
 
 var look_rotation: Vector2 = Vector2.ZERO
 var is_enabled: bool = true
@@ -20,6 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		var look_speed: float = GlobalSettings.look_sensitivity
 		look_rotation.x -= event.relative.y * look_speed
 		look_rotation.y -= event.relative.x * look_speed
 		

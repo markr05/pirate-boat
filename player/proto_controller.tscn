@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cwnyps0rbenaq" path="res://player/scripts/digging.gd" id="3_ta44y"]
 [ext_resource type="PackedScene" uid="uid://ck0hnjbok1n0n" path="res://scenes/ui/game_info.tscn" id="4_0rk7u"]
 [ext_resource type="Script" uid="uid://dd53cdnd3uqdb" path="res://player/scripts/state_machine.gd" id="6_h60nn"]
+[ext_resource type="PackedScene" uid="uid://bvv7tbm8e28ey" path="res://scenes/ui/settings.tscn" id="7_ovedx"]
 [ext_resource type="Script" uid="uid://bnyoq57ysa6sy" path="res://player/scripts/idle.gd" id="7_ujot4"]
 [ext_resource type="Script" uid="uid://duwu22pk57h07" path="res://player/scripts/walk.gd" id="8_1tksx"]
 [ext_resource type="Script" uid="uid://cspphqiguot2t" path="res://player/scripts/run.gd" id="9_ths8c"]
@@ -944,6 +945,9 @@ unique_name_in_owner = true
 [node name="ExternalInventoryUI" parent="CanvasLayer" unique_id=79095522 instance=ExtResource("3_6dqce")]
 unique_name_in_owner = true
 z_index = 10
+
+[node name="Settings" parent="CanvasLayer" unique_id=663054423 instance=ExtResource("7_ovedx")]
+visible = false
 
 [node name="StateMachine" type="Node" parent="." unique_id=1497306239 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_h60nn")

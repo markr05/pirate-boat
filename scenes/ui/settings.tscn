@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bvv7tbm8e28ey"]
+
+[ext_resource type="Script" uid="uid://csd4eodb1x63h" path="res://scripts/ui/settings_menu.gd" id="1_8wfqe"]
+
+[node name="Settings" type="CanvasLayer" unique_id=663054423]
+script = ExtResource("1_8wfqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1853523113]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1127380142]
+layout_mode = 2
+color = Color(0.12, 0.12, 0.12, 0.6627451)
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=287946087]
+layout_mode = 2
+
+[node name="SensitivityMargin" type="MarginContainer" parent="MarginContainer/GridContainer" unique_id=185007119]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/GridContainer/SensitivityMargin" unique_id=6974200]
+layout_mode = 2
+color = Color(0.12156863, 0.12156863, 0.12156863, 0.6627451)
+
+[node name="Sensitivity" type="Label" parent="MarginContainer/GridContainer/SensitivityMargin" unique_id=1137438002]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Sensitivity"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/GridContainer/SensitivityMargin" unique_id=57073970]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 8
+min_value = 1.0
+value = 6.0
+
+[node name="Label" type="Label" parent="MarginContainer/GridContainer/SensitivityMargin" unique_id=175569976]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MusicMargin" type="MarginContainer" parent="MarginContainer/GridContainer" unique_id=1981997672]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/GridContainer/MusicMargin" unique_id=1554238420]
+layout_mode = 2
+color = Color(0.12156863, 0.12156863, 0.12156863, 0.6627451)
+
+[node name="Music" type="Label" parent="MarginContainer/GridContainer/MusicMargin" unique_id=508747027]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/GridContainer/MusicMargin" unique_id=460529510]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 8
+min_value = 1.0
+value = 1.0
+
+[node name="Label" type="Label" parent="MarginContainer/GridContainer/MusicMargin" unique_id=1590415078]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SfxMargin" type="MarginContainer" parent="MarginContainer/GridContainer" unique_id=257615430]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/GridContainer/SfxMargin" unique_id=1338694162]
+layout_mode = 2
+color = Color(0.12156863, 0.12156863, 0.12156863, 0.6627451)
+
+[node name="Sfx" type="Label" parent="MarginContainer/GridContainer/SfxMargin" unique_id=1254354811]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Sound Effects Volume"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/GridContainer/SfxMargin" unique_id=487990321]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 8
+min_value = 1.0
+value = 1.0
+
+[node name="Label" type="Label" parent="MarginContainer/GridContainer/SfxMargin" unique_id=1283917363]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[connection signal="value_changed" from="MarginContainer/GridContainer/SensitivityMargin/HSlider" to="." method="_on_sens_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/MusicMargin/HSlider" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/SfxMargin/HSlider" to="." method="_on_sfx_value_changed"]
