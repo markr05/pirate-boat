@@ -7,4 +7,3 @@
 [node name="ScatterBox" type="Node3D" unique_id=406734948]
 script = ExtResource("1_ga0jg")
 items_to_spawn = Array[PackedScene]([ExtResource("2_4dxek"), ExtResource("3_3wrhr")])
-y_offset_range = null

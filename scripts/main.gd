@@ -12,7 +12,7 @@ func _process(delta):
 	
 	# 1. Update the Ocean Shader
 	# Make sure to point this to your actual Ocean mesh node
-	$Ocean/ocean_mesh.get_active_material(0).set_shader_parameter("sync_time", t)
+	$Ocean/Ocean/ocean_mesh.get_active_material(0).set_shader_parameter("sync_time", t)
 	
 	# 2. Update the Bobber (if it exists)
 	var bobber = get_node_or_null("Bobber")

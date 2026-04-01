@@ -33,33 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://cffd1hqokidlj" path="res://scenes/objects/stone1.tscn" id="29_tel4y"]
 [ext_resource type="PackedScene" uid="uid://bdkw872vsvb0q" path="res://scenes/objects/stone2.tscn" id="30_qkpxi"]
 [ext_resource type="PackedScene" uid="uid://bgajrpkr14w54" path="res://scenes/objects/stone3.tscn" id="31_5q0nq"]
+[ext_resource type="PackedScene" uid="uid://bx8rfqw04ckvi" path="res://scenes/world_environment.tscn" id="34_dgi5k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_top_color = Color(0.089645155, 0.3675001, 0.97487515, 1)
-sky_horizon_color = Color(0.45054615, 0.7570229, 1, 1)
-ground_bottom_color = Color(0.65705484, 0.9999998, 0.99759156, 1)
-ground_horizon_color = Color(0.5803922, 0.78039217, 1, 1)
-
-[sub_resource type="Sky" id="Sky_2wyq8"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
-
-[sub_resource type="Environment" id="Environment_0xm2m"]
-background_mode = 2
-sky = SubResource("Sky_2wyq8")
-ambient_light_color = Color(0.6921118, 0.6841188, 0.62486446, 1)
-ambient_light_sky_contribution = 0.1
-tonemap_mode = 3
-tonemap_exposure = 0.8
-ssao_enabled = true
-glow_enabled = true
-glow_blend_mode = 2
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.005
-volumetric_fog_albedo = Color(0.68, 0.76533324, 1, 1)
-adjustment_enabled = true
-adjustment_saturation = 1.1
 
 [sub_resource type="Gradient" id="Gradient_ti27t"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -732,9 +708,6 @@ colors = PackedColorArray(0.24940318, 0.62023133, 7.70092e-07, 1, 0.055367284, 0
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yq6so"]
 gradient = SubResource("Gradient_2f3dj")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_y6deb"]
-size = Vector3(0.86279297, 1, 0.4864502)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_og1vs"]
 size = Vector3(40, 40, 30)
 
@@ -819,7 +792,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
 item_data = ExtResource("12_5q0nq")
 
 [node name="shovel" parent="Items" unique_id=1102567755 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0377045, -2.3114738)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8247566, 2.0377045, -2.3114738)
 item_data = ExtResource("12_2wyq8")
 
 [node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
@@ -828,18 +801,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.582819, 11.277137, -3.26940
 [node name="TerrainRayCast" parent="Player/Head/Digging" parent_id_path=PackedInt32Array(1947708472, 1349587819) index="0" unique_id=1062111521 node_paths=PackedStringArray("terrain")]
 collision_mask = 1
 terrain = NodePath("../../../../Terrain3D")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=675739207]
-environment = SubResource("Environment_0xm2m")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1523047921]
-transform = Transform3D(-0.8137978, -0.2358888, 0.5311212, 0.57964003, -0.26366562, 0.77103674, -0.04184054, 0.9353272, 0.35130116, 0, 0, 0)
-light_color = Color(1, 0.95686275, 0.9019608, 1)
-light_energy = 2.0
-shadow_enabled = true
-
-[node name="Ocean" parent="." unique_id=1402291055 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.0033302307, 9.991999, 1.0725298)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=703888171]
 data_directory = "res://terrain_data"
@@ -977,8 +938,8 @@ bus = &"Sfx"
 [node name="ScatterBox" parent="Foliage" unique_id=406734948 instance=ExtResource("24_y6deb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.20592, 17.443556, -20.70684)
 custom_seed = 5385
-items_to_spawn = Array[PackedScene]([ExtResource("27_vxglm"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("27_vxglm"), ExtResource("26_qkpxi"), ExtResource("26_qkpxi")])
-spawn_count = 300
+items_to_spawn = Array[PackedScene]([ExtResource("27_vxglm"), ExtResource("20_jscy8"), ExtResource("25_og1vs"), ExtResource("27_vxglm"), ExtResource("26_qkpxi"), ExtResource("26_qkpxi"), ExtResource("25_og1vs"), ExtResource("25_og1vs")])
+spawn_count = 500
 inclusion_layer = 1
 box_size = Vector3(100, 25, 100)
 y_offset_range = Vector2(-0.05, -0.1)
@@ -986,30 +947,6 @@ y_offset_range = Vector2(-0.05, -0.1)
 [node name="ExclusionZones" type="StaticBody3D" parent="Foliage" unique_id=1355103329]
 collision_layer = 32
 collision_mask = 0
-
-[node name="House" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=558072071]
-transform = Transform3D(13.76042, 0, 0, 0, 8.620425, 0, 0, 0, 11.318821, 76.302376, 17.008087, -6.964056)
-shape = SubResource("BoxShape3D_y6deb")
-
-[node name="House2" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1787769409]
-transform = Transform3D(13.359771, 0, -2.711427, 0, 8.620424, 0, 3.2963126, 0, 10.989262, 65.686584, 17.008087, -9.353386)
-shape = SubResource("BoxShape3D_y6deb")
-
-[node name="House3" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1542488358]
-transform = Transform3D(13.359771, 0, -2.711427, 0, 8.620424, 0, 3.2963126, 0, 10.989262, 53.980347, 17.008087, -13.060886)
-shape = SubResource("BoxShape3D_y6deb")
-
-[node name="House4" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=83091404]
-transform = Transform3D(12.910571, 0, 3.9161541, 0, 8.620424, 0, -4.7609134, 0, 10.619767, 44.61592, 17.008087, -12.398445)
-shape = SubResource("BoxShape3D_y6deb")
-
-[node name="House5" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=2032970392]
-transform = Transform3D(12.910571, 0, 3.9161541, 0, 8.620424, 0, -4.7609134, 0, 10.619767, 33.82313, 17.008087, -9.463362)
-shape = SubResource("BoxShape3D_y6deb")
-
-[node name="House6" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1300971095]
-transform = Transform3D(12.910571, 0, 3.9161541, 0, 8.620424, 0, -4.7609134, 0, 10.619767, 28.336927, 13.315748, -6.986568)
-shape = SubResource("BoxShape3D_y6deb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Foliage/ExclusionZones" unique_id=1201942952]
 transform = Transform3D(0.9309985, 0, -0.36502305, 0, 1, 0, 0.36502305, 0, 0.9309985, 89.570015, 8.751832, -39.9926)
@@ -1023,7 +960,6 @@ target_scatterer = NodePath("../../Foliage/ScatterBox")
 custom_seed = 3298
 items_to_spawn = Array[PackedScene]([ExtResource("19_jscy8")])
 box_size = Vector3(250, 25, 250)
-y_offset_range = Vector2(0, 0)
 max_tilt_degrees = 5.0
 
 [node name="Coconuts" parent="GroundItems" unique_id=1432077917 node_paths=PackedStringArray("target_scatterer") instance=ExtResource("24_y6deb")]
@@ -1059,6 +995,36 @@ items_to_spawn = Array[PackedScene]([ExtResource("29_tel4y"), ExtResource("30_qk
 spawn_count = 75
 inclusion_layer = 1
 box_size = Vector3(100, 25, 100)
-y_offset_range = Vector2(0, 0)
+
+[node name="WorldEnvironment" parent="." unique_id=1771174578 instance=ExtResource("34_dgi5k")]
+
+[node name="Ocean" type="Node3D" parent="." unique_id=270278741]
+
+[node name="Ocean" parent="Ocean" unique_id=1402291055 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0, 9.992, 0)
+
+[node name="Ocean2" parent="Ocean" unique_id=1796813565 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.003, 9.992, 512)
+
+[node name="Ocean3" parent="Ocean" unique_id=1054104986 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.003, 9.992, -512)
+
+[node name="Ocean4" parent="Ocean" unique_id=26610025 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.991999, 1.0725298)
+
+[node name="Ocean5" parent="Ocean" unique_id=1002863959 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.992, 512)
+
+[node name="Ocean6" parent="Ocean" unique_id=2109599191 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.992, -512)
+
+[node name="Ocean7" parent="Ocean" unique_id=104246720 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.991999, 1.0725298)
+
+[node name="Ocean8" parent="Ocean" unique_id=1242559659 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.992, 512)
+
+[node name="Ocean9" parent="Ocean" unique_id=1515132060 instance=ExtResource("17_muem4")]
+transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.992, -512)
 
 [editable path="Player"]

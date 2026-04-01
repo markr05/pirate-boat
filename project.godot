@@ -261,6 +261,7 @@ dig={
 [layer_names]
 
 3d_physics/layer_6="exclusion"
+3d_physics/layer_8="interact"
 3d_physics/layer_12="dig_layer"
 
 [physics]
@@ -270,6 +271,7 @@ dig={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
 
 [shader_globals]
 

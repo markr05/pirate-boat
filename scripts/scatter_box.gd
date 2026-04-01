@@ -4,8 +4,8 @@ extends Node3D
 signal spawning_finished
 
 @export_group("Execution Order")
-@export var target_scatterer: Node3D ## Drag the 'Tree' ScatterBox here so this box waits for it.
-@export var refresh: bool = false: ## Check this box in the editor to test the spawner!
+@export var target_scatterer: Node3D 
+@export var refresh: bool = false: 
 	set(value):
 		if Engine.is_editor_hint():
 			generate_items()
@@ -20,32 +20,31 @@ signal spawning_finished
 @export var box_size: Vector3 = Vector3(5000, 100, 5000)
 @export var freeze_spawned_items: bool = true
 
+# --- NEW VARIABLE HERE ---
+@export var max_slope_angle: float = 30.0 ## Trees won't spawn on ground steeper than this angle.
+
 @export_group("Randomization")
-@export var y_offset_range: Vector2 = Vector2(0.0, 0.0) # X is min offset, Y is max offset
+@export var y_offset_range: Vector2 = Vector2(0.0, 0.0) 
 @export var scale_range: Vector2 = Vector2(0.8, 1.2)
 @export var max_tilt_degrees: float = 10.0
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	# We don't want it to automatically run every time you open the editor
 	if Engine.is_editor_hint():
 		return
 		
 	rng.seed = custom_seed
 	
-	# If a target is assigned (this is the Follower), wait for the signal
 	if target_scatterer:
 		target_scatterer.spawning_finished.connect(_on_target_finished)
 	else:
-		# If no target is assigned (this is the Leader), run immediately
 		call_deferred("generate_items")
 
 func _on_target_finished():
 	call_deferred("generate_items")
 
 func generate_items():
-	# 1. Clean up old items before spawning new ones (Crucial for @tool mode)
 	for child in get_children():
 		if child.has_meta("is_scattered_item"):
 			child.queue_free()
@@ -61,7 +60,7 @@ func generate_items():
 
 	var spawned_so_far = 0
 	var attempts = 0
-	var max_attempts = spawn_count * 1000 # Safety break to prevent infinite loops
+	var max_attempts = spawn_count * 20 # Increased slightly for slope filtering
 
 	while spawned_so_far < spawn_count and attempts < max_attempts:
 		attempts += 1
@@ -80,25 +79,27 @@ func generate_items():
 		if result:
 			var hit_layer = result.collider.collision_layer
 			
-			# Skip if we hit an exclusion zone
 			if hit_layer & exclusion_bit:
 				continue
 			
-			# Check for inclusion
 			if hit_layer & inclusion_bit:
-				# Find the floor below the inclusion hit
 				var floor_query = PhysicsRayQueryParameters3D.create(result.position, ray_end)
 				floor_query.collision_mask = ground_bit
 				var floor_result = space_state.intersect_ray(floor_query)
 				
 				if floor_result:
-					_spawn_mesh(floor_result.position)
-					spawned_so_far += 1 
+					# --- SLOPE CHECK LOGIC ---
+					# result.normal tells us which way the ground is facing.
+					# angle_to(Vector3.UP) tells us how many radians it tilts away from flat ground.
+					var slope_angle = rad_to_deg(floor_result.normal.angle_to(Vector3.UP))
 					
-	# 2. Tell the physics engine to update, then tell the Follower box to start
+					if slope_angle <= max_slope_angle:
+						_spawn_mesh(floor_result.position)
+						spawned_so_far += 1 
+
 	if not Engine.is_editor_hint():
 		await get_tree().physics_frame
-		await get_tree().physics_frame # Waiting 2 frames ensures collisions are fully registered
+		await get_tree().physics_frame 
 		spawning_finished.emit()
 		print(name, " finished spawning ", spawned_so_far, " items.")
 

@@ -715,15 +715,16 @@ nodes/Animation/node = SubResource("AnimationNodeAnimation_ovedx")
 nodes/Animation/position = Vector2(420, 470)
 node_connections = [&"output", 0, &"FishingAction", &"Blend2", 0, &"TimeScale", &"Blend2", 1, &"UpperBody", &"TimeScale", 0, &"BaseMovement", &"FishingAction", 0, &"Blend2", &"FishingAction", 1, &"Animation"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6dqce"]
-size = Vector3(0.81103516, 1.4401855, 0.37200928)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovedx"]
+radius = 0.31933594
+height = 1.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0rk7u"]
 size = Vector3(0.4940796, 0.4510498, 1)
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1947708472 groups=["player"]]
 wall_min_slide_angle = 1.134464
-safe_margin = 0.1
+safe_margin = 0.2
 script = ExtResource("1_ucva2")
 coins = 500
 
@@ -898,8 +899,8 @@ parameters/FishingAction/internal_active = false
 parameters/FishingAction/request = 0
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1686505244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.7552246, 0.05508423)
-shape = SubResource("BoxShape3D_6dqce")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.8445953, 0.05508423)
+shape = SubResource("CapsuleShape3D_ovedx")
 
 [node name="Head" type="Node3D" parent="." unique_id=1792126765 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6369691, 0)

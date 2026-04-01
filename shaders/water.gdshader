@@ -12,13 +12,10 @@ uniform vec3 shallow_water_color : source_color = vec3(0.0, 0.6, 0.9);
 varying float wave_height;
 
 void vertex() {
-    // Calculate the wave displacement separately
-    float displacement = (sin(sync_time + VERTEX.x) * cos(sync_time + VERTEX.z)) * 0.5;
+    // Replace 'sync_time' with 'TIME'
+    float displacement = (sin(TIME + VERTEX.x) * cos(TIME + VERTEX.z)) * 0.5;
     
-    // Apply the displacement to the Y axis
     VERTEX.y += displacement;
-    
-    // 3. Store the displacement in our varying variable
     wave_height = displacement;
 }
 
