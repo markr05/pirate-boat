@@ -124,6 +124,15 @@ mesh = ExtResource("4_fbgvc")
 
 [node name="ProtoController" parent="." unique_id=1947708472 instance=ExtResource("2_idvxj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109022744, 1.530369, 2.7792368)
+base_speed = null
+sprint_speed = null
+jump_velocity = null
+max_hp = null
+strength = null
+defense = null
+double_forage_chance = null
+foraging_xp = null
+fishing_xp = null
 
 [node name="WorldEnvironment" parent="." unique_id=1771174578 instance=ExtResource("3_pv5go")]
 

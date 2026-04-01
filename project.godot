@@ -35,7 +35,7 @@ Shortcuts/density_decrement=Object(Shortcut,"resource_local_to_scene":false,"res
 [application]
 
 config/name="Test Game"
-run/main_scene="uid://dgei3sdvi5j3i"
+run/main_scene="uid://d44r0lkks404"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -271,7 +271,6 @@ dig={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
 
 [shader_globals]
 

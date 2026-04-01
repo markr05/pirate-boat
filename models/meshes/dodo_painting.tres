@@ -1,6 +1,7 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://3cmeamdc2av3"]
 
 [ext_resource type="Texture2D" uid="uid://dmo3w3xxrva14" path="res://glbs/dodo_painting_dodo_painting.jpg" id="1_0xqao"]
+[ext_resource type="Texture2D" uid="uid://bnjxj5ydp1upk" path="res://glbs/dodo_painting_dodo_roughness.png" id="2_oiir4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1e5my"]
 resource_name = "Dodo"
@@ -11,10 +12,14 @@ roughness = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqjae"]
 resource_name = "Frame"
 cull_mode = 2
-albedo_color = Color(0.90633965, 0.78530097, 0.4841805, 1)
-metallic = 0.695086
+albedo_color = Color(0.8392158, 0.87451, 0.90588254, 1)
+metallic = 0.8
+metallic_texture = ExtResource("2_oiir4")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_oiir4")
+roughness_texture_channel = 1
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_oiir4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_s2168"]
 _surfaces = [{
 "aabb": AABB(0.9256523, -0.82918704, -1.0513945, 1e-05, 1.6583741, 2.102789),
 "format": 34896613377,
@@ -66,4 +71,4 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAP///78AAP//AAD/vwAA//////+/AAAAAAAA/7///3n2hQkz21JvAAAAADPb//+FCYUJM9tSb///AAAz21Jv/////8qk//+FCXn2yqRSbwAA///KpP//efZ59sqkUm///wAA78X//3n2efbvxVJv/////+/F//959oUJ78VSbwAA//8Jxv//hQmFCQnGUm8AAAAACcb//4UJefYJxgAAAAAAAP//Um///wAA//8AAP//AAD//1JvAAAAAP////+FCYUJVwNlbyHq3RUxM///efaFCXI0ZW/dFd0VJgBSb///AABL1QAA/////0vVAAD//wAAS9VSb/////9L1QAAAAAAAF3VUm8AAP//XdVSbwAAAABd1QAAAAD//13VUm8AAP//E8AAAP////8TwFJv/////xPAAAAAAP//E8D//4UJefY0xGVv3RXdFTrE//+FCYUJOsRlb90VIeo0xP//efZ59hAaZW/dFSHq7g///4UJefaAD2VvIeoh6uIa//959oUJwTtlbyHqIerBO///efZ59sE7ZW8h6t0VwTvXf6//13+v/9d/r//Xf6//HoAuAB6ALgAegC4AHoAuAB6AXwAegF8AHoBfAB6AXwADuiAdA7ogHQO6IB0DuiAdIWP4OSFj+DkhY/g5IWP4OQ/AEEAPwBBAD8AQQA/AEEBLrd19q6JXYFWiZ18HruZ/WtW1KlrVtSpa1bUqWtW1KmBVT1VgVU9VYFVPVWBVT1X/f/9//3//f/9//3//f/9/5LMPGuGz/Rnhs/wZ5LMRGqIsXDW3GzBABxuhQCguYjQMZuEzDWbgMw1m4DMMZuEz")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_oiir4")
+shadow_mesh = SubResource("ArrayMesh_s2168")

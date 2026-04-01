@@ -9,6 +9,7 @@ signal xp_changed(foraging_xp_amount, fishing_xp_amount)
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var hand_socket: Node3D = %HandSocket
 @onready var interact_ray: RayCast3D = $Head/Camera3D/RayCast3D
+@onready var interact_ray_map: RayCast3D = $Head/Camera3D/InteractRayCast
 @onready var collider: CollisionShape3D = $Collider
 @onready var anim_player = $player/AnimationPlayer
 @onready var state_machine: PlayerStateMachine = $StateMachine
@@ -20,6 +21,7 @@ signal xp_changed(foraging_xp_amount, fishing_xp_amount)
 @onready var hotbar_controller: Node = %InventoryController/CanvasLayer/HotbarUI
 @onready var settings_controller: Node = $CanvasLayer/Settings
 @export var game_info_ui: Control = null
+@onready var map_ui: Node = $CanvasLayer/MapUI
 @onready var external_inventory_node = $CanvasLayer/ExternalInventoryUI
 @onready var water_overlay = $CanvasLayer/GameInfo/WaterVision
 @onready var standard_overlay = $CanvasLayer/GameInfo/StandardVision
@@ -36,6 +38,7 @@ var speed_multiplier: float = 1.0
 # --- STATE ---
 var is_menu_open: bool = false
 var is_settings_open: bool = false
+var is_map_open: bool = false
 var is_locked: bool = false 
 var last_focused_target = null
 
@@ -111,8 +114,12 @@ func _ready() -> void:
 # --- INPUT ---
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if is_menu_open:
+		if is_settings_open:
+			toggle_settings(false)
+		elif is_menu_open:
 			toggle_inventory(false)
+		elif is_map_open:
+			map_ui.visible = false
 			crosshair.visible = !crosshair.visible
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -132,6 +139,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("interact"):
 		try_interact()
+		try_interact_map()
 
 	if current_tool and not is_menu_open:
 		# 1. Check for Primary Action (Digging, Using, etc.)
@@ -166,23 +174,27 @@ func toggle_settings(open: bool):
 	is_settings_open = open
 	is_locked = open
 	camera_controller.is_enabled = !open
+	crosshair.visible = !crosshair.visible
 	if settings_controller: settings_controller.visible = open
 	
 	if open:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		interact_ray.enabled = false
+		interact_ray_map.enabled = false
 		if is_on_floor():
 			velocity.x = 0
 			velocity.z = 0 
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		interact_ray.enabled = true
+		interact_ray_map.enabled = true
 
 # --- INVENTORY & EQUIPPING ---
 func toggle_inventory(open: bool):
 	is_menu_open = open
 	is_locked = open
 	camera_controller.is_enabled = !open
+	crosshair.visible = !crosshair.visible
 	
 	if inventory_controller: inventory_controller.visible = open
 	if hotbar_controller: hotbar_controller.visible = true 
@@ -198,12 +210,14 @@ func toggle_inventory(open: bool):
 	if open:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		interact_ray.enabled = false
+		interact_ray_map.enabled = false
 		if is_on_floor():
 			velocity.x = 0
 			velocity.z = 0 
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		interact_ray.enabled = true
+		interact_ray_map.enabled = true
 
 func open_external_inventory(container):
 	if external_inventory_node and external_inventory_node.has_method("open_container"):
@@ -256,17 +270,21 @@ func _physics_process(delta: float) -> void:
 		apply_gravity(delta)
 		move_and_slide()
 		return
-	_handle_highlighting()
+	_handle_all_highlighting()
 	state_machine.process_physics(delta)
 	
-func _handle_highlighting():
+func _handle_all_highlighting():
+	var target = null
+	
+	# 1. Check the standard ray first
 	if interact_ray.is_colliding():
-		var target = interact_ray.get_collider()
-		
-		if not target:
-			_clear_highlight()
-			return
-		
+		target = interact_ray.get_collider()
+	# 2. If the first hit nothing, check the map ray
+	elif interact_ray_map.is_colliding():
+		target = interact_ray_map.get_collider()
+	
+	# 3. Process the found target
+	if target:
 		var focus_target = null
 		if target.has_method("focus"):
 			focus_target = target
@@ -275,13 +293,13 @@ func _handle_highlighting():
 		
 		if focus_target:
 			if last_focused_target != focus_target:
-				_clear_highlight()
+				_clear_highlight() # Clear the old one before focusing new
 				focus_target.focus()
 				last_focused_target = focus_target
-		else:
-			_clear_highlight()
-	else:
-		_clear_highlight()
+			return # Exit early, we found something!
+			
+	# 4. If we reached here, neither ray found a valid focus target
+	_clear_highlight()
 
 func _clear_highlight():
 	if last_focused_target:
@@ -292,6 +310,16 @@ func _clear_highlight():
 func try_interact():
 	if interact_ray.is_colliding():
 		var target = interact_ray.get_collider()
+		if target.has_method("interact"):
+			_clear_highlight()
+			target.interact(self)
+		elif target.get_parent().has_method("interact"):
+			_clear_highlight()
+			target.get_parent().interact(self)
+			
+func try_interact_map():
+	if interact_ray_map.is_colliding():
+		var target = interact_ray_map.get_collider()
 		if target.has_method("interact"):
 			_clear_highlight()
 			target.interact(self)

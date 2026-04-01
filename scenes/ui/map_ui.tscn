@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://efnj7hn12bto"]
+
+[ext_resource type="Script" uid="uid://c18gjb0t35xvj" path="res://scripts/ui/map_ui.gd" id="1_k3mub"]
+
+[node name="MapUI" type="CanvasLayer" unique_id=2060975877 node_paths=PackedStringArray("option_button", "confirmation_checkbox")]
+script = ExtResource("1_k3mub")
+option_button = NodePath("MarginContainer/OptionButton")
+confirmation_checkbox = NodePath("MarginContainer/CheckBox")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1833218519]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1503040351]
+layout_mode = 2
+color = Color(0.38039216, 0.38039216, 0.38039216, 0.7294118)
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer" unique_id=2101547753]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+item_count = 1
+popup/item_0/text = "Island 1"
+popup/item_0/id = 0
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer" unique_id=1143854434]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8

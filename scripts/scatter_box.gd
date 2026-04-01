@@ -97,11 +97,17 @@ func generate_items():
 						_spawn_mesh(floor_result.position)
 						spawned_so_far += 1 
 
+	if not is_inside_tree():
+		return
+
 	if not Engine.is_editor_hint():
-		await get_tree().physics_frame
-		await get_tree().physics_frame 
-		spawning_finished.emit()
-		print(name, " finished spawning ", spawned_so_far, " items.")
+		# Safety check: make sure the tree still exists before awaiting
+		var tree = get_tree()
+		if tree:
+			await tree.physics_frame
+			await tree.physics_frame 
+			spawning_finished.emit()
+			print(name, " finished spawning ", spawned_so_far, " items.")
 
 func _spawn_mesh(pos: Vector3):
 	var random_index = rng.randi() % items_to_spawn.size()

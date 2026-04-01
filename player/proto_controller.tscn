@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bvv7tbm8e28ey" path="res://scenes/ui/settings.tscn" id="7_ovedx"]
 [ext_resource type="Script" uid="uid://bnyoq57ysa6sy" path="res://player/scripts/idle.gd" id="7_ujot4"]
 [ext_resource type="Script" uid="uid://duwu22pk57h07" path="res://player/scripts/walk.gd" id="8_1tksx"]
+[ext_resource type="PackedScene" uid="uid://efnj7hn12bto" path="res://scenes/ui/map_ui.tscn" id="8_tgwd7"]
 [ext_resource type="Script" uid="uid://cspphqiguot2t" path="res://player/scripts/run.gd" id="9_ths8c"]
 [ext_resource type="Script" uid="uid://dwvf3rtrjugp2" path="res://player/scripts/fish.gd" id="10_x436g"]
 [ext_resource type="Script" uid="uid://cepad3jgr8jwo" path="res://player/scripts/boat.gd" id="11_08y0n"]
@@ -917,6 +918,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, -0.6, -0.7999999)
 target_position = Vector3(0, 0, -3)
 collision_mask = 128
 
+[node name="InteractRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=1242723099]
+target_position = Vector3(0, 0, -3)
+collision_mask = 256
+
 [node name="HeadDetector" type="Area3D" parent="Head/Camera3D" unique_id=1980867275]
 collision_layer = 129
 
@@ -948,6 +953,9 @@ unique_name_in_owner = true
 z_index = 10
 
 [node name="Settings" parent="CanvasLayer" unique_id=663054423 instance=ExtResource("7_ovedx")]
+visible = false
+
+[node name="MapUI" parent="CanvasLayer" unique_id=2060975877 instance=ExtResource("8_tgwd7")]
 visible = false
 
 [node name="StateMachine" type="Node" parent="." unique_id=1497306239 node_paths=PackedStringArray("initial_state")]

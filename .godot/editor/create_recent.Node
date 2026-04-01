@@ -1,3 +1,9 @@
+CheckBox
+CheckButton
+ColorRect
+OptionButton
+MarginContainer
+CanvasLayer
 StaticBody3D
 MeshInstance3D
 Node3D
@@ -7,8 +13,3 @@ ReflectionProbe
 CollisionShape3D
 SpotLight3D
 GridContainer
-GridMap
-ColorRect
-Label
-MarginContainer
-HSlider
