@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://tbtpuh3q5kj1"]
+
+[ext_resource type="Script" uid="uid://b2i2a53pbd0ky" path="res://scripts/rigid_ground_item.gd" id="1_a7d4i"]
+[ext_resource type="Resource" uid="uid://bdppvkuas2wrn" path="res://items/item_files/stick.tres" id="2_do8g4"]
+[ext_resource type="ArrayMesh" uid="uid://cf61ps32hcf5" path="res://models/meshes/stick1.tres" id="4_a7d4i"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qtbv5"]
+points = PackedVector3Array(0.09828362, 0.019510863, -0.41771415, 0.086717814, 0.019510863, -0.4323549, 0.084401146, 0.037905652, -0.43050605, 0.0959494, 0.037905652, -0.41586533, 0.0862264, 0.009141114, -0.24217528, 0.08585784, -0.0094490675, -0.24332455, 0.07183497, -0.0024009882, -0.29868948, 0.06270869, 0.002158166, -0.33411705, 0.053599954, 0.0067126676, -0.36949468, 0.033785403, 0.010094816, -0.4035731, 0.021096364, 0.011257865, -0.41636503, -0.017005853, 0.014751665, -0.4547407, -0.042401485, 0.017082416, -0.48032454, -0.05510807, 0.018250117, -0.49311644, -0.06779711, 0.019413168, -0.50585836, -0.06695469, 0.038008, -0.5050589, 0.08094369, -0.0069554895, -0.2632619, -0.080170244, 0.038008, -0.4919172, 0.014005944, 0.025167935, 0.0024698973, 0.061883807, 0.011513736, -0.0931696, 0.07023786, 0.009136463, -0.1100589, 0.07241413, 0.009103896, -0.127298, 0.076363, 0.009103896, -0.15977743, 0.08422564, 0.009103896, -0.2247363, 0.08382198, -0.009518851, -0.22478628, 0.06727183, -0.009146675, -0.24207532, -0.081012666, 0.019413168, -0.49276665, -0.0037200972, 0.006689407, -0.0037261844, -0.0026670694, 0.025167935, -0.0058748424, 0.012935363, 0.006689407, 0.0046185255, 0.060830772, -0.0069694463, -0.09102094, 0.06960605, -0.0094537195, -0.109009564, 0.07201047, -0.009518851, -0.12734795, 0.077925, -0.009518851, -0.17606711, 0.075941786, -0.009518851, -0.15982741, 0.051757157, -0.009142023, -0.11435619, 0.036874294, -0.00014001969, -0.043201208)
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=621081290 node_paths=PackedStringArray("mesh_node", "collision_node")]
+collision_layer = 129
+mass = 0.5
+script = ExtResource("1_a7d4i")
+mesh_node = NodePath("MeshInstance3D")
+collision_node = NodePath("CollisionShape3D")
+xp_value = 2.0
+item_data = ExtResource("2_do8g4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1405321670]
+mesh = ExtResource("4_a7d4i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=650013530]
+shape = SubResource("ConvexPolygonShape3D_qtbv5")

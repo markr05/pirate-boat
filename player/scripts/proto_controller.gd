@@ -41,6 +41,7 @@ var is_settings_open: bool = false
 var is_map_open: bool = false
 var is_locked: bool = false 
 var last_focused_target = null
+var is_sprinting: bool = false
 
 # Tool
 var current_tool: Node3D = null
@@ -50,10 +51,22 @@ var current_boat: RigidBody3D = null
 
 # Player Level/Stats Section
 @export var max_hp: int = 100
+@export var max_stamina: int = 100
 @export var strength: int = 0
 @export var defense: int = 0
-@export var hp: int = max_hp * .5
+@export var hp: int = max_hp
+
 @export var double_forage_chance: float = 0
+@export var stamina: float = max_stamina:
+	set(value):
+		# Clamp ensures stamina stays between 0 and 100
+		stamina = clamp(value, 0, max_stamina)
+		
+		# Automatically update UI whenever this variable changes
+		if game_info_ui and game_info_ui.stamina_bar:
+			game_info_ui.stamina_bar.update_stamina(stamina, max_stamina)
+@export var stamina_drain_rate: float = 20.0  # Points per second while sprinting
+@export var stamina_regen_rate: float = 10.0   # Points per second while resting
 
 @export var foraging_xp: float = 1:
 	set(value):
@@ -82,6 +95,7 @@ func _ready() -> void:
 		var found_info = get_tree().get_nodes_in_group("game_info")
 		if found_info: game_info_ui = found_info[0]
 		game_info_ui.hp_bar.update_hp(hp, max_hp)
+		game_info_ui.stamina_bar.update_stamina(stamina, max_stamina)
 		
 	if game_info_ui:
 		game_info_ui.hp_bar.update_hp(hp, max_hp)
@@ -148,7 +162,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var active_item = inventory.get_active_item() 
 			if active_item and active_item.action_data:
 				# This triggers the Shovel's DigActionData
-				active_item.action_data.execute_action(self)
+					active_item.action_data.execute_action(self)
 			elif current_tool.has_method("primary_action"):
 				# Fallback for old tools that don't use ActionData
 				current_tool.primary_action()
@@ -270,9 +284,38 @@ func _physics_process(delta: float) -> void:
 		apply_gravity(delta)
 		move_and_slide()
 		return
+		
+	if state_machine.current_state and state_machine.current_state.name != "Run":
+		if stamina < max_stamina:
+			stamina += stamina_regen_rate * delta
+	
 	_handle_all_highlighting()
 	state_machine.process_physics(delta)
+
+func handle_stamina(delta: float) -> void:
+	# 1. Check if the player is trying to sprint (Shift key) and is actually moving
+	var is_moving = velocity.length() > 0.1
+	var wants_to_sprint = Input.is_action_pressed("sprint") # Ensure "sprint" is in Input Map
 	
+	if wants_to_sprint and is_moving and stamina > 0:
+		is_sprinting = true
+		stamina -= stamina_drain_rate * delta
+		speed_multiplier = sprint_speed / base_speed # Boost speed
+	else:
+		is_sprinting = false
+		speed_multiplier = 1.0 # Return to normal speed
+		
+		# 2. Regenerate stamina if not sprinting
+		if stamina < max_stamina:
+			stamina += stamina_regen_rate * delta
+	
+	# 3. Clamp stamina so it doesn't go below 0 or above max
+	stamina = clamp(stamina, 0, max_stamina)
+	
+	# 4. Update the UI (if your UI has a stamina bar)
+	if game_info_ui and game_info_ui.has_method("update_stamina"):
+		game_info_ui.update_stamina(stamina, max_stamina)
+
 func _handle_all_highlighting():
 	var target = null
 	
@@ -406,3 +449,22 @@ func _on_xp_changed(new_foraging_xp: float, new_fishing_xp: float) -> void:
 	# Always update the UI display
 	if game_info_ui:
 		game_info_ui.update_levels_display(foraging_lvl, fishing_lvl)
+		
+
+func take_damage(amount: int) -> void:
+	hp -= amount
+	hp = clamp(hp, 0, max_hp)
+	
+	# Update the UI
+	if game_info_ui and game_info_ui.hp_bar:
+		game_info_ui.hp_bar.update_hp(hp, max_hp)
+		
+	print("Player took damage! Current HP: ", hp)
+	
+	if hp <= 0:
+		die()
+
+func die() -> void:
+	print("Player has died!")
+	# For now, let's just reload the current scene
+	get_tree().reload_current_scene()

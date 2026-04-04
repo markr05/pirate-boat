@@ -4,6 +4,7 @@ extends Control
 @onready var xp_label: Label = %MarginContainer/ForagingLvl
 @onready var item_label: Label = %ItemNameMargin/ItemName
 @onready var hp_bar: ProgressBar = $HpMargin/ProgressBar
+@onready var stamina_bar: ProgressBar = $StaminaMargin/ProgressBar
 
 var fade_tween: Tween
 var item_label_default_y: float # Store the "home" spot here

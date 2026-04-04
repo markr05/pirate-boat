@@ -49,6 +49,7 @@ SimpleGrass="*uid://bfq0snth8sj3h"
 Math="*uid://b0kh6wmipl1ac"
 ItemDB="*uid://8qhg87qapvgo"
 GlobalSettings="*uid://d0irrpe070em6"
+TimeManager="*uid://sx188sq7y0uk"
 
 [display]
 
@@ -71,6 +72,7 @@ import/blender/enabled=false
 hotbar=""
 external_inventory_ui=""
 fishing_rod=""
+sun=""
 
 [gui]
 
@@ -271,6 +273,7 @@ dig={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
 
 [shader_globals]
 

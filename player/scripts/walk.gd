@@ -20,7 +20,7 @@ func physics_update(delta: float) -> void:
 	
 		return
 		
-	if Input.is_action_pressed("sprint"):
+	if Input.is_action_pressed("sprint") and player.stamina > 0:
 		state_machine.transition_to("Run")
 		player.anim_tree.set("parameters/TimeScale/scale", calc_speed)
 		return

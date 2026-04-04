@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bdppvkuas2wrn"]
+
+[ext_resource type="ArrayMesh" uid="uid://cf61ps32hcf5" path="res://models/meshes/stick1.tres" id="1_1wxhh"]
+[ext_resource type="Script" uid="uid://buhi2og5nuwaj" path="res://scripts/itemtypes/ItemData.gd" id="1_hpu5o"]
+[ext_resource type="Texture2D" uid="uid://pmlngf3nv44u" path="res://items/item_icons/stick.png" id="2_pt8bf"]
+
+[resource]
+script = ExtResource("1_hpu5o")
+name = "Stick"
+icon = ExtResource("2_pt8bf")
+description = "This is a stick"
+ground_mesh = ExtResource("1_1wxhh")
+stackable = true
+price = 3
+metadata/_custom_type_script = "uid://buhi2og5nuwaj"

@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://c4uwdirv22xhu" path="res://shaders/underwater.gdshader" id="2_rurq7"]
 [ext_resource type="Shader" uid="uid://bdelvgq0eas08" path="res://shaders/standardvision.gdshader" id="3_tyd5r"]
 [ext_resource type="Script" uid="uid://b7qjac8rcdk48" path="res://scripts/ui/progress_bar.gd" id="4_rwcpy"]
+[ext_resource type="Script" uid="uid://dndqfrc78mh2a" path="res://scripts/ui/stamina_bar.gd" id="5_hhm4c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwcpy"]
 shader = ExtResource("2_rurq7")
@@ -202,3 +203,33 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rwcpy")
 step = 1.0
 show_percentage = false
 script = ExtResource("4_rwcpy")
+
+[node name="StaminaMargin" type="MarginContainer" parent="." unique_id=50131300]
+custom_minimum_size = Vector2(458, 73)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -471.0
+offset_top = -403.0
+offset_right = -13.0
+offset_bottom = -330.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="StaminaMargin" unique_id=1528117366]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="StaminaMargin" unique_id=1662237972]
+custom_minimum_size = Vector2(450, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_hhm4c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rwcpy")
+step = 1.0
+show_percentage = false
+script = ExtResource("5_hhm4c")

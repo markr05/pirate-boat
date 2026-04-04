@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dgei3sdvi5j3i"]
 
 [ext_resource type="Script" uid="uid://dnrvraq4w0fgq" path="res://scripts/main.gd" id="1_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://bhdag6bddjet" path="res://scenes/ui/day_notification.tscn" id="2_j8jky"]
 [ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/objects/dinghy1.tscn" id="5_gqmmt"]
 [ext_resource type="Resource" uid="uid://c1q63eejybysf" path="res://items/item_files/guava.tres" id="7_0ld40"]
 [ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/item_files/lure1.tres" id="7_dp3eg"]
@@ -33,7 +34,8 @@
 [ext_resource type="PackedScene" uid="uid://cffd1hqokidlj" path="res://scenes/objects/stone1.tscn" id="29_tel4y"]
 [ext_resource type="PackedScene" uid="uid://bdkw872vsvb0q" path="res://scenes/objects/stone2.tscn" id="30_qkpxi"]
 [ext_resource type="PackedScene" uid="uid://bgajrpkr14w54" path="res://scenes/objects/stone3.tscn" id="31_5q0nq"]
-[ext_resource type="PackedScene" uid="uid://bx8rfqw04ckvi" path="res://scenes/world_environment.tscn" id="34_dgi5k"]
+[ext_resource type="PackedScene" uid="uid://3imovqgw23ik" path="res://scenes/daynight.tscn" id="34_dgi5k"]
+[ext_resource type="PackedScene" uid="uid://tbtpuh3q5kj1" path="res://scenes/objects/stick1.tscn" id="35_kmb1v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 
@@ -714,6 +716,10 @@ size = Vector3(40, 40, 30)
 [node name="Main" type="Node3D" unique_id=1774244753]
 script = ExtResource("1_jbj1t")
 
+[node name="DayNotification" parent="." unique_id=1664732600 instance=ExtResource("2_j8jky")]
+
+[node name="DayNight" parent="." unique_id=1586212340 instance=ExtResource("34_dgi5k")]
+
 [node name="Objects" type="Node3D" parent="." unique_id=2080418021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 
@@ -991,12 +997,10 @@ max_tilt_degrees = 60.0
 [node name="Stones" parent="Stones" unique_id=538464229 node_paths=PackedStringArray("target_scatterer") instance=ExtResource("24_y6deb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.431335, 18.622498, 0)
 target_scatterer = NodePath("../../Foliage/ScatterBox")
-items_to_spawn = Array[PackedScene]([ExtResource("29_tel4y"), ExtResource("30_qkpxi"), ExtResource("31_5q0nq")])
-spawn_count = 75
+items_to_spawn = Array[PackedScene]([ExtResource("29_tel4y"), ExtResource("30_qkpxi"), ExtResource("31_5q0nq"), ExtResource("35_kmb1v"), ExtResource("35_kmb1v"), ExtResource("35_kmb1v")])
+spawn_count = 150
 inclusion_layer = 1
 box_size = Vector3(100, 25, 100)
-
-[node name="WorldEnvironment" parent="." unique_id=1771174578 instance=ExtResource("34_dgi5k")]
 
 [node name="Ocean" type="Node3D" parent="." unique_id=270278741]
 

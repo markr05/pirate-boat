@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3imovqgw23ik"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kk6tq"]
+sky_top_color = Color(0.089645155, 0.3675001, 0.97487515, 1)
+sky_horizon_color = Color(0.45054615, 0.7570229, 1, 1)
+ground_bottom_color = Color(0.65705484, 0.9999998, 0.99759156, 1)
+ground_horizon_color = Color(0.5803922, 0.78039217, 1, 1)
+
+[sub_resource type="Sky" id="Sky_2wyq8"]
+sky_material = SubResource("ProceduralSkyMaterial_kk6tq")
+
+[sub_resource type="Environment" id="Environment_2w4pr"]
+background_mode = 2
+sky = SubResource("Sky_2wyq8")
+ambient_light_color = Color(0.6921118, 0.6841188, 0.62486446, 1)
+ambient_light_sky_contribution = 0.1
+ambient_light_energy = 0.5
+tonemap_mode = 3
+tonemap_exposure = 0.8
+ssao_enabled = true
+glow_enabled = true
+glow_blend_mode = 2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.68, 0.76533324, 1, 1)
+adjustment_enabled = true
+adjustment_saturation = 1.1
+
+[node name="DayNight" type="Node3D" unique_id=1586212340]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903630298]
+environment = SubResource("Environment_2w4pr")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1035896419 groups=["sun"]]
+transform = Transform3D(-0.8137978, -0.2358888, 0.5311212, 0.57964003, -0.26366562, 0.77103674, -0.04184054, 0.9353272, 0.35130116, 0, 0, 0)
+light_color = Color(1, 0.95686275, 0.9019608, 1)
+light_energy = 2.0
+shadow_enabled = true
