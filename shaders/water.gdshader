@@ -1,32 +1,50 @@
 shader_type spatial;
 
-render_mode depth_draw_always, blend_mix;
+render_mode blend_mix, diffuse_lambert, specular_schlick_ggx;
 
-uniform float sync_time;
-
-// 1. Add color uniforms so you can tweak them directly in the Godot Inspector
 uniform vec3 deep_water_color : source_color = vec3(0.0, 0.2, 0.5);
 uniform vec3 shallow_water_color : source_color = vec3(0.0, 0.6, 0.9);
 
-// 2. Create a varying variable to pass the height data
-varying float wave_height;
+// Controls
+uniform float wave_height_scale : hint_range(0.0, 2.0) = 0.05; 
+uniform float wave_speed : hint_range(0.0, 5.0) = 0.8;        
+uniform float wave_frequency : hint_range(0.0, 10.0) = 4.0;
+
+varying float v_height;
 
 void vertex() {
-    // Replace 'sync_time' with 'TIME'
-    float displacement = (sin(TIME + VERTEX.x) * cos(TIME + VERTEX.z)) * 0.5;
+    // 1. Get world position
+    vec3 world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     
-    VERTEX.y += displacement;
-    wave_height = displacement;
+    // 2. Calculate the wave height (Displacement)
+    float time_speed = TIME * wave_speed;
+    float wave_x = world_pos.x * wave_frequency;
+    float wave_z = world_pos.z * wave_frequency;
+    
+    float height = sin(time_speed + wave_x) * cos(time_speed + wave_z) * wave_height_scale;
+    
+    // Move the vertex up/down
+    VERTEX.y += height;
+    v_height = height;
+
+    // 3. THE OPTIMIZATION: Analytical Normals
+    // Instead of sampling neighbors, we calculate the exact mathematical slope.
+    // This is infinitely faster and removes the lag.
+    float dx = cos(time_speed + wave_x) * cos(time_speed + wave_z) * wave_frequency * wave_height_scale;
+    float dz = sin(time_speed + wave_x) * -sin(time_speed + wave_z) * wave_frequency * wave_height_scale;
+    
+    // Build the normal and convert it to View Space for Godot's lighting
+    vec3 world_normal = normalize(vec3(-dx, 1.0, -dz));
+    NORMAL = (VIEW_MATRIX * vec4(world_normal, 0.0)).xyz;
 }
 
 void fragment() {
-    // 4. Normalize the wave_height. 
-    // Your displacement goes from roughly -0.5 (lowest) to 0.5 (highest).
-    // Adding 0.5 shifts this math to a 0.0 to 1.0 range, which is perfect for blending colors.
-    float blend_factor = wave_height + 0.5;
+    // Blend colors based on height
+    float blend = clamp((v_height / wave_height_scale) * 0.5 + 0.5, 0.0, 1.0);
+    ALBEDO = mix(deep_water_color, shallow_water_color, blend);
     
-    // 5. Use the mix() function to blend the two colors based on the height
-    ALBEDO = mix(deep_water_color, shallow_water_color, blend_factor);
-    
-    ALPHA = 0.90;
+    // Water properties
+    ROUGHNESS = 0.05;
+    SPECULAR = 0.5;
+    ALPHA = 0.95;
 }

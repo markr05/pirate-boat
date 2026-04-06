@@ -6,9 +6,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j38dg"]
 render_priority = 0
 shader = ExtResource("1_tiovm")
-shader_parameter/sync_time = 0.0
 shader_parameter/deep_water_color = Color(0, 0.2, 0.5, 1)
 shader_parameter/shallow_water_color = Color(0, 0.6, 0.9, 1)
+shader_parameter/wave_height_scale = 0.05
+shader_parameter/wave_speed = 0.8
+shader_parameter/wave_frequency = 4.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nb2vx"]
 size = Vector2(100, 100)
@@ -16,12 +18,13 @@ subdivide_width = 40
 subdivide_depth = 40
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j38dg"]
-size = Vector3(100, 10, 100)
+size = Vector3(392.2998, 10, 399.10132)
 
 [node name="Ocean" type="Node3D" unique_id=1402291055]
 script = ExtResource("1_j38dg")
 
 [node name="ocean_mesh" type="MeshInstance3D" parent="." unique_id=2105834076]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_j38dg")
 mesh = SubResource("PlaneMesh_nb2vx")
 

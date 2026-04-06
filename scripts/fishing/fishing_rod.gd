@@ -8,6 +8,7 @@ extends EquippableItem
 @onready var fishing_line_starter_marker: Marker3D = %FishingLineStarterMarker
 @onready var bobber_start_marker: Marker3D = %BobberStartMarker
 @onready var fishing_line: MeshInstance3D = %FishingLine
+@onready var direction_label: Label = $FishingUI/MarginContainer/Label
 
 @onready var anim_player: AnimationPlayer = get_tree().get_first_node_in_group("player_animations")
 
@@ -29,6 +30,7 @@ var cast_timer: float = 0.0
 var fish_hooked: bool = false
 var fish_caught: ItemData = null
 var is_winding_up: bool = false
+var fish_direction: String = ""
 @export var rod: RodData = null
 
 var current_fish_xp: float = 0.0
@@ -102,14 +104,30 @@ func _physics_process(delta: float) -> void:
 		if fishing_line: fishing_line.hide()
 
 func _handle_inputs(delta: float):
-	if Input.is_action_pressed("fire_primary"):
+	if Input.is_action_pressed("fire_secondary"):
 		current_rope_length += REEL_OUT_SPEED * delta
 	
-	if Input.is_action_pressed("fire_secondary"):
-		current_rope_length -= REEL_IN_SPEED * delta
-		var dist = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
-		if current_rope_length > dist + 1.0:
-			current_rope_length = dist 
+	if Input.is_action_pressed("fire_primary"):
+		if fish_hooked:
+			var move = false
+			if Input.is_action_pressed("ui_down") and fish_direction == "UP":
+				move = true
+			if Input.is_action_pressed("ui_up") and fish_direction == "DOWN":
+				move = true
+			if Input.is_action_pressed("ui_right") and fish_direction == "LEFT":
+				move = true
+			if Input.is_action_pressed("ui_left") and fish_direction == "RIGHT":
+				move = true
+			if move:
+				current_rope_length -= REEL_IN_SPEED * delta
+				var dist = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
+				if current_rope_length > dist + 1.0:
+					current_rope_length = dist
+		else:
+			current_rope_length -= REEL_IN_SPEED * delta
+			var dist = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
+			if current_rope_length > dist + 1.0:
+				current_rope_length = dist 
 	
 	current_rope_length = clamp(current_rope_length, MIN_LENGTH, MAX_LENGTH)
 
@@ -128,7 +146,7 @@ func _handle_physics(delta: float):
 	elif is_underwater:
 		bobber.velocity *= 0.9 
 
-	var is_reeling = Input.is_action_pressed("fire_secondary")
+	var is_reeling = Input.is_action_pressed("fire_primary")
 	if dist > current_rope_length and cast_timer <= 0:
 		var direction_to_rod = (rod_tip - bobber.global_position).normalized()
 		var stretch = dist - current_rope_length
@@ -154,11 +172,17 @@ func _handle_physics(delta: float):
 			var collision = bobber.get_slide_collision(i)
 			var collider = collision.get_collider()
 		
-			# If we hit the dock, kill the velocity so we don't 'slide' through it
-			if collider.collision_layer & 2: # Check if it's on Layer 2
+			# 1. If it's underwater or fighting a fish, hitting the lake floor is normal.
+			if in_water or fish_hooked:
+				# Just kill the momentum so it doesn't clip through the ground
 				bobber.velocity = Vector3.ZERO 
-				# Optional: Move it slightly away from the hit point to prevent sticking
 				bobber.global_position += collision.get_normal() * 0.05
+				continue # Skip the cancel logic below
+				
+			# 2. If it hits dry land BEFORE ever touching the water (a bad cast)
+			print("Hit land! Canceling cast.")
+			stop_fishing()
+			return # Stop processing physics this frame
 
 func start_fishing():
 	is_fishing = true
@@ -209,7 +233,7 @@ func _on_fish_bite_received(fish_data: FishData):
 		return
 
 	# 3. Check if player is already holding the reel button (prevents instant-catch exploits)
-	if Input.is_action_pressed("fire_secondary"):
+	if Input.is_action_pressed("fire_primary"):
 		if fishing_manager:
 			fishing_manager.start_waiting() 
 		return
@@ -229,7 +253,7 @@ func _on_fish_bite_received(fish_data: FishData):
 		
 		# 5. The "Reaction" window
 		while timer < reaction_time:
-			if Input.is_action_just_pressed("fire_secondary"):
+			if Input.is_action_just_pressed("fire_primary"):
 				hooked_successfully = true
 				# Pass the ItemData to the bobber so it shows the fish mesh
 				bobber.set_mesh(item_result) 
@@ -252,15 +276,37 @@ func fish_fight():
 	bobber.set("has_fish", true)
 	
 	while fish_hooked and is_fishing:
-		# 1. Calculate the direction AWAY from the rod
 		var rod_pos = fishing_line_starter_marker.global_position
-		var dir_away_from_player = (bobber.global_position - rod_pos).normalized()
 		
-		# 2. Add some "wander" so it's not a boring straight line
-		# We'll rotate the away vector by a random amount (-60 to +60 degrees)
-		var wander_angle = deg_to_rad(randf_range(-60.0, 60.0))
-		var horizontal_pull = dir_away_from_player.rotated(Vector3.UP, wander_angle)
-		horizontal_pull.y = 0 # Keep it horizontal before applying the dive tilt
+		# Pick a completely random direction on the 3D XZ plane (0 to 360 degrees)
+		# TAU is a GDScript constant for 360 degrees in radians.
+		var random_angle = randf_range(0, TAU) 
+		var horizontal_pull = Vector3(cos(random_angle), 0, sin(random_angle))
+		
+		# --- PLAYER-RELATIVE DIRECTION DETECTION ---
+		var pull_dir_world = horizontal_pull.normalized()
+		var cam_basis = player_ref.camera.global_transform.basis
+
+		var local_z = pull_dir_world.dot(cam_basis.z) 
+		var local_x = pull_dir_world.dot(cam_basis.x) 
+
+		# Determine the primary direction (The "WASD" logic)
+		if abs(local_z) > abs(local_x):
+			if local_z < 0:
+				fish_direction = "UP"
+				direction_label.text = "S"
+			else:
+				fish_direction = "DOWN"
+				direction_label.text = "W"
+		else:
+			if local_x > 0:
+				fish_direction = "RIGHT"
+				direction_label.text = "A"
+			else:
+				fish_direction = "LEFT"
+				direction_label.text = "D"
+		
+		horizontal_pull.y = 0 
 		
 		var tilt_angle = deg_to_rad(-15) 
 		var pull_direction = horizontal_pull.rotated(horizontal_pull.cross(Vector3.UP).normalized(), tilt_angle)
@@ -270,7 +316,7 @@ func fish_fight():
 		
 		while timer < pull_duration and fish_hooked:
 			# If the player is reeling, the fish fights harder!
-			var reeling_bonus = 1.5 if Input.is_action_pressed("fire_secondary") else 1.0
+			var reeling_bonus = 1.5 if Input.is_action_pressed("fire_primary") else 1.0
 			var pull_force = 22.0 * reeling_bonus 
 			
 			bobber.velocity += pull_direction * pull_force * get_physics_process_delta_time()
@@ -290,6 +336,7 @@ func _fail_fishing():
 	
 func stop_fishing():
 	# 1. Handle Fish Logic
+	direction_label.text = ""
 	bobber.reset_mesh()
 	bobber.set("has_fish", false)
 	alert.visible = false

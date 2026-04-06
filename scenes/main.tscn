@@ -1007,28 +1007,4 @@ box_size = Vector3(100, 25, 100)
 [node name="Ocean" parent="Ocean" unique_id=1402291055 instance=ExtResource("17_muem4")]
 transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0, 9.992, 0)
 
-[node name="Ocean2" parent="Ocean" unique_id=1796813565 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.003, 9.992, 512)
-
-[node name="Ocean3" parent="Ocean" unique_id=1054104986 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0.003, 9.992, -512)
-
-[node name="Ocean4" parent="Ocean" unique_id=26610025 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.991999, 1.0725298)
-
-[node name="Ocean5" parent="Ocean" unique_id=1002863959 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.992, 512)
-
-[node name="Ocean6" parent="Ocean" unique_id=2109599191 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 512, 9.992, -512)
-
-[node name="Ocean7" parent="Ocean" unique_id=104246720 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.991999, 1.0725298)
-
-[node name="Ocean8" parent="Ocean" unique_id=1242559659 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.992, 512)
-
-[node name="Ocean9" parent="Ocean" unique_id=1515132060 instance=ExtResource("17_muem4")]
-transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, -512, 9.992, -512)
-
 [editable path="Player"]
