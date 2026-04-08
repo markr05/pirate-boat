@@ -900,7 +900,7 @@ parameters/FishingAction/internal_active = false
 parameters/FishingAction/request = 0
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1686505244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.8445953, 0.05508423)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008056641, 0.7614769, 0.05508423)
 shape = SubResource("CapsuleShape3D_ovedx")
 
 [node name="Head" type="Node3D" parent="." unique_id=1792126765 node_paths=PackedStringArray("player")]

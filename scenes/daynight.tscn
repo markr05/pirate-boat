@@ -28,7 +28,7 @@ adjustment_saturation = 1.1
 
 [node name="DayNight" type="Node3D" unique_id=1586212340]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903630298]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903630298 groups=["environment"]]
 environment = SubResource("Environment_2w4pr")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1035896419 groups=["sun"]]

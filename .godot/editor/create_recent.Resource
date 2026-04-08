@@ -1,4 +1,4 @@
-res://scripts/itemtypes/ItemData.gd
+GradientTexture1D
 Curve
 Gradient
 Shader

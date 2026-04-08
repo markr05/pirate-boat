@@ -73,6 +73,7 @@ hotbar=""
 external_inventory_ui=""
 fishing_rod=""
 sun=""
+environment=""
 
 [gui]
 

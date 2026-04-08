@@ -130,6 +130,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if is_settings_open:
 			toggle_settings(false)
+			toggle_inventory(false)
 		elif is_menu_open:
 			toggle_inventory(false)
 		elif is_map_open:
@@ -141,8 +142,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("inventory"):
-		toggle_inventory(!is_menu_open)
-		crosshair.visible = !crosshair.visible
+		if not is_settings_open:
+			toggle_inventory(!is_menu_open)
 	
 	if event.is_action_pressed("drop_item") and not is_menu_open:
 		inventory.drop_current_item()
@@ -152,8 +153,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	if event.is_action_pressed("interact"):
-		try_interact()
-		try_interact_map()
+		if not is_settings_open and not is_map_open and not is_menu_open:
+			try_interact()
+			try_interact_map()
+		elif is_menu_open:
+			toggle_inventory(false)
 
 	if current_tool and not is_menu_open:
 		# 1. Check for Primary Action (Digging, Using, etc.)
@@ -208,7 +212,7 @@ func toggle_inventory(open: bool):
 	is_menu_open = open
 	is_locked = open
 	camera_controller.is_enabled = !open
-	crosshair.visible = !crosshair.visible
+	crosshair.visible = !open
 	
 	if inventory_controller: inventory_controller.visible = open
 	if hotbar_controller: hotbar_controller.visible = true 

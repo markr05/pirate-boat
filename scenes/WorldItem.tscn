@@ -10,12 +10,19 @@ script/source = "extends RigidBody3D
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-# Make sure to link this to your new Area3D child
 @onready var pickup_area: Area3D = $PickupArea 
 @onready var pickup_shape: CollisionShape3D = $PickupArea/PickupShape
 
 func _ready() -> void:
-	# We use the Area3D signal instead of the RigidBody signal
+	# --- THE FIX: Lock the tipping rotations ---
+	axis_lock_angular_x = true
+	axis_lock_angular_z = true
+	
+	# Optional: If you also want to stop them from sliding horizontally 
+	# like they are on ice when dropped, uncomment these:
+	# axis_lock_linear_x = true
+	# axis_lock_linear_z = true
+
 	pickup_area.body_entered.connect(_on_pickup_entered)
 	_update_visuals()
 
@@ -28,22 +35,31 @@ func _update_visuals():
 
 func _autofit_collision_shapes():
 	if not mesh_instance.mesh: return
+	
+	# --- 1. Accurate Physics Shape (Convex Hull) ---
+	# This automatically builds a custom 3D polygon that wraps your mesh tightly.
+	# The 'true, true' parameters tell Godot to clean and simplify the shape for better performance.
+	var exact_shape = mesh_instance.mesh.create_convex_shape(true, true)
+	collision_shape.shape = exact_shape
+	
+	# Because the convex shape is built from the mesh's origin points, 
+	# it doesn't need to be offset like the box did!
+	collision_shape.position = Vector3.ZERO
+	
+	
+	# --- 2. Pickup Shape (Sphere) ---
+	# We still use the AABB here just to find out how long the item is 
+	# so we can make the pickup radius big enough.
 	var aabb: AABB = mesh_instance.get_aabb()
+	var area_sphere = SphereShape3D.new()
 	
-	# 1. Physics Shape (The actual box that hits the floor)
-	var phys_box = BoxShape3D.new()
-	phys_box.size = aabb.size
-	collision_shape.shape = phys_box
-	collision_shape.position = aabb.get_center()
+	var max_length = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
+	area_sphere.radius = max_length # Multiplier removed so it isn't completely massive
 	
-	# 2. Pickup Shape (Make this 1.5x to 2x bigger so it's easy to grab)
-	var area_box = BoxShape3D.new()
-	area_box.size = aabb.size * 2.0 
-	pickup_shape.shape = area_box
+	pickup_shape.shape = area_sphere
 	pickup_shape.position = aabb.get_center()
 
 func _on_pickup_entered(body: Node3D) -> void:
-	# Use a group check or method check
 	if body.has_method(\"add_to_inventory\"):
 		body.add_to_inventory(item_data)
 		queue_free()

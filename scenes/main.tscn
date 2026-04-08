@@ -3,12 +3,8 @@
 [ext_resource type="Script" uid="uid://dnrvraq4w0fgq" path="res://scripts/main.gd" id="1_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bhdag6bddjet" path="res://scenes/ui/day_notification.tscn" id="2_j8jky"]
 [ext_resource type="PackedScene" uid="uid://bxglemabo2j30" path="res://scenes/objects/dinghy1.tscn" id="5_gqmmt"]
-[ext_resource type="Resource" uid="uid://c1q63eejybysf" path="res://items/item_files/guava.tres" id="7_0ld40"]
-[ext_resource type="Resource" uid="uid://creq7aw5a62y1" path="res://items/item_files/lure1.tres" id="7_dp3eg"]
-[ext_resource type="Resource" uid="uid://dn0i7jb7fyrje" path="res://items/item_files/fish/fish.tres" id="7_jscy8"]
+[ext_resource type="PackedScene" uid="uid://cx5d033oxqbu3" path="res://scenes/npc_scenes/npc1.tscn" id="6_dgi5k"]
 [ext_resource type="PackedScene" uid="uid://d38i0pyiwty6h" path="res://scenes/WorldItem.tscn" id="8_a8y0u"]
-[ext_resource type="Resource" uid="uid://belnsjuepivcc" path="res://items/item_files/shovel.tres" id="12_2wyq8"]
-[ext_resource type="Resource" uid="uid://1shc10gdwxny" path="res://items/item_files/accessories/speed_amulet.tres" id="12_5q0nq"]
 [ext_resource type="Resource" uid="uid://cts4hsulrxu7j" path="res://items/item_files/fishing_rod.tres" id="12_vxglm"]
 [ext_resource type="PackedScene" uid="uid://bb8jjc6xsmrcq" path="res://player/proto_controller.tscn" id="14_yq6so"]
 [ext_resource type="PackedScene" uid="uid://ddrfgv4jxh2ej" path="res://scenes/plants/grass.tscn" id="15_dp3eg"]
@@ -18,10 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bapa1kkmjhtpc" path="res://data/textures/sand_1.png" id="17_jscy8"]
 [ext_resource type="PackedScene" uid="uid://bbp31jak13786" path="res://scenes/ocean.tscn" id="17_muem4"]
 [ext_resource type="Texture2D" uid="uid://mthde0qgu5ip" path="res://data/textures/grass_normal_baked.png" id="17_y6deb"]
-[ext_resource type="PackedScene" uid="uid://2lhvn6qyr455" path="res://scenes/npc.tscn" id="19_0ld40"]
-[ext_resource type="PackedScene" uid="uid://b4c2klpvf6ep4" path="res://scenes/dock_part.tscn" id="19_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://dbl7pbboxv465" path="res://scenes/plants/guava.tscn" id="19_jscy8"]
-[ext_resource type="PackedScene" uid="uid://cjvhstja16kl4" path="res://scenes/dock_shop.tscn" id="19_yc10j"]
 [ext_resource type="ArrayMesh" uid="uid://kw8prbe20vyo" path="res://models/meshes/grass.tres" id="20_2f3dj"]
 [ext_resource type="PackedScene" uid="uid://cg6pcehvop8qy" path="res://scenes/plants/palm.tscn" id="20_jscy8"]
 [ext_resource type="Script" uid="uid://2juaclm8gc1n" path="res://addons/simplegrasstextured/grass.gd" id="21_yq6so"]
@@ -36,8 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bgajrpkr14w54" path="res://scenes/objects/stone3.tscn" id="31_5q0nq"]
 [ext_resource type="PackedScene" uid="uid://3imovqgw23ik" path="res://scenes/daynight.tscn" id="34_dgi5k"]
 [ext_resource type="PackedScene" uid="uid://tbtpuh3q5kj1" path="res://scenes/objects/stick1.tscn" id="35_kmb1v"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
+[ext_resource type="PackedScene" uid="uid://dwdiiwrtbo54h" path="res://scenes/objects/fishing_hut.tscn" id="37_fuf3a"]
 
 [sub_resource type="Gradient" id="Gradient_ti27t"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -724,89 +716,20 @@ script = ExtResource("1_jbj1t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 
 [node name="dinghy1" parent="Objects" unique_id=1282315474 instance=ExtResource("5_gqmmt")]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.0033240318, -1.5071306, 1.6433663)
-
-[node name="pier" type="Node3D" parent="Objects" unique_id=1190533252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.077754, 0)
-
-[node name="dock1" parent="Objects/pier" unique_id=1516264505 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.53692, 0.5422125, -3.3276215)
-
-[node name="dock2" parent="Objects/pier" unique_id=916407244 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.538199, 0.5422125, -3.3276215)
-
-[node name="dock3" parent="Objects/pier" unique_id=1541332876 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.504042, 0.5422125, -3.3276215)
-
-[node name="dock4" parent="Objects/pier" unique_id=1547266415 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.4803653, 0.5422125, -3.3276215)
-
-[node name="dock5" parent="Objects/pier" unique_id=152380481 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5494223, 0.5422125, -3.3276215)
-
-[node name="dock6" parent="Objects/pier" unique_id=163639283 instance=ExtResource("19_gqmmt")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.575738, 0.5422125, -3.3276215)
-
-[node name="dock_shop_full" parent="Objects/pier" unique_id=1628401207 instance=ExtResource("19_yc10j")]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 14.753188, 0.32572174, -8.917433)
-
-[node name="NPC" parent="Objects/pier" unique_id=968812797 instance=ExtResource("19_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.615792, 2.0913181, -6.5)
-inventory_size = 18
-
-[node name="House" type="Node3D" parent="Objects" unique_id=1652977768]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.698754, 0)
-visible = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Objects/House" unique_id=308089874]
-transform = Transform3D(33.46206, 0, 0, 0, 12.272632, 0, 0, 0, 13.70482, 75.99733, 18.400583, -7.4495764)
-material_override = SubResource("ShaderMaterial_jscy8")
-size = Vector3(0.22277832, 0.5349121, 0.76464844)
+transform = Transform3D(0.8680169, 0, -0.49653462, 0, 1, 0, 0.49653462, 0, 0.8680169, 16.500315, -0.9628086, -24.85444)
 
 [node name="Chest" parent="Objects" unique_id=714947045 instance=ExtResource("17_dp3eg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -0.6987543, -4.9)
+transform = Transform3D(0.8516305, 0, 0, 0, 0.8515656, 0.010508407, 0, -0.010508407, 0.8515656, 26.520176, -0.47548485, 17.43893)
 
 [node name="Items" type="Node3D" parent="." unique_id=258792208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.698754, 0)
 
-[node name="Fish1" parent="Items" unique_id=2129893044 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.511806, -0.7727299, -4.086938)
-item_data = ExtResource("7_jscy8")
-
-[node name="beginner_rod" parent="Items" unique_id=1186068086 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5943475, -0.2091484, -4.1044054)
+[node name="fishing_rod" parent="Items" unique_id=942997380 instance=ExtResource("8_a8y0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.80761, 19.332264, -4.5033674)
 item_data = ExtResource("12_vxglm")
 
-[node name="Lure1" parent="Items" unique_id=891127075 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1460075, -0.32929134, -1.7606058)
-item_data = ExtResource("7_dp3eg")
-
-[node name="guava" parent="Items" unique_id=942997380 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
-item_data = ExtResource("7_0ld40")
-
-[node name="speed_amulet" parent="Items" unique_id=1602082850 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
-item_data = ExtResource("12_5q0nq")
-
-[node name="speed_amulet2" parent="Items" unique_id=1947343653 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
-item_data = ExtResource("12_5q0nq")
-
-[node name="speed_amulet3" parent="Items" unique_id=1992096987 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23699379, -2.973811)
-item_data = ExtResource("12_5q0nq")
-
-[node name="shovel" parent="Items" unique_id=1102567755 instance=ExtResource("8_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8247566, 2.0377045, -2.3114738)
-item_data = ExtResource("12_2wyq8")
-
 [node name="Player" parent="." unique_id=1947708472 instance=ExtResource("14_yq6so")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.582819, 11.277137, -3.2694037)
-
-[node name="TerrainRayCast" parent="Player/Head/Digging" parent_id_path=PackedInt32Array(1947708472, 1349587819) index="0" unique_id=1062111521 node_paths=PackedStringArray("terrain")]
-collision_mask = 1
-terrain = NodePath("../../../../Terrain3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.22485, 11.786057, -25.123384)
 
 [node name="Terrain3D" type="Terrain3D" parent="." unique_id=703888171]
 data_directory = "res://terrain_data"
@@ -1007,4 +930,8 @@ box_size = Vector3(100, 25, 100)
 [node name="Ocean" parent="Ocean" unique_id=1402291055 instance=ExtResource("17_muem4")]
 transform = Transform3D(5.117436, 0, 0, 0, 1, 0, 0, 0, 5.1250453, 0, 9.992, 0)
 
-[editable path="Player"]
+[node name="FishingHut" parent="." unique_id=2069232334 instance=ExtResource("37_fuf3a")]
+transform = Transform3D(-0.9907786, 0, -0.13549073, 0, 1, 0, 0.13549073, 0, -0.9907786, 24.902233, 10.167588, 19.06928)
+
+[node name="NPC1" parent="." unique_id=621081290 instance=ExtResource("6_dgi5k")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 27.015177, 11.453978, 19.47687)

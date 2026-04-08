@@ -9,7 +9,7 @@ func _ready():
 
 func interact(player):
 	player.open_external_inventory(self)
-	player.crosshair.visible = !player.crosshair.visible
+	player.crosshair.visible = false
 
 
 func close_inventory(player):

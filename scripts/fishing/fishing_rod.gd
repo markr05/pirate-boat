@@ -9,6 +9,8 @@ extends EquippableItem
 @onready var bobber_start_marker: Marker3D = %BobberStartMarker
 @onready var fishing_line: MeshInstance3D = %FishingLine
 @onready var direction_label: Label = $FishingUI/MarginContainer/Label
+@onready var distance_label: Label = $FishingUI/FishLine/Label
+@onready var fish_line: TextureRect = $FishingUI/FishLine/Fish
 
 @onready var anim_player: AnimationPlayer = get_tree().get_first_node_in_group("player_animations")
 
@@ -18,7 +20,7 @@ const THROW_ARC = 3.0
 const REEL_IN_SPEED = 3.0 # Sped up slightly for better feel
 const REEL_OUT_SPEED = 3.0
 const MIN_LENGTH = 1.0
-const MAX_LENGTH = 500.0
+const MAX_LENGTH = 100.0
 const ROPE_STIFFNESS = 40.0
 const CATCH_DISTANCE = 2.5
 
@@ -32,12 +34,14 @@ var fish_caught: ItemData = null
 var is_winding_up: bool = false
 var fish_direction: String = ""
 @export var rod: RodData = null
+var _actual_tension: float = 0.0
+var line_tension: int = 0
+var max_tension: int = 100
 
 var current_fish_xp: float = 0.0
 
 func setup(player):
 	super.setup(player)
-		
 	bobber.set_as_top_level(true)
 	if fishing_line: fishing_line.set_as_top_level(true)
 	bobber.set_physics_process(true)
@@ -81,6 +85,9 @@ func primary_action():
 
 func _physics_process(delta: float) -> void:
 	if is_fishing:
+		var distance_to_player = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
+		distance_label.text = str(round(distance_to_player))
+		fish_line.position.x = -450 + line_tension * 10
 		if is_winding_up:
 			# GLUE TO ROD TIP: Keep the bobber exactly at the marker while the arm moves
 			bobber.global_position = fishing_line_starter_marker.global_position
@@ -94,6 +101,9 @@ func _physics_process(delta: float) -> void:
 			var current_dist = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
 			if current_dist > current_rope_length:
 				current_rope_length = current_dist
+				
+		if fish_hooked:
+			_process_tension(delta)
 		
 		_refresh_line()
 		_handle_inputs(delta)
@@ -127,7 +137,7 @@ func _handle_inputs(delta: float):
 			current_rope_length -= REEL_IN_SPEED * delta
 			var dist = bobber.global_position.distance_to(fishing_line_starter_marker.global_position)
 			if current_rope_length > dist + 1.0:
-				current_rope_length = dist 
+				current_rope_length = dist
 	
 	current_rope_length = clamp(current_rope_length, MIN_LENGTH, MAX_LENGTH)
 
@@ -272,6 +282,47 @@ func _on_fish_bite_received(fish_data: FishData):
 		else:
 			_fail_fishing()
 
+func _process_tension(delta: float):
+	var rod_tip = fishing_line_starter_marker.global_position
+	var dir_to_bobber = rod_tip.direction_to(bobber.global_position)
+	
+	var pull_away_speed = bobber.velocity.dot(dir_to_bobber)
+	var is_reeling = Input.is_action_pressed("fire_primary")
+	var is_letting_out = Input.is_action_pressed("fire_secondary")
+	
+	var tension_change = 0.0
+	
+	# Priority 1: If letting out line, tension drops at a constant, fast rate
+	if is_letting_out:
+		tension_change = -30.0 
+	else:
+		# Priority 2: The fish is actively pulling away
+		if pull_away_speed > 0.01:
+			if is_reeling:
+				# DANGER: Player is pulling AGAINST the fish. Massive tension spike!
+				tension_change = 40.0 + (pull_away_speed * 60.0) 
+			else:
+				# Fish is pulling, but player is just holding the rod. Slow, safe tension climb.
+				tension_change = 5.0 + (pull_away_speed * 15.0) 
+		
+		# Priority 3: The fish is resting, darting sideways, or coming towards you
+		else:
+			if is_reeling:
+				tension_change = 10.0 # Slow cooldown (reeling while the fish rests)
+			else:
+				tension_change = -10.0 # Normal cooldown (doing nothing)
+			
+	_actual_tension += tension_change * delta
+	_actual_tension = clamp(_actual_tension, 0.0, float(max_tension))
+	line_tension = int(_actual_tension)
+	
+	# Print updated stats (You can comment this out once it feels right)
+	print("Speed: %.3f | Change/sec: %.2f | Tension: %d" % [pull_away_speed, tension_change, line_tension])
+	
+	if line_tension >= max_tension:
+		print("Line Snapped!")
+		stop_fishing()
+		
 func fish_fight():
 	bobber.set("has_fish", true)
 	
@@ -280,7 +331,7 @@ func fish_fight():
 		
 		# Pick a completely random direction on the 3D XZ plane (0 to 360 degrees)
 		# TAU is a GDScript constant for 360 degrees in radians.
-		var random_angle = randf_range(0, TAU) 
+		var random_angle = randf_range(deg_to_rad(50), deg_to_rad(310)) 
 		var horizontal_pull = Vector3(cos(random_angle), 0, sin(random_angle))
 		
 		# --- PLAYER-RELATIVE DIRECTION DETECTION ---
@@ -308,7 +359,9 @@ func fish_fight():
 		
 		horizontal_pull.y = 0 
 		
-		var tilt_angle = deg_to_rad(-15) 
+		var tilt_angle = deg_to_rad(-8)
+		if bobber.is_on_floor():
+			tilt_angle = deg_to_rad(5)
 		var pull_direction = horizontal_pull.rotated(horizontal_pull.cross(Vector3.UP).normalized(), tilt_angle)
 		
 		var pull_duration = randf_range(0.8, 2.0)
@@ -336,12 +389,13 @@ func _fail_fishing():
 	
 func stop_fishing():
 	# 1. Handle Fish Logic
+	fish_line.position.x = -450
 	direction_label.text = ""
 	bobber.reset_mesh()
 	bobber.set("has_fish", false)
 	alert.visible = false
 	
-	if fish_hooked and fish_caught:
+	if fish_hooked and fish_caught and line_tension < max_tension:
 		player_ref.add_to_inventory(fish_caught)
 		player_ref.update_xp("fishing", current_fish_xp)
 	
@@ -351,6 +405,9 @@ func stop_fishing():
 	fish_hooked = false
 	fish_caught = null
 	is_winding_up = false
+	
+	_actual_tension = 0.0
+	line_tension = 0
 	
 	# 3. Physics & Bobber Cleanup
 	# Reset the bobber's parent-level velocity and move it back
